@@ -2,22 +2,32 @@
 layout: default
 ---
 
-<div class="home">
+        {% for post in paginator.posts %}
+        <div class="blog-post">
+          <h2 class="blog-post-title">{{ post.title }}</h2>
+          <p class="blog-post-meta">
+            {{ post.date | date: "%b %-d, %Y" }} |
+            {% if site.comments == true and site.disqus != '' %}
+            <a class="author" href="{{ site.baseurl }}{{ post.url }}/#disqus_thread">Comments</a>
+            {% endif %}
+          </p>
+          <div class="content">
+            {{ post.content }}
+          </div>
+        </div>
+        {% endfor %}
 
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+        <div class="pagination">
+          <ul class="pager">
+            {% if paginator.previous_page %}
+              {% if paginator.previous_page == 1 %}
+                <li><a href="{{ site.baseurl}}/index.html" class="previous">Newer</a></li>
+              {% else %}
+                <li><a href="{{ site.baseurl}}/page{{ paginator.previous_page }}" class="previous">Newer</a></li>
+              {% endif %}
+            {% endif %}
+            {% if paginator.next_page %}
+            <li><a href="{{ site.baseurl}}/page{{ paginator.next_page }}" class="next">Older</a></li>
+            {% endif %}
+          </ul>
+        </div>

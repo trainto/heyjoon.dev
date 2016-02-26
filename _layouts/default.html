@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html>
+{% include header.html %}
 
-  {% include head.html %}
-
-  <body>
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
+    <div class="container">
+      <div class="blog-header">
+        <h1 class="blog-title">{{ site.title }}</h1>
+        <p class="lead blog-description">IT, music, movie, travel, life.. random log of my life</p>
       </div>
+
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+          {{ content }}
+        </div><!-- /.blog-main -->
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          {% include sidebar.html %}
+        </div>
+      </div><!-- /.row -->
     </div>
 
-    {% include footer.html %}
-
-  </body>
-
-</html>
+{% include footer.html %}
