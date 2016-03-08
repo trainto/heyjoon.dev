@@ -8,7 +8,7 @@ layout: default
           <p class="blog-post-meta">
             {{ post.date | date: "%b %-d, %Y" }} |
             {% if site.comments == true and site.disqus != '' %}
-            <a class="author" href="{{ site.baseurl }}{{ post.url }}/#disqus_thread">Comments</a>
+            <a class="author" href="{{ site.baseurl }}{{ post.url }}#disqus_thread">Comments</a>
             {% endif %}
           </p>
           <div class="content">

@@ -13,7 +13,7 @@
         <div class="sidebar-module">
           <h4>Tags</h4>
           {% for tag in site.tags %}
-            <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size         }}">{{ tag[0] }}</a> &nbsp;
+            <a href="{{ site.baseurl }}/tags#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size         }}">{{ tag[0] }}</a> &nbsp;
           {% endfor %}
         </div>
         <div class="sidebar-module">
@@ -25,7 +25,7 @@
             {% assign year = this_year %}
             {% unless post == site.posts.first %}
             {% endunless %}
-            <li id="{{ year }}" > <a href="{{ site.baseurl }}/archives/#{{year}}">{{ year }}</a></li>
+            <li id="{{ year }}" > <a href="{{ site.baseurl }}/archives#{{year}}">{{ year }}</a></li>
             {% endunless %}
             {% endfor %}
           </ol>
