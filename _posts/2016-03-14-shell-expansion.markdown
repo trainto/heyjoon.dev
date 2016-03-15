@@ -7,7 +7,7 @@ tags:
 - bash
 ---
 Usually I've been using shell expansion without any notion. However I though it would be meaningful to wrap things up. 'Shell expansion' can be divided into 8 types, and detailed explanation can be founded [here](http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html).
-
+<br />
 
 
 ### Brace expansion
@@ -26,7 +26,7 @@ a b c d
 > echo "Hello "{foo,bar}
 Hello foo Hello bar
 ~~~
-
+<br />
 
 
 ### Tilde expansion
@@ -45,7 +45,7 @@ Used to expand to several pathnames such as home directory, current working dire
 > echo ~-
 (previous working directory)
 ~~~
-
+<br />
 
 
 ### Shell parameter and Variable expansion
@@ -66,7 +66,7 @@ foo
 > echo ${str3}
 bar
 ~~~
-
+<br />
 
 
 ### Command substitution
@@ -78,7 +78,7 @@ $(cmds)
 > echo $(date)
 Mon Mar 14 00:12:57 PDT 2016
 ~~~
-
+<br />
 
 
 ### Arithmetic expansion
@@ -91,7 +91,7 @@ Arithmetic expansion allows the evaluation of an arithmetic expression and the s
 > echo $((num1=1,num2=2,num3=num1*num2))
 2
 ~~~
-
+<br />
 
 
 ### Process substitution
@@ -111,7 +111,7 @@ Process substitution is supported on systems that support named pipes or the /de
 > cat -vte < <(echo -e "$IFS")
 ^I$
 ~~~
-
+<br />
 
 
 ### Word splitting
@@ -123,7 +123,7 @@ If you want to check IFS value, you can do this,
 > set | grep "IFS"
 IFS=$' \t\n'
 ~~~
-
+<br />
 
 
 ### File name expansion
