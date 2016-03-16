@@ -4,7 +4,7 @@ layout: default
 
         {% for post in paginator.posts %}
         <div class="blog-post">
-          <h2 class="blog-post-title">{{ post.title }}</h2>
+          <a href="{{ site.baseurl }}{{ post.url }}" id="link-no-deco"><h2 class="blog-post-title">{{ post.title }}</h2></a>
           <p class="blog-post-meta">
             {{ post.date | date: "%b %-d, %Y" }} |
             {% if site.comments == true and site.disqus != '' %}

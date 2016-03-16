@@ -137,3 +137,21 @@ h6, .h6 {
   font-size: 0.7em;
   vertical-align: super;
 }
+
+#link-no-deco:link {
+  text-decoration: none;
+  color: #333;
+}
+
+#link-no-deco:visited {
+  text-decoration: none;
+  color: #333;
+}
+
+#link-no-deco:active {
+  text-decoration: none;
+}
+
+#link-no-deco:hover {
+  text-decoration: none;
+}
