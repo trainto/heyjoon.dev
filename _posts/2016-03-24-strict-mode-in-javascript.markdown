@@ -21,6 +21,7 @@ function bar() {
 ~~~
 
 If the engine of javascript does not support ECMAScript 5, then it will be treated as just string.
+
 <br>
 
 
@@ -71,6 +72,7 @@ function foo() {
 
 ### Arguments
 The properties arguments.callee and arguments.caller have been eliminated. And also 'arguments' can not be used for variable name(SyntaxError will be given).
+
 <br>
 
 
@@ -93,5 +95,7 @@ function bar () {
 ### Etc.
 * No more 'with': 'with' statement cannot be used anymore.
 * No more octal numbers: SyntaxError will be given for octal literal.
+
+<br>
 
 For more detail, [ECMA-262-5 in detail. Chapter 2. Strict Mode](http://dmitrysoshnikov.com/ecmascript/es5-chapter-2-strict-mode/) is worth to read.
