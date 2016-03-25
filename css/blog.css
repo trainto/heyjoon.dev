@@ -155,7 +155,3 @@ h6, .h6 {
 #link-no-deco:hover {
   text-decoration: none;
 }
-
-@import
-  "syntax"
-;
