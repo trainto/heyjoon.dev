@@ -9,7 +9,7 @@ In strict mode, javascript behaves more safely and logically, and  it will gives
 
 To enable strict mode, you can just put the below code.
 
-~~~
+~~~javascript
 'use strict';
 
 // To apply strict mode to each function,
@@ -28,7 +28,7 @@ If the engine of javascript does not support ECMAScript 5, then it will be treat
 ### Variable must be declared
 In strict mode, every variable must be declared explicitly. If you try to assign value to variable which is not declared, an exception(ReferenceError) will be given.
 
-~~~
+~~~javascript
 function foo() {
     'use strict';
     value = 'hello';
@@ -41,7 +41,7 @@ foo();  // ReferenceError: value is not defined
 ### Function can not be declared in blocks
 Function must be declared in global scope or in another function, not in blocks.
 
-~~~
+~~~javascript
 function foo() {
     'use strict';
     {
@@ -57,7 +57,7 @@ function foo() {
 
 For workaround, function can be declared in blocks like this,
 
-~~~
+~~~javascript
 function foo() {
     'use strict';
     {
@@ -79,7 +79,7 @@ The properties arguments.callee and arguments.caller have been eliminated. And a
 ### this
 If it's not in strict mode, 'this' in function(not method) will be global object(like 'window' in browser). However in strict mode 'this' is undefined.
 
-~~~
+~~~javascript
 function foo () {
     this === window;    // true
 }
