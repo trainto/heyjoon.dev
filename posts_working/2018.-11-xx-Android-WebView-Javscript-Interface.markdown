@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Android - WebView with Javascript Interface"
+tags:
+- android
+- webview
+- javascript
+- kotlin
+---
+Recently I'm working on Hybrid android application at work. I thought it would be nice if I log some android WebView settings for that.
+
+Let's start with CustomWebView class which extends WebView.
+
+~~~kotlin
+class CustomWebView : WebView {
+
+  private inner class Bridge {
+
+  }
+}
+~~~
