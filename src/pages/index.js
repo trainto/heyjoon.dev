@@ -15,12 +15,7 @@ class BlogIndex extends React.Component {
         <SEO title="All posts" />
 
         <div className="row">
-          <div
-            className="col-12 col-md-4 mt-3"
-            style={{
-              borderRight: '1px solid rgba(255, 255, 255, 0.3)',
-            }}
-          >
+          <div className="col-12 col-md-4 mt-3">
             <Sidebar />
           </div>
 
