@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import './blog-post.css';
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -18,7 +18,9 @@ class BlogPostTemplate extends React.Component {
         <div className="row justify-content-center">
           <header className="col-12 col-md-8">
             <h3>
-              <Link to="/" style={{ textDecoration: 'none' }}>{siteTitle}</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                {siteTitle}
+              </Link>
             </h3>
           </header>
 
