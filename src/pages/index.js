@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-
-import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import Sidebar from '../components/sidebar';
 
 class BlogIndex extends React.Component {
   render() {
@@ -14,29 +13,42 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="All posts" />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug;
-          return (
-            <article key={node.fields.slug}>
-              <header>
-                <h3>
-                  <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                    {title}
-                  </Link>
-                </h3>
-                <small>{node.frontmatter.date}</small>
-              </header>
-              <section>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt
-                  }}
-                />
-              </section>
-            </article>
-          );
-        })}
+
+        <div className="row">
+          <div
+            className="col-12 col-md-4 mt-3"
+            style={{
+              borderRight: '1px solid rgba(255, 255, 255, 0.3)',
+            }}
+          >
+            <Sidebar />
+          </div>
+
+          <div className="col-12 col-md-8 mt-3 pl-5">
+            {posts.map(({ node }) => {
+              const title = node.frontmatter.title || node.fields.slug;
+              return (
+                <article key={node.fields.slug} className="mb-5">
+                  <header>
+                    <h3>
+                      <Link style={{ boxShadow: 'none', textDecoration: 'none' }} to={node.fields.slug}>
+                        {title}
+                      </Link>
+                    </h3>
+                    <small>{node.frontmatter.date}</small>
+                  </header>
+                  <section>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: node.frontmatter.description || node.excerpt
+                      }}
+                    />
+                  </section>
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </Layout>
     );
   }
