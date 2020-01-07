@@ -14,8 +14,8 @@ class BlogIndex extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="All posts" />
 
-        <div className="row">
-          <div className="col-12 col-md-4 mt-3">
+        <div className="row justify-content-center">
+          <div className="col-11 col-md-4 mt-3">
             <Sidebar />
           </div>
 
@@ -32,7 +32,7 @@ class BlogIndex extends React.Component {
                     </h3>
                     <small>{node.frontmatter.date}</small>
                   </header>
-                  <section>
+                  <section className="mt-2">
                     <p
                       dangerouslySetInnerHTML={{
                         __html: node.frontmatter.description || node.excerpt

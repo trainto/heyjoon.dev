@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
+import './sidebar.css';
 
 const Sidebar = () => {
   const data = useStaticQuery(graphql`
@@ -49,7 +50,7 @@ const Sidebar = () => {
   const { author, social } = data.site.siteMetadata;
 
   return (
-    <div className="px-3">
+    <div className="border-responsive">
       <Image
         className="shadow"
         fixed={data.avatar.childImageSharp.fixed}

@@ -18,18 +18,21 @@ class BlogPostTemplate extends React.Component {
         <div className="row justify-content-center">
           <header className="col-12 col-md-8">
             <h3>
-              <Link to="/">{siteTitle}</Link>
+              <Link to="/" style={{ textDecoration: 'none' }}>{siteTitle}</Link>
             </h3>
           </header>
 
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-md-8 mt-5">
             <article>
               <header>
                 <h1>{post.frontmatter.title}</h1>
                 <p>{post.frontmatter.date}</p>
               </header>
+
               <section dangerouslySetInnerHTML={{ __html: post.html }} />
-              <hr />
+
+              <hr className="my-4" />
+
               <footer>
                 <Bio />
               </footer>
