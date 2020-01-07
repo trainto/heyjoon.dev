@@ -14,10 +14,12 @@ class Layout extends React.Component {
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous"
           />
+          <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet" />
           <style type="text/css">{`
             body {
               background-color: #282c35;
               color: rgba(255, 255, 255, 0.88);
+              font-family: 'Noto Sans', sans-serif;
             }
 
             a, a:hover {
