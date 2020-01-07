@@ -1,11 +1,8 @@
 ---
-title: "Bach Cello Suite No.1"
-date: "2016-03-09"
-category: "Music"
-tags:
-- bach
-- cello
+title: 'Bach Cello Suite No.1'
+date: '2016-03-09'
 ---
+
 Recently, I started subscribe [Netflix](https://netflix.com) using my LG smart TV.(Because it was free for a month. yay~) The first series I watched was 'Daredevil' and I quite loved it, but that is not the topic I'm intending to post this article.
 
 In the series, there is supervillain who called Wilson Fisk. Every time he gets up from his bed, Bach's music comes out and he starts cook scramble. The music is Bach Cello Suite No.1.
