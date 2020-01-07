@@ -19,7 +19,7 @@ class BlogIndex extends React.Component {
             <Sidebar />
           </div>
 
-          <div className="col-12 col-md-8 mt-3 pl-5">
+          <div className="col-12 col-md-8 mt-3 pl-md-5">
             {posts.map(({ node }) => {
               const title = node.frontmatter.title || node.fields.slug;
               return (

@@ -5,7 +5,9 @@ module.exports = {
     description: `Hakjoon's blog`,
     siteUrl: `https://blog.trainto.me/`,
     social: {
-      twitter: `trainto`,
+      twitter: 'trainto',
+      linkedin: 'hakjoon-sim',
+      github: 'trainto'
     },
   },
   plugins: [
