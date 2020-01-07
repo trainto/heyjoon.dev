@@ -1,3 +1,10 @@
 pre {
   border-radius: 15px;
 }
+
+blockquote {
+  font-style: italic;
+  padding-left: 1rem;
+  border-left: 3px solid #e31b6d;
+  opacity: 0.8;
+}
