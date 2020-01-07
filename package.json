@@ -31,6 +31,7 @@
     "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
+    "eslint-config-react-app": "^5.1.0",
     "prettier": "^1.19.1"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
