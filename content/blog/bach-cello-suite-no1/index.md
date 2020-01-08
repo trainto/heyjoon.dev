@@ -1,6 +1,7 @@
 ---
 title: 'Bach Cello Suite No.1'
 date: '2016-03-09'
+description: 'The music makes me relaxed.'
 ---
 
 Recently, I started subscribe [Netflix](https://netflix.com) using my LG smart TV.(Because it was free for a month. yay~) The first series I watched was 'Daredevil' and I quite loved it, but that is not the topic I'm intending to post this article.

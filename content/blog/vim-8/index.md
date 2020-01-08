@@ -1,6 +1,7 @@
 ---
 title: 'Vim 8'
 date: '2017-01-05'
+description: 'Vim 8.0 is released!!'
 ---
 
 Vim 8.0 is released!! I know it might be quite old news, but I've found it today. :( Recently I don't use vim as much as before(mostly AndroidStudio and Atom), but it's still the best editor for me to edit simple text files, and source code quickly in shell environment.
