@@ -10,6 +10,10 @@ class BlogIndex extends React.Component {
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
 
+    const { currentPage, numPages } = this.props.pageContext;
+    const hasNext = currentPage < numPages;
+    const hasPrev = currentPage > 1;
+
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="All posts" />
@@ -42,6 +46,11 @@ class BlogIndex extends React.Component {
                 </article>
               );
             })}
+
+            <div className="d-flex justify-content-between pt-5" style={{ fontSize: '1.2rem' }}>
+              <div>{hasPrev ? <Link to={`/${currentPage === 2 ? '' : currentPage - 1}`}>← Prev</Link> : null}</div>
+              <div>{hasNext ? <Link to={`/${currentPage === 0 ? 1 : currentPage + 1}`}>→ Next</Link> : null}</div>
+            </div>
           </div>
         </div>
       </Layout>
@@ -52,13 +61,13 @@ class BlogIndex extends React.Component {
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query {
+  query($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: $limit, skip: $skip) {
       edges {
         node {
           excerpt
