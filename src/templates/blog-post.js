@@ -24,7 +24,7 @@ class BlogPostTemplate extends React.Component {
             </h3>
           </header>
 
-          <div className="col-12 col-md-8 mt-5">
+          <div className="col-12 col-md-8 mt-3">
             <article>
               <header>
                 <h1>{post.frontmatter.title}</h1>
