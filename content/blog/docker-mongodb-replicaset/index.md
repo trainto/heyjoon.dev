@@ -5,8 +5,6 @@ date: '2019-09-17'
 
 Setting up a MongoDB replica set on the one host might not make sense, but it can be useful to build up the dev environment. Because you don't have to set up 2 or 3 servers to build dev environment. Instead having physical servers for MongoDB replica set, Docker can simulate it.
 
-<br />
-
 ## Install Docker
 
 First of all, we should install Docker. To install Docker on your system, please refer [official document](https://docs.docker.com/install/linux/docker-ce/ubuntu/) for installing it.
@@ -17,8 +15,6 @@ Ater installing Docker, we need docker-compose as well, so that we can set up Mo
 // Ubuntu
 sudo apt install docker-compose
 ```
-
-<br />
 
 ## docker-compose.yml
 
@@ -85,8 +81,6 @@ The IP address is assigned by asus router, and domain is assigned by asus ddns s
 
 And ports should be different for each node, in my case 27017, 27018 and 27019, so that we can specify different address for each node in the replica set.
 
-<br />
-
 ## Starting MongoDB replica set
 
 In my case, I made sh script file to start it.
@@ -108,8 +102,6 @@ sudo docker-compose up -d
 ```
 
 This shell script file makes directories for MongoDB's data and keyfile for security between replica nodes, and then stars MongoDB replica set using docker-compose.yml file introduced above.
-
-<br />
 
 ## Setting replica set
 

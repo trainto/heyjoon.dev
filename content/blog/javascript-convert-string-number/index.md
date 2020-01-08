@@ -19,8 +19,6 @@ t2 *= 1; // t2 += 0, t2 /= 1, t2 -= 0 all possible
 
 This is the most simplest way.
 
-<br>
-
 ## function Number() and String()
 
 ```javascript
@@ -35,8 +33,6 @@ t2 = Number(t2);
 let t3 = '10.5';
 t3 = Number(t3); // 10.5
 ```
-
-<br>
 
 ## function parseInt() and parseFloat()
 

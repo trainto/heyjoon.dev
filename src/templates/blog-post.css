@@ -8,3 +8,8 @@ blockquote {
   border-left: 3px solid #e31b6d;
   opacity: 0.8;
 }
+
+section h1, section h2, section h3, section h4, section h5, section h6 {
+  margin-top: 3rem !important;
+  margin-bottom: 1.5rem !important
+}

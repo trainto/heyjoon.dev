@@ -19,8 +19,6 @@ gzip compression is also popular feature which you should offload from the appli
 
 The best way is to use nginx server to serve you static file and let you node.js server handle the dynamic content. That would be the most optimized solution to reduce the amount of requests on your node.js server that is slower to server static files than nginx. and the configuration to achieve that is very simple.
 
-<br />
-
 ## nginx.conf
 
 Once you install Nginx, you can find it under /etc/nginx, and there will be 'nginx.conf' file which is the default configuration file.
@@ -84,8 +82,6 @@ http {
 
 To turn off the server tokens(mainly to hide nginx version) and turn off gzip compression, I just uncommented them from default configuration file.
 
-<br />
-
 ## Your appplication specific configuration
 
 You need to create a configuration file under /etc/nginx/sites-available/ to set your application specific configuration. The file name can be whatever you like.
@@ -148,7 +144,6 @@ location /static/ {
     expires 30d;
 }
 ```
-
 There are configuratinos for serving static files. If you specify **_expires_** like 30d, the static files will have following header _cache-control: max-age=2592000_, and will be cached in the browser efficiently.
 
 <br />

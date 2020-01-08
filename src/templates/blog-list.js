@@ -47,7 +47,7 @@ class BlogIndex extends React.Component {
               );
             })}
 
-            <div className="d-flex justify-content-between pt-5" style={{ fontSize: '1.2rem' }}>
+            <div className="d-flex justify-content-between pt-5 mb-5" style={{ fontSize: '1.2rem' }}>
               <div>{hasPrev ? <Link to={`/${currentPage === 2 ? '' : currentPage - 1}`}>← Prev</Link> : null}</div>
               <div>{hasNext ? <Link to={`/${currentPage === 0 ? 1 : currentPage + 1}`}>→ Next</Link> : null}</div>
             </div>
