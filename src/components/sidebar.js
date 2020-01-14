@@ -69,7 +69,7 @@ const Sidebar = () => {
 
       <p className="text-muted">Developer who lives in Seoul. Like programming and doing nothing.</p>
 
-      <a href="https://trainto.me">About me</a>
+      <a href="https://iam.trainto.me">About me</a>
 
       <div className="mt-3">
         <a
