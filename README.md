@@ -1,4 +1,4 @@
-# [Trainto.log()](https://hisblog.yoursun.me/)
+# [Trainto.log()](https://blog.trianto.me/)
 
 My personal blog. Forked from [Gatsby blog starter](https://github.com/gatsbyjs/gatsby-starter-blog).
 
