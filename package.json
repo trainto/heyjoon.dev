@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "eslint-config-react-app": "^5.1.0",
+    "gh-pages": "^2.2.0",
     "prettier": "^1.19.1"
   },
   "homepage": "https://hisblog.yoursun.me",
@@ -50,6 +51,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "gatsby clean && gatsby build && gh-pages -d public"
   }
 }
