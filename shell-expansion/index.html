@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.fa065923c73e6d0eff70.css">code[class*=language-],pre[class*=language-]{text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;color:#c3cee3;background:#263238;font-family:Roboto Mono,monospace;font-size:1em;line-height:1.5em;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{background:#363636}:not(pre)>code[class*=language-]{white-space:normal;border-radius:.2em;padding:.1em}pre[class*=language-]{overflow:auto;position:relative;margin:.5em 0;padding:1.25em 1em}.language-css>code,.language-sass>code,.language-scss>code{color:#fd9170}[class*=language-] .namespace{opacity:.7}.token.atrule{color:#c792ea}.token.attr-name{color:#ffcb6b}.token.attr-value,.token.attribute{color:#c3e88d}.token.boolean{color:#c792ea}.token.builtin{color:#ffcb6b}.token.cdata,.token.char{color:#80cbc4}.token.class{color:#ffcb6b}.token.class-name,.token.color{color:#f2ff00}.token.comment{color:#546e7a}.token.constant{color:#c792ea}.token.deleted{color:#f07178}.token.doctype{color:#546e7a}.token.entity{color:#f07178}.token.function{color:#c792ea}.token.hexcode{color:#f2ff00}.token.id,.token.important{color:#c792ea;font-weight:700}.token.inserted{color:#80cbc4}.token.keyword{color:#c792ea;font-style:italic}.token.number{color:#fd9170}.token.operator{color:#89ddff}.token.prolog{color:#546e7a}.token.property{color:#80cbc4}.token.pseudo-class,.token.pseudo-element{color:#c3e88d}.token.punctuation{color:#89ddff}.token.regex{color:#f2ff00}.token.selector{color:#f07178}.token.string{color:#c3e88d}.token.symbol{color:#c792ea}.token.tag,.token.unit{color:#f07178}.token.url{color:#fd9170}.token.variable{color:#f07178}pre{border-radius:15px}blockquote{font-style:italic;padding-left:1rem;border-left:3px solid #e31b6d;opacity:.8}article header h1{color:#fff}section h1,section h2,section h3,section h4,section h5,section h6{margin-top:3rem!important;margin-bottom:1.5rem!important;color:#fff}section img{margin-top:1.5rem!important}.border-responsive{border-bottom:1px solid hsla(0,0%,100%,.3)}@media (min-width:768px){.border-responsive{border-bottom:none;border-right:1px solid hsla(0,0%,100%,.3)}}</style><meta name="generator" content="Gatsby 2.18.21"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><title data-react-helmet="true">Shell expansion | Trainto.log()</title><link data-react-helmet="true" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/><link data-react-helmet="true" href="https://fonts.googleapis.com/css?family=Noto+Sans&amp;display=swap" rel="stylesheet"/><meta data-react-helmet="true" name="description" content="Usually I’ve been using shell expansion without any notion. However I though it would be meaningful to wrap things up. ‘Shell expansion’ can be divided into…"/><meta data-react-helmet="true" property="og:title" content="Shell expansion"/><meta data-react-helmet="true" property="og:description" content="Usually I’ve been using shell expansion without any notion. However I though it would be meaningful to wrap things up. ‘Shell expansion’ can be divided into…"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Hakjoon Sim"/><meta data-react-helmet="true" name="twitter:title" content="Shell expansion"/><meta data-react-helmet="true" name="twitter:description" content="Usually I’ve been using shell expansion without any notion. However I though it would be meaningful to wrap things up. ‘Shell expansion’ can be divided into…"/><style data-react-helmet="true" type="text/css">
+            body {
+              background-color: #282c35;
+              color: rgba(255, 255, 255, 0.88);
+              font-family: 'Noto Sans', sans-serif;
+            }
+
+            a, a:hover {
+              color: #e31b6d;
+            }
+
+            hr {
+              background-color: rgba(255, 255, 255, 0.3);
+            }
+          </style><link as="script" rel="preload" href="/webpack-runtime-17c92acfcb31596bf979.js"/><link as="script" rel="preload" href="/app-843f040244f98aefb393.js"/><link as="script" rel="preload" href="/styles-67cf5e094dce50b264bc.js"/><link as="script" rel="preload" href="/commons-377e7c33e8cefb6bcdbe.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-15d735376b7c65aaf912.js"/><link as="fetch" rel="preload" href="/page-data/shell-expansion/page-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="container py-3"><main><div class="row justify-content-center"><header class="col-12 col-md-8"><h3><a style="text-decoration:none" href="/">Trainto.log()</a></h3></header><div class="col-12 col-md-8 mt-3"><article><header><h1>Shell expansion</h1><p>March 14, 2016</p></header><section><p>Usually I’ve been using shell expansion without any notion. However I though it would be meaningful to wrap things up. ‘Shell expansion’ can be divided into 8 types, and detailed explanation can be founded <a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html">here</a>.
+<br /></p>
+<h3>Brace expansion</h3>
+<p>Used to generate arbitrary strings.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">10</span><span class="token punctuation">}</span>
+<span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span> <span class="token number">10</span>
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token punctuation">{</span>a<span class="token punctuation">..</span>d<span class="token punctuation">}</span>
+a b c d
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">10</span><span class="token punctuation">..</span><span class="token number">2</span><span class="token punctuation">}</span>
+<span class="token number">1</span> <span class="token number">3</span> <span class="token number">5</span> <span class="token number">7</span> <span class="token number">9</span>
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token string">"Hello "</span><span class="token punctuation">{</span>foo,bar<span class="token punctuation">}</span>
+Hello foo Hello bar</code></pre></div>
+<br />
+<h3>Tilde expansion</h3>
+<p>Used to expand to several pathnames such as home directory, current working directory and previous working directory.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token builtin class-name">echo</span> ~
+/home/user
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> ~user2
+/home/user2
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> ~+
+<span class="token punctuation">(</span>current working directory<span class="token punctuation">)</span>
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> ~-
+<span class="token punctuation">(</span>previous working directory<span class="token punctuation">)</span></code></pre></div>
+<br />
+<h3>Shell parameter and Variable expansion</h3>
+<p>Parameter expansion is introduced with ’$’ symbol. It looks like below.</p>
+<p>${expressoin}</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token assign-left variable">str1</span><span class="token operator">=</span>hello
+<span class="token operator">></span> <span class="token assign-left variable">str2</span><span class="token operator">=</span>foo
+<span class="token operator">></span> <span class="token assign-left variable">str3</span><span class="token operator">=</span>bar
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token variable">${str1}</span>
+hello
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token variable">${str2}</span>
+foo
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token variable">${str3}</span>
+bar</code></pre></div>
+<br />
+<h3>Command substitution</h3>
+<p>Command substitution allows the output of a command to replace the command itself. It comes with ’$’ symbol and parenthesis like below.</p>
+<p>$(cmds)</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">date</span><span class="token variable">)</span></span>
+Mon Mar <span class="token number">14</span> 00:12:57 PDT <span class="token number">2016</span></code></pre></div>
+<br />
+<h3>Arithmetic expansion</h3>
+<p>Arithmetic expansion allows the evaluation of an arithmetic expression and the substitution of the result. It comes with ’$’ symbol and double parenthesis.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token variable"><span class="token variable">$((</span>num1<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>num2<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>num3<span class="token operator">=</span>num1<span class="token operator">*</span>num2<span class="token variable">))</span></span>
+<span class="token number">2</span>: <span class="token builtin class-name">command</span> not found
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token variable"><span class="token variable">$((</span>num1<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>num2<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>num3<span class="token operator">=</span>num1<span class="token operator">*</span>num2<span class="token variable">))</span></span>
+<span class="token number">2</span></code></pre></div>
+<br />
+<h3>Process substitution</h3>
+<p>Process substitution is supported on systems that support named pipes or the /dev/fd method of naming open files. It comes with pipeline expression ’>’, ’&#x3C;’ and parenthesis.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token comment"># Note 3 commands following show the same result</span>
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token function">ls</span><span class="token punctuation">)</span>
+/dev/fd/63
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> <span class="token operator">></span><span class="token punctuation">(</span><span class="token function">cat</span><span class="token punctuation">)</span>
+/dev/fd/63
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> /dev/fd/63
+/dev/fd/63
+
+<span class="token operator">></span> <span class="token function">cat</span> -vte <span class="token operator">&lt;</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token builtin class-name">echo</span> -e <span class="token string">"<span class="token environment constant">$IFS</span>"</span><span class="token punctuation">)</span>
+^I$</code></pre></div>
+<br />
+<h3>Word splitting</h3>
+<p>the results of parameter expansion, command substitution, and arithmetic expansion that did not occur within double quotes will be applied to word splitting by ‘IFS’ value. The default ‘IFS’ values are sequences of <space>, <tab>, and <newline>.</p>
+<p>If you want to check IFS value, you can do this,</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token builtin class-name">set</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"IFS"</span>
+<span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span>$<span class="token string">' <span class="token entity" title="\t">\t</span><span class="token entity" title="\n">\n</span>'</span></code></pre></div>
+<br />
+<h3>File name expansion</h3>
+<p>After word splitting, Bash scans each word for the characters ’*’, ’?’, and ’[‘.</p>
+<p>See <a href="https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html#Pattern-Matching">here</a> for Pattern-Matching. And note that it does not use Regular Expression.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token operator">></span> <span class="token function">ls</span>
+a b c
+
+<span class="token operator">></span> *
+a: <span class="token builtin class-name">command</span> not found
+
+<span class="token operator">></span> <span class="token builtin class-name">echo</span> *
+a b c</code></pre></div></section><hr class="my-4"/><footer><div><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIDAQb/xAAWAQEBAQAAAAAAAAAAAAAAAAACAQD/2gAMAwEAAhADEAAAAanfptN1PndBawj/AP/EABkQAAIDAQAAAAAAAAAAAAAAAAECAAMSEf/aAAgBAQABBQK7XAtlSywDCZM6IWJZiddLT//EABURAQEAAAAAAAAAAAAAAAAAACBB/9oACAEDAQE/AYP/xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAeEAABAwQDAAAAAAAAAAAAAAABAAIREBIhQTFhcf/aAAgBAQAGPwINbtXF0jYpBOV7QHtRPCyv/8QAGxABAAIDAQEAAAAAAAAAAAAAAQAhETFBEFH/2gAIAQEAAT8hXQ9/IIs/hiw4QN2oXLdEQzl6m9MaRuNUqf/aAAwDAQACAAMAAAAQJy9//8QAFxEBAQEBAAAAAAAAAAAAAAAAAAERIf/aAAgBAwEBPxDJ01Vf/8QAGBEBAQADAAAAAAAAAAAAAAAAAQAQETH/2gAIAQIBAT8QF3g7AX//xAAcEAEBAAMBAAMAAAAAAAAAAAABEQAhQTFRsfD/2gAIAQEAAT8Q8Sqi+AuGBMCj1lLm/jA0aGDHeeyhEdr+MRQg3ric1Arbsn1k/kNtmRgpCvM//9k=" alt="Hakjoon Sim" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/11d9aa0a042029a130f7ad2d42e2f7d0/30d3a/profile-pic.jpg 1x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/66c95/profile-pic.jpg 1.5x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/aacbd/profile-pic.jpg 2x" /><img loading="lazy" width="50" height="50" srcset="/static/11d9aa0a042029a130f7ad2d42e2f7d0/30d3a/profile-pic.jpg 1x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/66c95/profile-pic.jpg 1.5x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/aacbd/profile-pic.jpg 2x" src="/static/11d9aa0a042029a130f7ad2d42e2f7d0/30d3a/profile-pic.jpg" alt="Hakjoon Sim" style="position:absolute;top:0;left:0;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center"/></picture></noscript></div><p>Written by<!-- --> <strong><a href="https://twitter.com/trainto" target="_blank" rel="noopener noreferrer">Hakjoon Sim</a></strong> <!-- -->who lives Seoul. Like programming and doing nothing.</p></div></footer></article><nav><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/bach-cello-suite-no1/">← <!-- -->Bach Cello Suite No.1</a></li><li><a rel="next" href="/strict-mode-in-javascript/">Strict mode in Javascript<!-- --> →</a></li></ul></nav></div></div></main></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-73310674-3', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/shell-expansion/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-843f040244f98aefb393.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-15d735376b7c65aaf912.js"],"component---src-templates-blog-list-js":["/component---src-templates-blog-list-js-2b5e4defd214707c333c.js"],"component---src-pages-404-js":["/component---src-pages-404-js-c4e21bec9f8bea5f494e.js"]};/*]]>*/</script><script src="/component---src-templates-blog-post-js-15d735376b7c65aaf912.js" async=""></script><script src="/commons-377e7c33e8cefb6bcdbe.js" async=""></script><script src="/styles-67cf5e094dce50b264bc.js" async=""></script><script src="/app-843f040244f98aefb393.js" async=""></script><script src="/webpack-runtime-17c92acfcb31596bf979.js" async=""></script></body></html>

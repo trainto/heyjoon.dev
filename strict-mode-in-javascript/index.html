@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.fa065923c73e6d0eff70.css">code[class*=language-],pre[class*=language-]{text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;color:#c3cee3;background:#263238;font-family:Roboto Mono,monospace;font-size:1em;line-height:1.5em;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{background:#363636}:not(pre)>code[class*=language-]{white-space:normal;border-radius:.2em;padding:.1em}pre[class*=language-]{overflow:auto;position:relative;margin:.5em 0;padding:1.25em 1em}.language-css>code,.language-sass>code,.language-scss>code{color:#fd9170}[class*=language-] .namespace{opacity:.7}.token.atrule{color:#c792ea}.token.attr-name{color:#ffcb6b}.token.attr-value,.token.attribute{color:#c3e88d}.token.boolean{color:#c792ea}.token.builtin{color:#ffcb6b}.token.cdata,.token.char{color:#80cbc4}.token.class{color:#ffcb6b}.token.class-name,.token.color{color:#f2ff00}.token.comment{color:#546e7a}.token.constant{color:#c792ea}.token.deleted{color:#f07178}.token.doctype{color:#546e7a}.token.entity{color:#f07178}.token.function{color:#c792ea}.token.hexcode{color:#f2ff00}.token.id,.token.important{color:#c792ea;font-weight:700}.token.inserted{color:#80cbc4}.token.keyword{color:#c792ea;font-style:italic}.token.number{color:#fd9170}.token.operator{color:#89ddff}.token.prolog{color:#546e7a}.token.property{color:#80cbc4}.token.pseudo-class,.token.pseudo-element{color:#c3e88d}.token.punctuation{color:#89ddff}.token.regex{color:#f2ff00}.token.selector{color:#f07178}.token.string{color:#c3e88d}.token.symbol{color:#c792ea}.token.tag,.token.unit{color:#f07178}.token.url{color:#fd9170}.token.variable{color:#f07178}pre{border-radius:15px}blockquote{font-style:italic;padding-left:1rem;border-left:3px solid #e31b6d;opacity:.8}article header h1{color:#fff}section h1,section h2,section h3,section h4,section h5,section h6{margin-top:3rem!important;margin-bottom:1.5rem!important;color:#fff}section img{margin-top:1.5rem!important}.border-responsive{border-bottom:1px solid hsla(0,0%,100%,.3)}@media (min-width:768px){.border-responsive{border-bottom:none;border-right:1px solid hsla(0,0%,100%,.3)}}</style><meta name="generator" content="Gatsby 2.18.21"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link rel="alternate" type="application/rss+xml" href="/rss.xml"/><title data-react-helmet="true">Strict mode in Javascript | Trainto.log()</title><link data-react-helmet="true" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/><link data-react-helmet="true" href="https://fonts.googleapis.com/css?family=Noto+Sans&amp;display=swap" rel="stylesheet"/><meta data-react-helmet="true" name="description" content="In strict mode, javascript behaves more safely and logically, and it will gives you more warnings. To enable strict mode, you can just put the below code. If…"/><meta data-react-helmet="true" property="og:title" content="Strict mode in Javascript"/><meta data-react-helmet="true" property="og:description" content="In strict mode, javascript behaves more safely and logically, and it will gives you more warnings. To enable strict mode, you can just put the below code. If…"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Hakjoon Sim"/><meta data-react-helmet="true" name="twitter:title" content="Strict mode in Javascript"/><meta data-react-helmet="true" name="twitter:description" content="In strict mode, javascript behaves more safely and logically, and it will gives you more warnings. To enable strict mode, you can just put the below code. If…"/><style data-react-helmet="true" type="text/css">
+            body {
+              background-color: #282c35;
+              color: rgba(255, 255, 255, 0.88);
+              font-family: 'Noto Sans', sans-serif;
+            }
+
+            a, a:hover {
+              color: #e31b6d;
+            }
+
+            hr {
+              background-color: rgba(255, 255, 255, 0.3);
+            }
+          </style><link as="script" rel="preload" href="/webpack-runtime-17c92acfcb31596bf979.js"/><link as="script" rel="preload" href="/app-843f040244f98aefb393.js"/><link as="script" rel="preload" href="/styles-67cf5e094dce50b264bc.js"/><link as="script" rel="preload" href="/commons-377e7c33e8cefb6bcdbe.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-15d735376b7c65aaf912.js"/><link as="fetch" rel="preload" href="/page-data/strict-mode-in-javascript/page-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="container py-3"><main><div class="row justify-content-center"><header class="col-12 col-md-8"><h3><a style="text-decoration:none" href="/">Trainto.log()</a></h3></header><div class="col-12 col-md-8 mt-3"><article><header><h1>Strict mode in Javascript</h1><p>March 24, 2016</p></header><section><p>In strict mode, javascript behaves more safely and logically, and it will gives you more warnings.</p>
+<p>To enable strict mode, you can just put the below code.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token string">'use strict'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// To apply strict mode to each function,</span>
+<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token string">'use strict'</span><span class="token punctuation">;</span>
+    <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token operator">...</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>If the engine of javascript does not support ECMAScript 5, then it will be treated as just string.</p>
+<br>
+<h3>Variable must be declared</h3>
+<p>In strict mode, every variable must be declared explicitly. If you try to assign value to variable which is not declared, an exception(ReferenceError) will be given.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token string">'use strict'</span><span class="token punctuation">;</span>
+  value <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError: value is not defined</span></code></pre></div>
+<br>
+<h3>Function can not be declared in blocks</h3>
+<p>Function must be declared in global scope or in another function, not in blocks.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token string">'use strict'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token comment">// SyntaxError</span>
+            <span class="token operator">...</span><span class="token punctuation">.</span>
+            <span class="token operator">...</span><span class="token punctuation">.</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<br>
+<p>For workaround, function can be declared in blocks like this,</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token string">'use strict'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> <span class="token function-variable function">bar</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token operator">...</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<br>
+<h3>Arguments</h3>
+<p>The properties arguments.callee and arguments.caller have been eliminated. And also ‘arguments’ can not be used for variable name(SyntaxError will be given).</p>
+<br>
+<h3>this</h3>
+<p>If it’s not in strict mode, ‘this’ in function(not method) will be global object(like ‘window’ in browser). However in strict mode ‘this’ is undefined.</p>
+<div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span> <span class="token operator">===</span> window<span class="token punctuation">;</span> <span class="token comment">// true</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token string">'use strict'</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span> <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> <span class="token comment">// true</span>
+<span class="token punctuation">}</span></code></pre></div>
+<br>
+<h3>Etc.</h3>
+<ul>
+<li>No more ‘with’: ‘with’ statement cannot be used anymore.</li>
+<li>No more octal numbers: SyntaxError will be given for octal literal.</li>
+</ul>
+<br>
+<p>For more detail, <a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-2-strict-mode/">ECMA-262-5 in detail. Chapter 2. Strict Mode</a> is worth to read.</p></section><hr class="my-4"/><footer><div><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIDAQb/xAAWAQEBAQAAAAAAAAAAAAAAAAACAQD/2gAMAwEAAhADEAAAAanfptN1PndBawj/AP/EABkQAAIDAQAAAAAAAAAAAAAAAAECAAMSEf/aAAgBAQABBQK7XAtlSywDCZM6IWJZiddLT//EABURAQEAAAAAAAAAAAAAAAAAACBB/9oACAEDAQE/AYP/xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAeEAABAwQDAAAAAAAAAAAAAAABAAIREBIhQTFhcf/aAAgBAQAGPwINbtXF0jYpBOV7QHtRPCyv/8QAGxABAAIDAQEAAAAAAAAAAAAAAQAhETFBEFH/2gAIAQEAAT8hXQ9/IIs/hiw4QN2oXLdEQzl6m9MaRuNUqf/aAAwDAQACAAMAAAAQJy9//8QAFxEBAQEBAAAAAAAAAAAAAAAAAAERIf/aAAgBAwEBPxDJ01Vf/8QAGBEBAQADAAAAAAAAAAAAAAAAAQAQETH/2gAIAQIBAT8QF3g7AX//xAAcEAEBAAMBAAMAAAAAAAAAAAABEQAhQTFRsfD/2gAIAQEAAT8Q8Sqi+AuGBMCj1lLm/jA0aGDHeeyhEdr+MRQg3ric1Arbsn1k/kNtmRgpCvM//9k=" alt="Hakjoon Sim" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/11d9aa0a042029a130f7ad2d42e2f7d0/30d3a/profile-pic.jpg 1x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/66c95/profile-pic.jpg 1.5x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/aacbd/profile-pic.jpg 2x" /><img loading="lazy" width="50" height="50" srcset="/static/11d9aa0a042029a130f7ad2d42e2f7d0/30d3a/profile-pic.jpg 1x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/66c95/profile-pic.jpg 1.5x,
+/static/11d9aa0a042029a130f7ad2d42e2f7d0/aacbd/profile-pic.jpg 2x" src="/static/11d9aa0a042029a130f7ad2d42e2f7d0/30d3a/profile-pic.jpg" alt="Hakjoon Sim" style="position:absolute;top:0;left:0;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center"/></picture></noscript></div><p>Written by<!-- --> <strong><a href="https://twitter.com/trainto" target="_blank" rel="noopener noreferrer">Hakjoon Sim</a></strong> <!-- -->who lives Seoul. Like programming and doing nothing.</p></div></footer></article><nav><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/shell-expansion/">← <!-- -->Shell expansion</a></li><li><a rel="next" href="/vim-8/">Vim 8<!-- --> →</a></li></ul></nav></div></div></main></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-73310674-3', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/strict-mode-in-javascript/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-843f040244f98aefb393.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-15d735376b7c65aaf912.js"],"component---src-templates-blog-list-js":["/component---src-templates-blog-list-js-2b5e4defd214707c333c.js"],"component---src-pages-404-js":["/component---src-pages-404-js-c4e21bec9f8bea5f494e.js"]};/*]]>*/</script><script src="/component---src-templates-blog-post-js-15d735376b7c65aaf912.js" async=""></script><script src="/commons-377e7c33e8cefb6bcdbe.js" async=""></script><script src="/styles-67cf5e094dce50b264bc.js" async=""></script><script src="/app-843f040244f98aefb393.js" async=""></script><script src="/webpack-runtime-17c92acfcb31596bf979.js" async=""></script></body></html>
