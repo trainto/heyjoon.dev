@@ -16,7 +16,7 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" />
+        <SEO title={"Welcome"} description={data.site.siteMetadata.description} />
 
         <div className="row justify-content-center">
           <div className="col-11 col-md-4 mt-3">
@@ -64,7 +64,8 @@ export const pageQuery = graphql`
   query($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
-        title
+        title,
+        description
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: $limit, skip: $skip) {
