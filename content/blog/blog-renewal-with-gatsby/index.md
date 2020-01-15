@@ -1,6 +1,6 @@
 ---
 title: 'Blog renewal with Gatsby'
-date: '2020-01-20'
+date: '2020-01-14'
 ---
 
 Starting new year 2020, I decided to renew my blog. I built my previous blog with jekyll. It was almost 4 years ago, and at that time, I wasn't a Front-End developer. So I did not know well about web technologies. (I was quite interested in web technologies though.) Now I'm working as a Front-End developer and wanted my personal sites looks better.
