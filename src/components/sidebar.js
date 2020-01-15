@@ -15,14 +15,14 @@ const Sidebar = () => {
       }
       twitterLogo: file(absolutePath: { regex: "/twitter.png/" }) {
         childImageSharp {
-          fixed(width: 38, height: 38, quality: 100) {
+          fixed(width: 28, height: 28, quality: 100) {
             ...GatsbyImageSharpFixed
           }
         }
       }
       linkedinLogo: file(absolutePath: { regex: "/linkedin.png/" }) {
         childImageSharp {
-          fixed(width: 56, height: 56, quality: 100) {
+          fixed(width: 28, height: 28, quality: 100) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -71,7 +71,7 @@ const Sidebar = () => {
 
       <a href="https://iam.trainto.me">About me</a>
 
-      <div className="mt-3">
+      <div className="my-3">
         <a
           className="align-middle"
           href={`https://twitter.com/${social.twitter}`}
@@ -81,7 +81,7 @@ const Sidebar = () => {
           <Image fixed={data.twitterLogo.childImageSharp.fixed} alt="twitter" />
         </a>
         <a
-          className="align-middle"
+          className="align-middle ml-3"
           href={`https://linkedin.com/in/${social.linkedin}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -89,7 +89,7 @@ const Sidebar = () => {
           <Image fixed={data.linkedinLogo.childImageSharp.fixed} alt="linkedin" />
         </a>
         <a
-          className="align-middle"
+          className="align-middle ml-3"
           href={`https://github.com/${social.github}`}
           target="_blank"
           rel="noopener noreferrer"
