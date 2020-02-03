@@ -4,7 +4,7 @@ date: '2020-02-03'
 description: 'My Hawaii trip'
 ---
 
-I went to a Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and I'm still struggling with jet lag. I wrote title for this post as 'hang loose in the Aloha state', but actually I couldn't hang loose because of the tight schedule. However I just wanted to share my impression of Hawaii.
+I went to Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and I'm still struggling with jet lag. I wrote title for this post as 'hang loose in the Aloha state', but actually I couldn't hang loose because of the tight schedule. However I just wanted to share my impression of Hawaii.
 
 ### Kualoa Ranch
 Kualoa is a 4000-acre private nature reserve that has been the scene for a lot of Hollywood movies and tv shows. The most popular activities on Kualoa Ranch is an ATV tour. It was great way to see the beauty of the ranch and a quite exciting activity except that I had a shower with dust. Also we took a movie tour with very energetic and kind guide. Part of what's made Kualoa Ranch so famous are the movies that have filmed like Jurassic park, 50 First Dates, Pearl Harbor and Etc.
