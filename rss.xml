@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Trainto.log()]]></title><description><![CDATA[Hakjoon's blog]]></description><link>https://trainto.me</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 21 Jan 2020 04:21:58 GMT</lastBuildDate><item><title><![CDATA[Blog renewal with Gatsby]]></title><description><![CDATA[Starting new year 2020, I decided to renew my blog. I built my previous blog with jekyll. It was almost 4 years ago, and at that time, I…]]></description><link>https://trainto.me/blog-renewal-with-gatsby/</link><guid isPermaLink="false">https://trainto.me/blog-renewal-with-gatsby/</guid><pubDate>Tue, 14 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Starting new year 2020, I decided to renew my blog. I built my previous blog with jekyll. It was almost 4 years ago, and at that time, I wasn’t a Front-End developer. So I did not know well about web technologies. (I was quite interested in web technologies though.) Now I’m working as a Front-End developer and wanted my personal sites looks better.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Trainto.log()]]></title><description><![CDATA[Hakjoon's blog]]></description><link>https://trainto.me</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 03 Feb 2020 10:37:39 GMT</lastBuildDate><item><title><![CDATA[Hang loose in the Aloha state - Hawaii trip]]></title><description><![CDATA[I went to a Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii…]]></description><link>https://trainto.me/hang-loose-in-aloha-state-hawai-trip/</link><guid isPermaLink="false">https://trainto.me/hang-loose-in-aloha-state-hawai-trip/</guid><pubDate>Mon, 03 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I went to a Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and I’m still struggling with jet lag. I wrote title for this post as ‘hang loose in the Aloha state’, but actually I couldn’t hang loose because of the tight schedule. However I just wanted to share my impression of Hawaii.&lt;/p&gt;
+&lt;h3&gt;Kualoa Ranch&lt;/h3&gt;
+&lt;p&gt;Kualoa is a 4000-acre private nature reserve that has been the scene for a lot of Hollywood movies and tv shows. The most popular activities on Kualoa Ranch is an ATV tour. It was great way to see the beauty of the ranch and a quite exciting activity except that I had a shower with dust. Also we took a movie tour with very energetic and kind guide. Part of what’s made Kualoa Ranch so famous are the movies that have filmed like Jurassic park, 50 First Dates, Pearl Harbor and Etc.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b3b589c0966befdc52f169941b207fa0/e937d/kualoa.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABQABBP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEAMQAAABV5g8ROLsv//EABsQAAIBBQAAAAAAAAAAAAAAAAACAQQQEhQh/9oACAEBAAEFAlmMXqUU3L8P/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAIAQIBAT8Bqv/EABwQAAEDBQAAAAAAAAAAAAAAAAABERIgMTJhof/aAAgBAQAGPwJ3QvJdGHaP/8QAGxAAAwACAwAAAAAAAAAAAAAAAAERIUExUXH/2gAIAQEAAT8habGWxXwB5izBVsnQ/9oADAMBAAIAAwAAABBD7//EABURAQEAAAAAAAAAAAAAAAAAABAR/9oACAEDAQE/EIf/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAgEBPxBl/8QAHxABAAIBAwUAAAAAAAAAAAAAAQARITFBgVFxocHR/9oACAEBAAE/EB2HUFHM1TBg9mDDHMvkuHZektUGO0u2eZ//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Kualoa Ranch&quot;
+        title=&quot;Kualoa Ranch&quot;
+        src=&quot;/static/b3b589c0966befdc52f169941b207fa0/88218/kualoa.jpg&quot;
+        srcset=&quot;/static/b3b589c0966befdc52f169941b207fa0/7237a/kualoa.jpg 148w,
+/static/b3b589c0966befdc52f169941b207fa0/0cfdf/kualoa.jpg 295w,
+/static/b3b589c0966befdc52f169941b207fa0/88218/kualoa.jpg 590w,
+/static/b3b589c0966befdc52f169941b207fa0/77d57/kualoa.jpg 885w,
+/static/b3b589c0966befdc52f169941b207fa0/e937d/kualoa.jpg 1024w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Normally I don’t like visiting nature reserve things on my trip, but it has breathtaking views and some exciting activities. I think it’s worth to try.&lt;/p&gt;
+&lt;h3&gt;Waikiki beach&lt;/h3&gt;
+&lt;p&gt;Waikiki beach was the spot I exptected the most. Because it is one of the most famous beach in the world.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/013ee8802238e2f9b5c94cdaa40088a5/e937d/waikiki.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAwABAv/EABQBAQAAAAAAAAAAAAAAAAAAAAL/2gAMAwEAAhADEAAAAc6QUXikP//EABoQAAICAwAAAAAAAAAAAAAAAAABAhIREyH/2gAIAQEAAQUCTicZqJLLoih//8QAFxEBAAMAAAAAAAAAAAAAAAAAAAECEf/aAAgBAwEBPwGasf/EABcRAQADAAAAAAAAAAAAAAAAAAABAhL/2gAIAQIBAT8Bi7b/xAAXEAADAQAAAAAAAAAAAAAAAAAAATEQ/9oACAEBAAY/AkVFRN//xAAbEAEAAgIDAAAAAAAAAAAAAAABABFRYSExsf/aAAgBAQABPyFQrq5TZtwygHUK1ETnyA1P/9oADAMBAAIAAwAAABBLP//EABYRAAMAAAAAAAAAAAAAAAAAABARMf/aAAgBAwEBPxBUD//EABYRAAMAAAAAAAAAAAAAAAAAAAEQQf/aAAgBAgEBPxA9T//EABsQAQADAAMBAAAAAAAAAAAAAAEAESFBUWFx/9oACAEBAAE/EEoNUvM7hRlqoskoMD8i4p4KEJKLvThEAmHyf//Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Waikiki beach&quot;
+        title=&quot;Waikiki beach&quot;
+        src=&quot;/static/013ee8802238e2f9b5c94cdaa40088a5/88218/waikiki.jpg&quot;
+        srcset=&quot;/static/013ee8802238e2f9b5c94cdaa40088a5/7237a/waikiki.jpg 148w,
+/static/013ee8802238e2f9b5c94cdaa40088a5/0cfdf/waikiki.jpg 295w,
+/static/013ee8802238e2f9b5c94cdaa40088a5/88218/waikiki.jpg 590w,
+/static/013ee8802238e2f9b5c94cdaa40088a5/77d57/waikiki.jpg 885w,
+/static/013ee8802238e2f9b5c94cdaa40088a5/e937d/waikiki.jpg 1024w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;I expected beer or cocktail like Mojito laying down on the beach, but I couldn’t find any beach bar and realized nobody was drinking any alcohol. I was wondering what was going on and finally ended up figuring out that driking in public is strictly prohibited In Hawaii, even on the beach.&lt;/p&gt;
+&lt;p&gt;Except the part that it’s not allowed to drink(Maybe it’s the most important reason 😅), it was really nice place to relax.&lt;/p&gt;
+&lt;h3&gt;Pearl harbor&lt;/h3&gt;
+&lt;p&gt;My father in law wanted to visit Pearl harbor museum. Frankly speaking If I went to Hawaii with just my wife, we wouldn’t visit Pearl harbor.(Might have just hanged in Waikiki beach 🏖️) Pearl harbor memorial was huge scale then I expected. It looked like it could take for whole day to see everything, so we decided to see battleship Missouri memorial.(Also it was quite expensive than I thought. To see everything, it costs 72$ for each person.)&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8d7e5f57485ec7dc9dc7adb21adae007/e937d/missouri.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 75%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAABAP/aAAwDAQACEAMQAAABZ0YYIzFwX//EABsQAAICAwEAAAAAAAAAAAAAAAACARIDEyER/9oACAEBAAEFAp6M9WvA+Tmv01qf/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAIAQMBAT8BR//EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAECAQE/Aar/xAAaEAACAgMAAAAAAAAAAAAAAAAAIQFBAhEx/9oACAEBAAY/AumMbRYhyWf/xAAbEAADAAIDAAAAAAAAAAAAAAAAAREhMcHR4f/aAAgBAQABPyGOgRM1aKPBkoxYk3q8iX6P/9oADAMBAAIAAwAAABCw/wD/xAAWEQEBAQAAAAAAAAAAAAAAAAABEBH/2gAIAQMBAT8QDY//xAAWEQADAAAAAAAAAAAAAAAAAAABEBH/2gAIAQIBAT8QMJ//xAAaEAEBAQEBAQEAAAAAAAAAAAABEQAhUTFx/9oACAEBAAE/EAHWfrL0Jrenjm0XevSZ0t6hJg6mCb9Z3CwYz//Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Battleship Missouri memorial&quot;
+        title=&quot;Battleship Missouri memorial&quot;
+        src=&quot;/static/8d7e5f57485ec7dc9dc7adb21adae007/88218/missouri.jpg&quot;
+        srcset=&quot;/static/8d7e5f57485ec7dc9dc7adb21adae007/7237a/missouri.jpg 148w,
+/static/8d7e5f57485ec7dc9dc7adb21adae007/0cfdf/missouri.jpg 295w,
+/static/8d7e5f57485ec7dc9dc7adb21adae007/88218/missouri.jpg 590w,
+/static/8d7e5f57485ec7dc9dc7adb21adae007/77d57/missouri.jpg 885w,
+/static/8d7e5f57485ec7dc9dc7adb21adae007/e937d/missouri.jpg 1024w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We had a Korean narrated tour and I learned the battleship was related to Korean history too. I could remind what I learned from school but I forgot like World-War-2 and Korean War.&lt;/p&gt;
+&lt;br /&gt;
+&lt;p&gt;I should get back to work which is always unpleasnt after every holiday, especially this trip was too short and not my style because it was family trip(Everyone wants different things. 😭). But anyway it was quality time to refresh.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3e8003a3f2911ef32b22a75586d6f99c/e937d/pineapple.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 120.5078125%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAYABQDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAAAAIDBQH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAwD/2gAMAwEAAhADEAAAAauzzo1uaRThnGUwh//EABsQAAIDAQEBAAAAAAAAAAAAAAECAAMSIRET/9oACAEBAAEFAstn5MZ2qXnnraes2S4BQRNtP//EABcRAAMBAAAAAAAAAAAAAAAAAAEQESH/2gAIAQMBAT8BgCuL/8QAGREAAwADAAAAAAAAAAAAAAAAAAERAhAh/9oACAECAQE/AcXaxUndf//EABwQAAMAAQUAAAAAAAAAAAAAAAABESECEjFhof/aAAgBAQAGPwK2EbjaNuowy0Tngl1DByf/xAAcEAEAAwACAwAAAAAAAAAAAAABABExIXFBUWH/2gAIAQEAAT8hRfGQ7WIQ/BXK9kfYnKjJcE9i1vJEBgU8lli+pe5//9oADAMBAAIAAwAAABDjMH//xAAYEQEAAwEAAAAAAAAAAAAAAAABABARIf/aAAgBAwEBPxDJ2IbBU//EABoRAQABBQAAAAAAAAAAAAAAAAEAEBEhMUH/2gAIAQIBAT8Qc6HkSMkso//EAB8QAQACAgICAwAAAAAAAAAAAAEAESFBMWFRcYGR8f/aAAgBAQABPxDWSg4Sg/W/cvvStX8i9oMxhSdQadlSvGiWL1CN5KYrRamU7e+4GREPK1WfcxGQWUcfMTvzRtP/2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Pineapple juice&quot;
+        title=&quot;Pineapple juice&quot;
+        src=&quot;/static/3e8003a3f2911ef32b22a75586d6f99c/88218/pineapple.jpg&quot;
+        srcset=&quot;/static/3e8003a3f2911ef32b22a75586d6f99c/7237a/pineapple.jpg 148w,
+/static/3e8003a3f2911ef32b22a75586d6f99c/0cfdf/pineapple.jpg 295w,
+/static/3e8003a3f2911ef32b22a75586d6f99c/88218/pineapple.jpg 590w,
+/static/3e8003a3f2911ef32b22a75586d6f99c/77d57/pineapple.jpg 885w,
+/static/3e8003a3f2911ef32b22a75586d6f99c/e937d/pineapple.jpg 1024w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Lastly you should really try Hawaian pineapple slush and ice cream.🍍&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Blog renewal with Gatsby]]></title><description><![CDATA[Starting new year 2020, I decided to renew my blog. I built my previous blog with jekyll. It was almost 4 years ago, and at that time, I…]]></description><link>https://trainto.me/blog-renewal-with-gatsby/</link><guid isPermaLink="false">https://trainto.me/blog-renewal-with-gatsby/</guid><pubDate>Tue, 14 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Starting new year 2020, I decided to renew my blog. I built my previous blog with jekyll. It was almost 4 years ago, and at that time, I wasn’t a Front-End developer. So I did not know well about web technologies. (I was quite interested in web technologies though.) Now I’m working as a Front-End developer and wanted my personal sites looks better.&lt;/p&gt;
 &lt;p&gt;Followings are skills that applied to build this blog.&lt;/p&gt;
 &lt;h3&gt;Gatsby (React)&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://gatsbyjs.org&quot;&gt;Gatsby&lt;/a&gt; is a open source framework based on React to build your site as &lt;em&gt;static&lt;/em&gt; files which is similar to jekyll. The reason I chose Gatsby is that it is based on React, which is I use everyday.&lt;/p&gt;
