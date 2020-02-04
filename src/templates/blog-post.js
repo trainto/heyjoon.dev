@@ -4,6 +4,7 @@ import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import './blog-post.css';
+import Adsense from '../components/adsense';
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -30,6 +31,8 @@ class BlogPostTemplate extends React.Component {
                 <h1>{post.frontmatter.title}</h1>
                 <p>{post.frontmatter.date}</p>
               </header>
+
+              <Adsense format="horizontal" slot="4364348128" />
 
               <section dangerouslySetInnerHTML={{ __html: post.html }} />
 

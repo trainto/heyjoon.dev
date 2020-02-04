@@ -2,6 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import './sidebar.css';
+import Adsense from './adsense';
 
 const Sidebar = () => {
   const data = useStaticQuery(graphql`
