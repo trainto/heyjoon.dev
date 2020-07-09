@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Trainto.log()]]></title><description><![CDATA[Hakjoon's blog]]></description><link>https://trainto.me</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 09 Jul 2020 08:28:23 GMT</lastBuildDate><item><title><![CDATA[Hang loose in the Aloha state - Hawaii trip]]></title><description><![CDATA[I went to Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and…]]></description><link>https://trainto.me/hang-loose-in-aloha-state-hawai-trip/</link><guid isPermaLink="false">https://trainto.me/hang-loose-in-aloha-state-hawai-trip/</guid><pubDate>Mon, 03 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I went to Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and I’m still struggling with jet lag. I wrote title for this post as ‘hang loose in the Aloha state’, but actually I couldn’t hang loose because of the tight schedule. However I just wanted to share my impression of Hawaii.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Trainto.log()]]></title><description><![CDATA[Hakjoon's blog]]></description><link>https://trainto.me</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 09 Jul 2020 09:04:06 GMT</lastBuildDate><item><title><![CDATA[How to make a docker image with Nginx and Nodejs]]></title><description><![CDATA[In this post, I’ll explain how to dockerize Nodejs app and Nginx as reverse proxy. The best or the most simple way might be just creating…]]></description><link>https://trainto.me/docker-image-with-nginx-nodejs/</link><guid isPermaLink="false">https://trainto.me/docker-image-with-nginx-nodejs/</guid><pubDate>Sat, 15 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In this post, I’ll explain how to dockerize Nodejs app and Nginx as reverse proxy. The best or the most simple way might be just creating two docker images, one for Nginx and one for Nodejs. However I’ll create just one docker image includes both.&lt;/p&gt;
+&lt;h3&gt;Create Nodejs app&lt;/h3&gt;
+&lt;p&gt;For creating the docker image, let’s just create very simple Nodejs app here.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; nodeapp
+&lt;span class=&quot;token builtin class-name&quot;&gt;cd&lt;/span&gt; nodeapp
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init
+
+&lt;span class=&quot;token comment&quot;&gt;# I&apos;ll just enter for every prompts&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --save express&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;br /&gt;
+&lt;p&gt;Now we need to add index.js to run express server.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; express &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;express&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; port &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;/&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;req&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; res&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; res&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Hello World!&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;port&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;Example app listening on port &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;port&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Prepare nginx.conf and start script&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nodeapp
+ |-- /node_modules
+ |-- index.js
+ |-- package.json
+ |-- package-lock.json
+ |-- nginx.conf
+ |-- start.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Dockerfile&lt;/h3&gt;
+&lt;p&gt;There are many useful docker images we can use on docker hub. We will create our docker image based on one of the &lt;a href=&quot;https://hub.docker.com/_/nginx&quot;&gt;Official Nginx docker images&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let’s create Dockerfile like below.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;dockerfile&quot;&gt;&lt;pre class=&quot;language-dockerfile&quot;&gt;&lt;code class=&quot;language-dockerfile&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# We will use nginx:mainline-alpine to minimize our docker image size.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;FROM&lt;/span&gt; nginx&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;mainline&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;alpine
+
+&lt;span class=&quot;token comment&quot;&gt;# Copy nginx.conf file to the docker image&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;COPY&lt;/span&gt; nginx.conf /etc/nginx/nginx.conf
+
+&lt;span class=&quot;token comment&quot;&gt;# This line will install node and npm to the docker image.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# With --repository=http://.... option, we can install latest nodejs version.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; apk add &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;no&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;cache &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;repository=http&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;//dl&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;cdn.alpinelinux.org/alpine/edge/main nodejs npm
+
+&lt;span class=&quot;token comment&quot;&gt;# Out nodejs app will be located /usr/src/app&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;WORKDIR&lt;/span&gt; /usr/src/app
+
+&lt;span class=&quot;token comment&quot;&gt;# Copy all our nodejs app into the docker image&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;COPY&lt;/span&gt; . .
+
+&lt;span class=&quot;token comment&quot;&gt;# Install pm2 globally&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; npm install &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;g pm2
+
+&lt;span class=&quot;token comment&quot;&gt;# When your app is more complicated and need to be built before running&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# npm prune and npm cach clean to minimize the size of our docker image&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# RUN npm install \&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;#     &amp;amp;&amp;amp; npm run build \&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;#     &amp;amp;&amp;amp; npm prune --production \&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;#     &amp;amp;&amp;amp; npm cache clean --force&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;EXPOSE&lt;/span&gt; 80
+
+&lt;span class=&quot;token comment&quot;&gt;# COPY start.sh and make it executable&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;COPY&lt;/span&gt; start.sh /usr/src/app/start.sh
+&lt;span class=&quot;token keyword&quot;&gt;RUN&lt;/span&gt; chmod 744 start.sh
+
+&lt;span class=&quot;token keyword&quot;&gt;CMD&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/usr/src/app/start.sh&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Build docker image&lt;/h3&gt;
+&lt;p&gt;Now we are very prepared to create the docker image.&lt;/p&gt;
+&lt;p&gt;All we have to do here is just enter below command.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;docker build -t &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;IMAGE_NAME_YOU_WANT&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token builtin class-name&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Hang loose in the Aloha state - Hawaii trip]]></title><description><![CDATA[I went to Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and…]]></description><link>https://trainto.me/hang-loose-in-aloha-state-hawai-trip/</link><guid isPermaLink="false">https://trainto.me/hang-loose-in-aloha-state-hawai-trip/</guid><pubDate>Mon, 03 Feb 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I went to Hawaii for a holiday with my wife and her family. It was 6 days / 4 nights trip which is not enough for fully enjoying Hawaii and I’m still struggling with jet lag. I wrote title for this post as ‘hang loose in the Aloha state’, but actually I couldn’t hang loose because of the tight schedule. However I just wanted to share my impression of Hawaii.&lt;/p&gt;
 &lt;h3&gt;Kualoa Ranch&lt;/h3&gt;
 &lt;p&gt;Kualoa is a 4000-acre private nature reserve that has been the scene for a lot of Hollywood movies and tv shows. The most popular activities on Kualoa Ranch is an ATV tour. It was great way to see the beauty of the ranch and a quite exciting activity except that I had a shower with dust. Also we took a movie tour with very energetic and kind guide. Part of what’s made Kualoa Ranch so famous are the movies that have filmed like Jurassic park, 50 First Dates, Pearl Harbor and Etc.&lt;/p&gt;
 &lt;p&gt;&lt;span
