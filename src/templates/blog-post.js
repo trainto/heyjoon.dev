@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link, graphql } from 'gatsby';
 import Bio from '../components/bio';
 import Layout from '../components/layout';
@@ -6,18 +6,46 @@ import SEO from '../components/seo';
 import './blog-post.css';
 import Adsense from '../components/adsense';
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark;
-    const siteTitle = this.props.data.site.siteMetadata.title;
-    const { previous, next } = this.props.pageContext;
+const BlogPostTemplate = props => {
+  const post = props.data.markdownRemark;
+  const siteTitle = props.data.site.siteMetadata.title;
+  const { previous, next } = props.pageContext;
 
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
+  const refContent = useRef();
+  const refAdRight = useRef();
+
+  useEffect(() => {
+    const rePosition = () => {
+      const content = refContent.current;
+      const adRight = refAdRight.current;
+      if (!content || !adRight) {
+        return;
+      }
+
+      const contentRight = content.offsetLeft + content.offsetWidth;
+      adRight.style.left = contentRight + 100 + 'px';
+    };
+
+    rePosition();
+
+    window.addEventListener('resize', rePosition);
+
+    return () => window.removeEventListener('resize', rePosition);
+  }, []);
+
+  return (
+    <>
+      <div className="d-none d-xl-block fixed-top" style={{ top: 100, width: 160, height: 600 }}>
+        <span className="position-relative" ref={refAdRight}>
+          <Adsense slot="8329899743" style={{ display: 'inline-block', width: 160, height: 600 }} />
+        </span>
+      </div>
+
+      <Layout location={props.location} title={siteTitle}>
         <SEO title={post.frontmatter.title} description={post.frontmatter.description || post.excerpt} />
 
         <div className="row justify-content-center">
-          <header className="col-12 col-md-8">
+          <header className="col-12 col-md-8" ref={refContent}>
             <h3>
               <Link to="/" style={{ textDecoration: 'none' }}>
                 {siteTitle}
@@ -32,12 +60,12 @@ class BlogPostTemplate extends React.Component {
                 <p>{post.frontmatter.date}</p>
               </header>
 
-              <Adsense format="horizontal" slot="4364348128" />
-
               <section dangerouslySetInnerHTML={{ __html: post.html }} />
 
-              <hr className="my-4" />
+              <br />
+              <Adsense format="horizontal" slot="4364348128" />
 
+              <hr className="my-4" />
               <footer>
                 <Bio />
               </footer>
@@ -72,9 +100,9 @@ class BlogPostTemplate extends React.Component {
           </div>
         </div>
       </Layout>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default BlogPostTemplate;
 
