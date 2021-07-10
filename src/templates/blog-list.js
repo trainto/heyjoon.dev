@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Sidebar from '../components/sidebar';
-import Adsense from '../components/adsense';
 
 class BlogIndex extends React.Component {
   render() {
@@ -49,12 +48,17 @@ class BlogIndex extends React.Component {
                     </section>
                   </article>
                   {adPosition === i ? (
-                    <Adsense
-                      style={{ display: 'block', width: '100%', height: '150px' }}
-                      layout-key="-gm-3+1f-3d+2z"
-                      slot="9233297857"
-                      format="fluid"
-                    />
+                    <>
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
+                      <ins class="adsbygoogle"
+                        style={{ display: 'block' }}
+                        data-ad-format="fluid"
+                        data-ad-layout-key="-gm-3+1f-3d+2z"
+                        data-ad-client="ca-pub-6978978720477594"
+                        data-ad-slot="9233297857"
+                      />
+                      <script dangerouslySetInnerHTML={{ __html: `(adsbygoogle = window.adsbygoogle || []).push({});` }}/>
+                    </>
                   ) : null}
                 </div>
               );
