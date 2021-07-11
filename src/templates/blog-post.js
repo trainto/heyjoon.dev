@@ -37,7 +37,13 @@ const BlogPostTemplate = props => {
     <>
       <div className="d-none d-xl-block fixed-top" style={{ top: 100, width: 160, height: 600 }}>
         <span className="position-relative" ref={refAdRight}>
-          <Adsense slot="8329899743" style={{ display: 'inline-block', width: 160, height: 600 }} />
+          <Adsense>
+            <ins class="adsbygoogle"
+              style={{ display: 'inline-block', width: '160px', height: '600px' }}
+              data-ad-client="ca-pub-6978978720477594"
+              data-ad-slot="8329899743"
+            />
+          </Adsense>
         </span>
       </div>
 
@@ -63,7 +69,14 @@ const BlogPostTemplate = props => {
               <section dangerouslySetInnerHTML={{ __html: post.html }} />
 
               <br />
-              <Adsense format="horizontal" slot="4364348128" />
+              <Adsense>
+                <ins className="adsbygoogle"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-6978978720477594"
+                  data-ad-slot="4364348128"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              </Adsense>
 
               <hr className="my-4" />
               <footer>
