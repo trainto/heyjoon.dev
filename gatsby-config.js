@@ -3,7 +3,7 @@ module.exports = {
     title: `Trainto.log()`,
     author: `Hakjoon Sim`,
     description: `Hakjoon's blog`,
-    siteUrl: `https://trainto.me/`,
+    siteUrl: `https://heyjoon.dev/`,
     social: {
       twitter: 'trainto',
       linkedin: 'hakjoon-sim',

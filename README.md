@@ -1,4 +1,4 @@
-# [Trainto.log()](https://trainto.me/)
+# [Trainto.log()](https://heyjoon.dev/)
 
 My personal blog. Forked from [Gatsby blog starter](https://github.com/gatsbyjs/gatsby-starter-blog).
 

@@ -4,7 +4,7 @@ date: '2018-04-02'
 description: "Let's implement zip function like Rx using LiveData"
 ---
 
-The last post, [Replace EventBus with LiveData](https://trainto.me/android-replace-eventbus-with-livedata) was introduced.
+The last post, [Replace EventBus with LiveData](/android-replace-eventbus-with-livedata) was introduced.
 
 This time, Implementing Zip function(Like Rx) using LiveData will be introduced. To acheive this, MediatorLiveData, which extends LiveData, will be applied.
 
