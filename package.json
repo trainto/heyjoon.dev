@@ -6,12 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
