@@ -10,8 +10,12 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const contentHtml = await markdownToHtml(post.content);
 
   return (
-    <article>
-      <div dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
+    <article className="mt-10">
+      <h2 className="text-3xl">{post.title}</h2>
+      {post.description && <h3 className="text-lg text-gray-500">{post.description}</h3>}
+      <div className="text-sm text-gray-500">{post.date}</div>
+
+      <div className="mt-10" dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
     </article>
   );
 }
