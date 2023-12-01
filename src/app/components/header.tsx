@@ -7,7 +7,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="text-right">
+    <header className="text-right px-5">
       <Link href="/">
         <div
           className={`text-4xl pt-10 font-bold ${

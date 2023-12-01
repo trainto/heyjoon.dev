@@ -14,18 +14,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} container px-10 mx-auto`}>
+      <body className={`${roboto.className} container mx-auto`}>
         <Header />
 
         <main className="mt-10">{children}</main>
 
-        <footer className="flex justify-between items-end border-t border-gray-500 text-sm text-gray-400 text-right mt-10 pt-2 pb-10 px-2">
+        <footer className="flex justify-between items-end border-t border-gray-500 text-sm text-gray-400 text-right mt-10 pt-2 pb-10 px-2 mx-5 sm:mx-0">
           <div>
-            <Link href="/" className="text-brand1 text-lg">
-              Trainto.log()
+            <Link href="/" className="text-brand1">
+              Joon.log()
             </Link>
           </div>
-          <div>
+          <div className="text-xs">
             Hakjoon Sim <span className="text-brand1">©{new Date().getFullYear()}</span>
           </div>
         </footer>

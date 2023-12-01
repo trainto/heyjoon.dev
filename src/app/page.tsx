@@ -7,12 +7,12 @@ export default function Home() {
   const posts = Posts.getAllPosts();
 
   return (
-    <div className="flex">
-      <div className="px-10">
+    <div className="flex flex-col sm:flex-row justify-center">
+      <div>
         <Me />
       </div>
 
-      <div className="px-10">
+      <div className="px-5 sm:px-10">
         {posts.map((post) => (
           <>
             <Link key={post.slug} as={`/posts/${post.slug}`} href="/posts/[slug].tsx">
