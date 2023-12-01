@@ -7,7 +7,8 @@ export default function Me() {
         <Image src="/me.jpg" className="rounded-full" width={100} height={100} alt="Linkedin" />
       </a>
       <div className="text-2xl text-gray-300 mt-5">Hakjoon Sim</div>
-      <div>Developer who lives in Seoul, like programming and doing nothing.</div>
+      <div>Developer who lives in Seoul,</div>
+      <div>like programming and doing nothing.</div>
       <div className="mt-5 flex space-x-2">
         <a href="https://linkedin.com" target="_blank">
           <Image src="/linkedin.png" width={28} height={28} alt="Linkedin" />
