@@ -12,7 +12,12 @@ import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-kotlin';
 import 'prismjs/components/prism-java';
 
-const sourceCodePro = Source_Code_Pro({ weight: ['400'], subsets: ['latin'] });
+const sourceCodePro = Source_Code_Pro({
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function ArticleBody({ contentHtml }: { contentHtml: string }) {
   useEffect(() => {

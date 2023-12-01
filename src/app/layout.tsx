@@ -4,7 +4,12 @@ import Header from './components/header';
 import './globals.css';
 import Link from 'next/link';
 
-const roboto = Roboto({ weight: ['400', '700'], style: ['normal'], subsets: ['latin'] });
+const roboto = Roboto({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Joon.log()',
