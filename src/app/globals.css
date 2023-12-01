@@ -38,3 +38,17 @@ a {
 pre {
   border-radius: 25px;
 }
+
+.text-gray-300-animation {
+  @apply text-gray-300;
+
+  transition-duration: .5s;
+  transition-timing-function: linear;
+}
+
+.text-brand1-animation {
+  @apply text-brand1;
+
+  transition-duration: .5s;
+  transition-timing-function: linear;
+}

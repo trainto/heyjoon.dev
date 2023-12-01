@@ -11,7 +11,7 @@ const Header = () => {
       <Link href="/">
         <div
           className={`text-4xl pt-10 font-bold ${
-            pathname === '/' ? 'text-gray-300' : 'text-brand1'
+            pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
           }`}
         >
           Joon.log()
