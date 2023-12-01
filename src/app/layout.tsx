@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+import Header from './components/header';
 import './globals.css';
 
 const roboto = Roboto({ weight: '400', style: ['normal'], subsets: ['latin'] });
@@ -12,15 +13,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} container mx-auto`}>
-        <header className="text-center">
-          <h1 className="text-5xl pt-10">Joon.log()</h1>
-        </header>
+      <body className={`${roboto.className} container px-10 mx-auto`}>
+        <Header />
 
-        <main className="pt-5">{children}</main>
+        <main className="mt-10">{children}</main>
 
         <footer className="border-t border-gray-500 text-sm text-gray-400 text-right mt-10 pt-2 pb-10 px-5">
-          Hakjoon Sim ©{new Date().getFullYear()}
+          Hakjoon Sim <span className="text-brand1">©{new Date().getFullYear()}</span>
         </footer>
       </body>
     </html>

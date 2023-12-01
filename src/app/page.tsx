@@ -16,12 +16,13 @@ export default function Home() {
         {posts.map((post) => (
           <>
             <Link key={post.slug} as={`/posts/${post.slug}`} href="/posts/[slug].tsx">
-              <div className="text-xl">{post.title}</div>
+              <div className="text-xl text-brand1">{post.title}</div>
             </Link>
-            {post.description && <div className="text text-gray-400">{post.description}</div>}
             <div className="text-sm text-gray-500">
               {format(new Date(post.date), 'MMM dd, yyyy')}
             </div>
+            {post.description && <div className="text text-gray-400">{post.description}</div>}
+
             <br />
           </>
         ))}
