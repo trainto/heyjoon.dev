@@ -7,27 +7,27 @@ body {
   background-color: #282c34;
 }
 
-article *+p {
+.article_body > *+p {
   margin-top: 1rem;
 }
 
-article *+h1,*+h2,*+h3,*+h4,*+h5,*+h6 {
+.article_body > *+h1,.article_body > *+h2,.article_body > *+h3,.article_body > *+h4,.article_body > *+h5,.article_body > *+h6 {
   margin-top: 1.5rem;
 }
 
-article *+pre {
+.article_body > *+pre {
   margin-top: 1rem;
 }
 
-article h2 {
+.article_body > h2 {
   font-size: 2rem;
 }
 
-article h3 {
+.article_body > h3 {
   font-size: 1.75rem;
 }
 
-article h4 {
+.article_body > h4 {
   font-size: 1.5rem;
 }
 

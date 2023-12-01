@@ -21,7 +21,7 @@ export default function ArticleBody({ contentHtml }: { contentHtml: string }) {
 
   return (
     <>
-      <div className="mt-10" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <div className="article_body mt-10" dangerouslySetInnerHTML={{ __html: contentHtml }} />
 
       <style jsx global>{`
         code {
