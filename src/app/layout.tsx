@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import Header from './components/header';
 import './globals.css';
+import Link from 'next/link';
 
 const roboto = Roboto({ weight: ['400', '700'], style: ['normal'], subsets: ['latin'] });
 
@@ -18,8 +19,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main className="mt-10">{children}</main>
 
-        <footer className="border-t border-gray-500 text-sm text-gray-400 text-right mt-10 pt-2 pb-10 px-5">
-          Hakjoon Sim <span className="text-brand1">©{new Date().getFullYear()}</span>
+        <footer className="flex justify-between items-end border-t border-gray-500 text-sm text-gray-400 text-right mt-10 pt-2 pb-10 px-2">
+          <div>
+            <Link href="/" className="text-brand1 text-lg">
+              Trainto.log()
+            </Link>
+          </div>
+          <div>
+            Hakjoon Sim <span className="text-brand1">©{new Date().getFullYear()}</span>
+          </div>
         </footer>
       </body>
     </html>
