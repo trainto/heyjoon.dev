@@ -1,3 +1,4 @@
+import ArticleBody from '@/app/components/article-body';
 import { Posts, markdownToHtml } from '@/lib/utils';
 import { format } from 'date-fns';
 
@@ -18,7 +19,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         {format(new Date(post.date), 'MMM dd, yyyy')}
       </div>
 
-      <div className="mt-10" dangerouslySetInnerHTML={{ __html: contentHtml }}></div>
+      <ArticleBody contentHtml={contentHtml} />
     </article>
   );
 }

@@ -162,7 +162,6 @@ public class Item {
 }
 ```
 
-<br>
 Another way for Java 7 or above, Objects class just simply can deal with it.
 
 ```java

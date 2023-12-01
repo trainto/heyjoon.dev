@@ -67,7 +67,7 @@ Finally this custom hook will return [state, setPersistedState].
 
 ### Example
 
-```typescript
+```tsx
 import React, { useState } from 'react';
 import usePersistedState from 'somewhere usePersistedState defined';
 

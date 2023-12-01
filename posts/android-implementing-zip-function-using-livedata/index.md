@@ -22,7 +22,6 @@ As always, start with dependencies configuration.
 implementation "android.arch.lifecycle:extensions:1.1.1"
 ```
 
-<br>
 Let's assume that there is MainViewModel which calls two async retrofit calls.
 
 ```kotlin
