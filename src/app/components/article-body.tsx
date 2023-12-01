@@ -11,6 +11,7 @@ import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-kotlin';
 import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-yaml';
 
 const sourceCodePro = Source_Code_Pro({
   weight: ['400'],
