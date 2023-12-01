@@ -20,8 +20,6 @@ function bar() {
 
 If the engine of javascript does not support ECMAScript 5, then it will be treated as just string.
 
-<br>
-
 ### Variable must be declared
 
 In strict mode, every variable must be declared explicitly. If you try to assign value to variable which is not declared, an exception(ReferenceError) will be given.
@@ -33,8 +31,6 @@ function foo() {
 }
 foo(); // ReferenceError: value is not defined
 ```
-
-<br>
 
 ### Function can not be declared in blocks
 
@@ -52,8 +48,6 @@ function foo() {
 }
 ```
 
-<br>
-
 For workaround, function can be declared in blocks like this,
 
 ```javascript
@@ -67,13 +61,9 @@ function foo() {
 }
 ```
 
-<br>
-
 ### Arguments
 
 The properties arguments.callee and arguments.caller have been eliminated. And also 'arguments' can not be used for variable name(SyntaxError will be given).
-
-<br>
 
 ### this
 
@@ -90,13 +80,9 @@ function bar() {
 }
 ```
 
-<br>
-
 ### Etc.
 
 - No more 'with': 'with' statement cannot be used anymore.
 - No more octal numbers: SyntaxError will be given for octal literal.
-
-<br>
 
 For more detail, [ECMA-262-5 in detail. Chapter 2. Strict Mode](http://dmitrysoshnikov.com/ecmascript/es5-chapter-2-strict-mode/) is worth to read.

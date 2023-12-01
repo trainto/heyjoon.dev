@@ -4,7 +4,6 @@ date: '2016-03-14'
 ---
 
 Usually I've been using shell expansion without any notion. However I though it would be meaningful to wrap things up. 'Shell expansion' can be divided into 8 types, and detailed explanation can be founded [here](http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html).
-<br />
 
 ### Brace expansion
 
@@ -24,8 +23,6 @@ a b c d
 Hello foo Hello bar
 ```
 
-<br />
-
 ### Tilde expansion
 
 Used to expand to several pathnames such as home directory, current working directory and previous working directory.
@@ -43,8 +40,6 @@ Used to expand to several pathnames such as home directory, current working dire
 > echo ~-
 (previous working directory)
 ```
-
-<br />
 
 ### Shell parameter and Variable expansion
 
@@ -66,8 +61,6 @@ foo
 bar
 ```
 
-<br />
-
 ### Command substitution
 
 Command substitution allows the output of a command to replace the command itself. It comes with '\$' symbol and parenthesis like below.
@@ -78,8 +71,6 @@ Command substitution allows the output of a command to replace the command itsel
 > echo $(date)
 Mon Mar 14 00:12:57 PDT 2016
 ```
-
-<br />
 
 ### Arithmetic expansion
 
@@ -92,8 +83,6 @@ Arithmetic expansion allows the evaluation of an arithmetic expression and the s
 > echo $((num1=1,num2=2,num3=num1*num2))
 2
 ```
-
-<br />
 
 ### Process substitution
 
@@ -114,8 +103,6 @@ Process substitution is supported on systems that support named pipes or the /de
 ^I$
 ```
 
-<br />
-
 ### Word splitting
 
 the results of parameter expansion, command substitution, and arithmetic expansion that did not occur within double quotes will be applied to word splitting by 'IFS' value. The default 'IFS' values are sequences of <space>, <tab>, and <newline>.
@@ -126,8 +113,6 @@ If you want to check IFS value, you can do this,
 > set | grep "IFS"
 IFS=$' \t\n'
 ```
-
-<br />
 
 ### File name expansion
 

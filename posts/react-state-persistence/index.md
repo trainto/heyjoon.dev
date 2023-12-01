@@ -55,8 +55,6 @@ const usePersistedState = <S extends unknown>(
 export default usePersistedState;
 ```
 
-<br />
-
 ### Helper function to save/load data from storage
 First a function called *`persist`* created. This function takes 3 parameters like *key*, *value* and *type*(sessionStorage or localStorage). If given *value* parameter is undefined, it will load saved data using given key, and returns object parsed.
 
@@ -66,8 +64,6 @@ Next a custom hook called *`useStatedPersist`* defined. In this custom hook, jus
 And *setPersistedState* function, which is wrapped by *useCallback*, is for changing state and persisting from components using this custom hook.
 
 Finally this custom hook will return [state, setPersistedState].
-
-<br />
 
 ### Example
 
@@ -107,7 +103,6 @@ const Name = () => {
 export default Name;
 
 ```
-<br />
 
 You might think this example is a bit weired. 😅 But it will be enough to show how it works. The *name* will be stored in localStorage, and *countNameChanged* will be persisted in sessionStorage(I don't want to explain difference between localStroage and sessionStorage here).
 

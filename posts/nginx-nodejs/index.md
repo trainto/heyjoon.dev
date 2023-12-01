@@ -118,8 +118,6 @@ server {
 
 Specify port and domain first.
 
-<br />
-
 ```nginx
 if ($http_x_forwarded_proto = "http") {
     return 301 https://$server_name$request_uri;
@@ -127,8 +125,6 @@ if ($http_x_forwarded_proto = "http") {
 ```
 
 If the request is with http, this configuration redirects it to https permanantly(301).
-
-<br />
 
 ```nginx
 location /favicon.ico {
@@ -145,8 +141,6 @@ location /static/ {
 }
 ```
 There are configuratinos for serving static files. If you specify **_expires_** like 30d, the static files will have following header _cache-control: max-age=2592000_, and will be cached in the browser efficiently.
-
-<br />
 
 ```nginx
 location / {

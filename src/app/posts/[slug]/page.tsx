@@ -12,7 +12,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <article className="mt-10">
-      <h2 className="text-3xl">{post.title}</h2>
+      <h1 className="text-4xl font-bold">{post.title}</h1>
       {post.description && <h3 className="text-lg text-gray-400">{post.description}</h3>}
       <div className="text-sm text-gray-500 text-right">
         {format(new Date(post.date), 'MMM dd, yyyy')}

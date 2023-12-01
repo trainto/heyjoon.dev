@@ -3,7 +3,7 @@ import { Roboto } from 'next/font/google';
 import Header from './components/header';
 import './globals.css';
 
-const roboto = Roboto({ weight: '400', style: ['normal'], subsets: ['latin'] });
+const roboto = Roboto({ weight: ['400', '700'], style: ['normal'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Joon.log()',

@@ -9,13 +9,13 @@ const Header = () => {
   return (
     <header className="text-right">
       <Link href="/">
-        <h1
-          className={`text-5xl pt-10 font-bold ${
+        <div
+          className={`text-4xl pt-10 font-bold ${
             pathname === '/' ? 'text-gray-300' : 'text-brand1'
           }`}
         >
           Joon.log()
-        </h1>
+        </div>
       </Link>
     </header>
   );

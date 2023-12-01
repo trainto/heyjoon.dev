@@ -23,8 +23,6 @@ The Gatsby CLI tool lets you install these starters like below.
 gatsby new [SITE_DIRECTORY] [URL_OF_STARTER_GIT_REPO]
 ```
 
-<br />
-
 With the blog starter, I remove some plugins I don't use, and modified some layout(Sidebar, Pagination and etc.).
 
 
@@ -38,9 +36,6 @@ Bootstrap is widely used CSS framework and I also like it. I know basic of HTML 
 ### Google Analytics
 This blog is not that popular or famous (🥺), still I want to know how many people visited, and which post was useful.
 Gatsby provides its official plugin for Google Analytics, so all I had to do was just inserting my GA tracking ID.
-
-<br />
-<br />
 
 Last year(2019), I wasn't active on this blog, but I look forward to writing more on it.
 

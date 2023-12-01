@@ -50,8 +50,6 @@ var strRes:String? = context?.let { it.getString(R.string.app_name) }
 
 This is quite powerful, isn't it?
 
-<br/>
-
 ## apply
 
 ```kotlin
@@ -87,8 +85,6 @@ val newStudent = Student("Joon", 20).apply {
 ```
 
 With apply, new Student instance initialized in a convenient way.
-
-<br />
 
 ## run
 
@@ -148,8 +144,6 @@ val homework = newStudent.run {
 println(homework) // "Implementing LinkedList"
 ```
 
-<br/>
-
 ## with
 
 ```kotlin
@@ -190,7 +184,5 @@ val homework = with(newStudent) {
     }
 }
 ```
-
-<br/>
 
 There are another useful funtions in Standard.kt like also, takeIf, takeUnless and repeat. Refer to Standard.kt, and examine them with simple code. I believe it will make your kotlin code more beautiful.

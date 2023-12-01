@@ -25,8 +25,6 @@ age.set('Abby', 15).set('Ziva', 29);
 age.set(0, 'what?');
 ```
 
-<br>
-
 Array of arryas can be passed to the constructor to initialize.
 
 ```javascript
@@ -35,8 +33,6 @@ const price = new Map([
   ['RealForce', 280]
 ]);
 ```
-
-<br>
 
 To search keys and get values:
 
@@ -56,8 +52,6 @@ age.get('Joon'); // undefined
 age.set('Tom', 50);
 age.get('Tom'); // 50
 ```
-
-<br>
 
 Map can be iterable by for...of loop
 
@@ -97,8 +91,6 @@ age.clear();
 age.size; // 0
 ```
 
-<br>
-
 ## WeakMap
 
 A WeakMap has a few different characteristics to Map.
@@ -133,8 +125,6 @@ e2.setSkill('kotlin');
 e2.getSkill(); // 'kotlin'
 ```
 
-<br>
-
 ## Set
 
 A set is a collection of data, does not allow duplication of data.
@@ -157,8 +147,6 @@ numbers.delete(3);
 
 numbers.size; // 2
 ```
-
-<br>
 
 There is another data structure introduced by ES6, which is called WeakSet. It is pretty much same with WeakMap except it is not Map, it is Set.
 

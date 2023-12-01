@@ -16,7 +16,6 @@ Using Jack tool-chain supports more features of Java 8 than using Retrolambda, b
 - Does not support Instant Run
 - Does not support full features for every API level
 
-<br/>
 Let's dive into lambda expression with Retrolambda.
 
 First, add the following to your build.gradle

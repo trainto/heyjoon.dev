@@ -1,8 +1,7 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import { join } from 'path';
-import { remark } from 'remark';
-import html from 'remark-html';
+import { micromark } from 'micromark';
 
 export const Posts = (() => {
   const postsDir = join(process.cwd(), 'posts');
@@ -48,7 +47,6 @@ export const Posts = (() => {
   return { getAllPosts, getPost };
 })();
 
-export const markdownToHtml = async (markdown: string) => {
-  const result = await remark().use(html).process(markdown);
-  return result.toString();
+export const markdownToHtml = (markdown: string) => {
+  return micromark(markdown);
 };

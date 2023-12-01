@@ -18,7 +18,6 @@ It's been about 10 years since Vim updated, and finally you can grab the new ver
 - GTK+ 3 support
 - MS-Windows DirectX support
 
-<br>
 If you want more detail, visit below link:
 
 [VIM REFERENCE MANUAL by Bram Moolenaar](https://raw.githubusercontent.com/vim/vim/master/runtime/doc/version8.txt)
@@ -38,7 +37,6 @@ brew install macvim
 brew linkapps
 ```
 
-<br>
 To execute MacVim in terminal mode,
 
 ```shell
