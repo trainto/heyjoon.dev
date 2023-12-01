@@ -16,6 +16,7 @@ const config: Config = {
     extend: {
       colors: {
         brand1: colors.pink[600],
+        brand2: colors.cyan[600],
       },
     },
   },
