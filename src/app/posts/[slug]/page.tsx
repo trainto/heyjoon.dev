@@ -19,29 +19,27 @@ const sourceCodePro = Source_Code_Pro({
   display: 'swap',
 });
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export default function Post({ params }: { params: { slug: string } }) {
   const post = Posts.getPost(params.slug);
 
   if (!post) {
     return <div>Oops...</div>;
   }
 
-  const contentHtml = await markdownToHtml(post.content);
+  const contentHtml = markdownToHtml(post.content);
 
   const processedContent = contentHtml.replace(
     /(<pre>\n*?\s*?<code class="language-(.*)">)([\s\S]*?)(<\/code>\n*?\s*?<\/pre>)/g,
-    (wrapper, openingTags, language, codeSnippet, closingTags) => {
-      if (Prism.languages[language]) {
-        codeSnippet = codeSnippet.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-        const snippet = Prism.highlight(codeSnippet, Prism.languages[language], language);
+    (_wrapper, openingTags, language, codeSnippet, closingTags) => {
+      codeSnippet = codeSnippet.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      codeSnippet = Prism.languages[language]
+        ? Prism.highlight(codeSnippet, Prism.languages[language], language)
+        : codeSnippet;
 
-        return `${openingTags.replace(
-          /<pre>/g,
-          `<pre class="language-${language} ${sourceCodePro.className}">`,
-        )}${snippet}${closingTags}`;
-      }
-
-      return wrapper;
+      return `${openingTags.replace(
+        /<pre>/g,
+        `<pre class="language-${language} ${sourceCodePro.className}">`,
+      )}${codeSnippet}${closingTags}`;
     },
   );
 
