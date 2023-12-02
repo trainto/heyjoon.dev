@@ -7,7 +7,7 @@ body {
   background-color: #282c34;
 }
 
-a {
+article a {
   @apply text-brand2
 }
 
@@ -52,6 +52,13 @@ pre {
 
 .text-brand1-animation {
   @apply text-brand1;
+
+  transition-duration: .5s;
+  transition-timing-function: linear;
+}
+
+.text-brand2-animation {
+  @apply text-brand2;
 
   transition-duration: .5s;
   transition-timing-function: linear;
