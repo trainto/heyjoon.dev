@@ -14,7 +14,7 @@ export default function Home() {
 
       <div className="px-5 sm:px-10">
         {posts.map((post) => (
-          <>
+          <div key={post.slug}>
             <Link key={post.slug} as={`/posts/${post.slug}`} href="/posts/[slug].tsx">
               <div className="text-xl text-brand1">{post.title}</div>
             </Link>
@@ -24,7 +24,7 @@ export default function Home() {
             {post.description && <div className="text text-gray-400">{post.description}</div>}
 
             <br />
-          </>
+          </div>
         ))}
       </div>
     </div>
