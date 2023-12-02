@@ -1,6 +1,6 @@
 import { Posts } from '@/lib/utils';
 import Link from 'next/link';
-import Me from './components/me';
+import Me from '../components/me';
 import { format } from 'date-fns';
 
 export default function Home() {
