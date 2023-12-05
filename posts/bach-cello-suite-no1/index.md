@@ -8,7 +8,7 @@ Recently, I started subscribe [Netflix](https://netflix.com) using my LG smart T
 
 In the series, there is supervillain who called Wilson Fisk. Every time he gets up from his bed, Bach's music comes out and he starts cook scramble. The music is Bach Cello Suite No.1.
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/PCicM6i59_I" frameborder="0" allowfullscreen></iframe></div>
+<div class="w-full"><iframe src="https://www.youtube.com/embed/PCicM6i59_I" class="w-full aspect-video" frameborder="0" allowfullscreen></iframe></div>
 
 My favourite is always Chopin, but I quite love Bach too. It is told that Chopin was also very fond of Bach. When I was taught playing piano, Bach was always total nightmare because my fingers did not listen to my head. However, listening to Bach makes me feel very relaxed helps me to refresh.
 

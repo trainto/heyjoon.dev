@@ -19,6 +19,7 @@ const config: Config = {
       },
     },
   },
+  safelist: ['w-full', 'aspect-video'],
   plugins: [],
 };
 export default config;

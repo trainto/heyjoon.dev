@@ -48,5 +48,5 @@ export const Posts = (() => {
 })();
 
 export const markdownToHtml = (markdown: string) => {
-  return micromark(markdown);
+  return micromark(markdown, { allowDangerousHtml: true });
 };

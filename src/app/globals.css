@@ -23,6 +23,10 @@ a {
   margin-top: 1rem;
 }
 
+.article_body > *+div {
+  margin-top: 1rem;
+}
+
 .article_body > h2 {
   font-size: 2rem;
 }
