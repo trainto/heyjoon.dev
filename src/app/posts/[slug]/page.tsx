@@ -3,6 +3,8 @@ import Prism from 'prismjs';
 import { format } from 'date-fns';
 import { Source_Code_Pro } from 'next/font/google';
 
+import './article.css';
+
 import './prism-tomorrow.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';

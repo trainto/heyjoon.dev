@@ -1,0 +1,36 @@
+.article_body>*+p {
+  margin-top: 1rem;
+}
+
+.article_body>*+h1,
+.article_body>*+h2,
+.article_body>*+h3,
+.article_body>*+h4,
+.article_body>*+h5,
+.article_body>*+h6 {
+  margin-top: 1.5rem;
+}
+
+.article_body>*+pre {
+  margin-top: 1rem;
+}
+
+.article_body>*+div {
+  margin-top: 1rem;
+}
+
+.article_body>h2 {
+  font-size: 2rem;
+}
+
+.article_body>h3 {
+  font-size: 1.75rem;
+}
+
+.article_body>h4 {
+  font-size: 1.5rem;
+}
+
+.article_body pre {
+  border-radius: 25px;
+}
