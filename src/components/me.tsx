@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Me() {
   return (
     <div className="text-gray-400 sm:border-r border-gray-500 pb-10 sm:sticky sm:top-10 px-5 sm:px-10">
-      <a href="https://you.heyjoon.dev">
+      <Link href="/about">
         <Image src="/me.jpg" className="rounded-full" width={100} height={100} alt="Linkedin" />
-      </a>
+      </Link>
       <div className="text-2xl text-gray-300 mt-5">Hakjoon Sim</div>
       <div>Developer who lives in Seoul,</div>
       <div>like programming and doing nothing.</div>
