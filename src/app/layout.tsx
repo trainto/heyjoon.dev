@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import Header from '../components/header';
 import Link from 'next/link';
+import Script from 'next/script';
 
 import './globals.css';
 
@@ -20,6 +21,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-RKYVNDDD7T"></Script>
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-RKYVNDDD7T');
+
+        `}
+      </Script>
+
       <body className={`${roboto.className} container mx-auto`}>
         <Header />
 
