@@ -7,7 +7,7 @@ body {
   background-color: #282c34;
 }
 
-article a {
+main a {
   @apply text-brand2
 }
 
@@ -62,4 +62,18 @@ pre {
 
   transition-duration: .5s;
   transition-timing-function: linear;
+}
+
+ul li {
+  list-style-type: disc;
+}
+
+.cursor-animation::after {
+  content: '|';
+  animation: cursor .8s infinite;
+}
+
+@keyframes cursor {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
