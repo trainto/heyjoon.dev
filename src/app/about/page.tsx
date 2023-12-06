@@ -35,7 +35,7 @@ export default function About() {
 
       <div className="mt-10">
         <h3 className="font-bold text-3xl">Career</h3>
-        <div className="flex flex-col sm:flex-row space-x-10 space-y-2 mt-5">
+        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-5">
           <div>
             <Image src="./skp.png" width={96} height={44.86} alt="SK planet" />
           </div>
@@ -54,7 +54,7 @@ export default function About() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col sm:flex-row space-x-10 space-y-2 mt-10">
+        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-10">
           <div>
             <Image src="./lge.png" width={96} height={20} alt="LGE" />
           </div>
@@ -77,9 +77,8 @@ export default function About() {
         </div>
       </div>
 
-      <div className="flexs space-x-10 sm:space-x-5 mt-14">
+      <div className="mt-14">
         <h3 className="font-bold text-3xl">Education</h3>
-        <div></div>
         <ul className="marker:text-brand2 mt-5">
           <li>
             MS in Computer Engineering - Researcher at{' '}
