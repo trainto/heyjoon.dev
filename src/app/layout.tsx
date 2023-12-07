@@ -15,7 +15,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'Joon.log()',
-  description: 'A personal blog by Hakjoon Sim',
+  description: 'A personal blog by Hakjoon Sim (심학준)',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
