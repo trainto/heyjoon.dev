@@ -14,7 +14,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Joon.log()',
+  title: 'Hakoon Sim - Joon.log()',
   description: 'A personal blog by Hakjoon Sim (심학준)',
 };
 
