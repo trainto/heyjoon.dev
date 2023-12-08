@@ -82,7 +82,7 @@ export default function About() {
         <ul className="marker:text-brand2 mt-5">
           <li>
             MS in Computer Engineering - Researcher at{' '}
-            <a href="iislab.skku.edu" target="_blank">
+            <a href="http://iislab.skku.edu" target="_blank">
               IIS Lab.
             </a>
             <br />
