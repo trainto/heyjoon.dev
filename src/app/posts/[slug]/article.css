@@ -34,3 +34,10 @@
 .article_body pre {
   border-radius: 25px;
 }
+
+.article_body img {
+  border-radius: 20px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}

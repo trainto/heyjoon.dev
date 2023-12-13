@@ -7,7 +7,7 @@ export const Posts = (() => {
   const postsDir = join(process.cwd(), 'posts');
   const slugs = fs.readdirSync(postsDir);
   const posts = slugs
-    .filter((slug) => !slug.startsWith('WIP'))
+    .filter((slug) => process.env.NODE_ENV !== 'production' || !slug.startsWith('WIP'))
     .map((slug) => {
       const fileContents = fs.readFileSync(join(postsDir, slug, 'index.md'), 'utf-8');
       const { data, content } = matter(fileContents);
