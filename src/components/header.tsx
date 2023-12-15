@@ -32,6 +32,17 @@ const Header = () => {
             Blog
           </Link>
         </span>
+        <span className="text-xs text-gray-500 px-2">|</span>
+        <span>
+          <Link
+            href="/places"
+            className={`${
+              pathname.startsWith('/places') ? 'text-brand2-animation' : 'text-gray-300-animation'
+            }`}
+          >
+            Places
+          </Link>
+        </span>
       </nav>
       <Link
         href="/"

@@ -5,3 +5,10 @@ type PostType = {
   description?: string;
   content: string;
 };
+
+type Place = {
+  id: number;
+  desc: string;
+  createdAt: string;
+  modifiedAt: string;
+};
