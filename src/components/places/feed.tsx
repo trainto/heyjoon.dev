@@ -1,26 +1,29 @@
 'use client';
 
 import { fetcher } from '@/lib/api/fetchers';
-import Link from 'next/link';
-import { useMemo } from 'react';
-import useSWR from 'swr';
+import { useScrollHitBottom } from '@/lib/hooks';
+import useSWRInfinite from 'swr/infinite';
+import Place from './place';
+import { useCallback } from 'react';
+
+export const PLACE_COUNT_PER_FETCH = 10;
 
 export default function Feed() {
-  const { data } = useSWR<Place[]>('/places', fetcher);
+  const { data, setSize } = useSWRInfinite<Place[]>((page, prevData) => {
+    if (prevData && prevData.length < PLACE_COUNT_PER_FETCH) {
+      return null;
+    }
 
-  return <div>{data?.map((p) => <Place key={p.id} place={p} />)}</div>;
-}
+    return `/places?limit=${PLACE_COUNT_PER_FETCH}${
+      page !== 0 && prevData ? '&lastId=' + prevData[prevData.length - 1].id : ''
+    }`;
+  }, fetcher);
 
-function Place({ place }: { place: Place }) {
-  const built = useMemo(() => {
-    return place.desc
-      .split(/(#[^\s#]+)/)
-      .map((s, i) => (s.startsWith('#') ? <Tag key={i} tag={s} /> : s));
-  }, [place.desc]);
+  useScrollHitBottom(
+    useCallback(() => {
+      setSize((p) => p + 1);
+    }, [setSize]),
+  );
 
-  return <div>{built}</div>;
-}
-
-function Tag({ tag }: { tag: string }) {
-  return <Link href={`/places/tag/${tag.replace(/#/g, '')}`}>{tag}</Link>;
+  return <div>{data?.map((arr) => arr.map((p) => <Place key={p.id} place={p} />))}</div>;
 }
