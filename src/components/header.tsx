@@ -32,7 +32,7 @@ const Header = () => {
             Blog
           </Link>
         </span>
-        <span className="text-xs text-gray-500 px-2">|</span>
+        {/* <span className="text-xs text-gray-500 px-2">|</span>
         <span>
           <Link
             href="/places"
@@ -42,7 +42,7 @@ const Header = () => {
           >
             Places
           </Link>
-        </span>
+        </span> */}
       </nav>
       <Link
         href="/"
