@@ -15,7 +15,7 @@ export default function Home() {
       <div className="px-5 sm:px-10">
         {posts.map((post) => (
           <div key={post.slug}>
-            <Link href={`/posts/${post.slug}`}>
+            <Link href={`/posts/${post.slug}`} prefetch={false}>
               <div className="text-xl text-brand1">{post.title}</div>
             </Link>
             <div className="text-sm text-gray-500">
