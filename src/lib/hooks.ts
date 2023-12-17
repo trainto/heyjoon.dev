@@ -17,7 +17,7 @@ export const useScrollHitBottom = (callback: () => void) => {
 
     throttleRef.current = setTimeout(() => {
       const elem = document.documentElement;
-      if (elem.clientHeight + elem.scrollTop + 50 >= elem.scrollHeight) {
+      if (elem.clientHeight + elem.scrollTop + 100 >= elem.scrollHeight) {
         if (callbackThrottleRef.current) {
           return;
         }
