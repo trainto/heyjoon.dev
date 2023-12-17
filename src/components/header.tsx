@@ -46,7 +46,7 @@ const Header = () => {
       </nav>
       <Link
         href="/"
-        className={`text-4xl pt-5 font-bold ${
+        className={`text-2xl sm:text-4xl pt-5 font-bold ${
           pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
         }`}
       >
