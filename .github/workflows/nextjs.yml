@@ -58,6 +58,11 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}-
       - name: Install dependencies
         run: pnpm install
+      - name: Generate environment file
+        run: |
+          echo "NEXT_PUBLIC_SECRET=$SECRET" >> .env
+        env:
+          SECRET: ${{ secrets.SECRET }}
       - name: Build and Static HTML with Next.js
         run: pnpm build
       - name: Upload artifact

@@ -1,7 +1,21 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import queryString, { StringifiableRecord } from 'query-string';
+import { generateSha256 } from '../utils-client';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'https://api.heyjoon.dev' : '/api';
+
+axios.interceptors.request.use(async (config) => {
+  const timeStamp = Date.now();
+  config.headers.set('X-Heyjoon-Time', timeStamp);
+  config.headers.set(
+    'X-Heyjoon-Token',
+    await generateSha256(
+      timeStamp + ':' + (process.env.NEXT_PUBLIC_SECRET || '') + ':' + config.url?.split('?').pop(),
+    ),
+  );
+
+  return config;
+});
 
 export const fetcher = async <T>(url: string, query?: StringifiableRecord) => {
   const axiosConfig: AxiosRequestConfig = {
