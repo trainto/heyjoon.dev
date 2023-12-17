@@ -2,12 +2,20 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useMemo } from 'react';
 
 const Header = () => {
   const pathname = usePathname();
+  console.log(pathname);
+
+  const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
   return (
-    <header className="flex justify-end items-end space-x-5 px-5">
+    <header
+      className={`flex justify-end items-end space-x-5 px-5 pt-3 pb-1 z-50 ${
+        sticky ? 'sticky top-0' : ''
+      }`}
+    >
       <nav>
         <span>
           <Link
@@ -46,7 +54,7 @@ const Header = () => {
       </nav>
       <Link
         href="/"
-        className={`text-2xl sm:text-4xl pt-5 font-bold ${
+        className={`text-2xl sm:text-4xl font-bold ${
           pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
         }`}
       >

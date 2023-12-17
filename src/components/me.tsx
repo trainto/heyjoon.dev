@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Me() {
   return (
-    <div className="text-gray-400 sm:border-r border-gray-500 pb-10 sm:sticky sm:top-10 px-5 sm:px-10">
+    <div className="text-gray-400 sm:border-r border-gray-500 pb-10 sm:sticky sm:top-20 px-5 sm:px-10">
       <Link href="/about">
         <Image src="/me.jpg" className="rounded-full" width={100} height={100} alt="Linkedin" />
       </Link>
