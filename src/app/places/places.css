@@ -1,3 +1,18 @@
 .place+.place {
   margin-top: 1rem;
 }
+
+.place .img-container {
+  position: relative;
+  background-color: black;
+  width: 100%;
+  padding-top: 75%;
+}
+
+.place .img-container div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

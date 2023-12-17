@@ -9,7 +9,7 @@ const Side = () => {
   const { data: topTags, isLoading } = useSWR<string[]>('/places/tags/top?limit=5', fetcher);
 
   return (
-    <div className="sm:sticky sm:top-10 border border-gray-700 p-3">
+    <div className="sm:sticky sm:top-10 border border-gray-700 p-3 rounded">
       <div className="text-xl font-bold">Top tags:</div>
       {isLoading && (
         <div className="flex justify-center mt-2">
