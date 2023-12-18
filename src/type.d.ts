@@ -12,3 +12,12 @@ type Place = {
   createdAt: string;
   modifiedAt: string;
 };
+
+type UserInfo = {
+  email: string;
+  nickname: string;
+  avatar: string;
+  approved: boolean;
+  intro?: string;
+  createdAt: string;
+};

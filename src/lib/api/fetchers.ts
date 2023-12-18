@@ -1,8 +1,9 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { Axios, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import queryString, { StringifiableRecord } from 'query-string';
 import { generateSha256 } from '../utils-client';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'https://api.heyjoon.dev' : '/api';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 axios.interceptors.request.use(async (config) => {
   const timeStamp = Date.now();
@@ -24,14 +25,26 @@ export const fetcher = async <T>(url: string, query?: StringifiableRecord) => {
   };
 
   try {
-    const res = await axios<AxiosResponse<T>>(axiosConfig);
+    const res = await axios<T>(axiosConfig);
 
     if (Math.floor(res.status / 100) === 2) {
-      return res.data.data;
+      return res.data;
     } else {
       throw res;
     }
   } catch (err: unknown) {
     throw err;
+  }
+};
+
+export const sendRequest = async <T>(config: AxiosRequestConfig) => {
+  try {
+    return await axios<AxiosResponse<T>>(config);
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      return err.response;
+    }
+
+    return { status: 600, statusText: (err as Error).message, data: '' };
   }
 };
