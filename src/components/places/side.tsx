@@ -2,12 +2,11 @@
 
 import { fetcher } from '@/lib/api/fetchers';
 import useSWR from 'swr';
-import Tag from './tag';
-import Loading from './loading';
 import Image from 'next/image';
 import useStore from '@/lib/store';
 import { useEffect } from 'react';
 import { Storage } from '../../lib/utils-client';
+import TopTags from './top-tags';
 
 const Side = () => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
@@ -17,7 +16,6 @@ const Side = () => {
     userInfo || !Storage.get('isLogin') ? null : fetcher,
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
   );
-  const { data: topTags, isLoading } = useSWR<string[]>('/places/tags/top?limit=5', fetcher);
 
   useEffect(() => {
     if (userInfoFetched && userInfo == null) {
@@ -38,17 +36,8 @@ const Side = () => {
       </div>
 
       <div className="text-xl font-bold mt-5 border-t border-gray-500 pt-2">Top tags:</div>
-      {isLoading && (
-        <div className="flex justify-center mt-2">
-          <Loading />
-        </div>
-      )}
       <div className="mt-1 px-1 text-sm">
-        {topTags?.map((t) => (
-          <div key={t}>
-            <Tag tag={'#' + t} />
-          </div>
-        ))}
+        <TopTags />
       </div>
     </div>
   );
