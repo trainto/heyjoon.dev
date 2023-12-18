@@ -6,7 +6,6 @@ import { useMemo } from 'react';
 
 const Header = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
