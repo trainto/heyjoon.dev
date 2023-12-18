@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-export const useScrollHitBottom = (callback: () => void) => {
+export const useScrollHitTheBottom = (callback: () => void) => {
   const callbackRef = useRef(callback);
 
   useEffect(() => {
@@ -23,6 +23,8 @@ export const useScrollHitBottom = (callback: () => void) => {
         }
 
         callbackThrottleRef.current = setTimeout(() => {
+          callbackThrottleRef.current = null;
+          throttleRef.current = null;
           callbackRef.current();
         }, 500);
       }

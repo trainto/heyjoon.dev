@@ -1,7 +1,7 @@
 'use client';
 
 import { fetcher } from '@/lib/api/fetchers';
-import { useScrollHitBottom } from '@/lib/hooks';
+import { useScrollHitTheBottom } from '@/lib/hooks';
 import useSWRInfinite from 'swr/infinite';
 import Place from './place';
 import { useCallback } from 'react';
@@ -19,7 +19,7 @@ export default function Feed() {
     }`;
   }, fetcher);
 
-  useScrollHitBottom(
+  useScrollHitTheBottom(
     useCallback(() => {
       setSize((p) => p + 1);
     }, [setSize]),
