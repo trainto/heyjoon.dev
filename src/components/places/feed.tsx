@@ -4,13 +4,17 @@ import { fetcher } from '@/lib/api/fetchers';
 import { useScrollHitTheBottom } from '@/lib/hooks';
 import useSWRInfinite from 'swr/infinite';
 import Place from './place';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
+import Loading from './loading';
 
 export const PLACE_COUNT_PER_FETCH = 10;
 
 export default function Feed() {
+  const noMoreFeed = useRef(false);
+
   const { data, setSize } = useSWRInfinite<Place[]>((page, prevData) => {
     if (prevData && prevData.length < PLACE_COUNT_PER_FETCH) {
+      noMoreFeed.current = true;
       return null;
     }
 
@@ -25,5 +29,15 @@ export default function Feed() {
     }, [setSize]),
   );
 
-  return <div>{data?.map((arr) => arr.map((p) => <Place key={p.id} place={p} />))}</div>;
+  return (
+    <>
+      <div>{data?.map((arr) => arr.map((p) => <Place key={p.id} place={p} />))}</div>
+
+      {data && !noMoreFeed.current && (
+        <div className="flex justify-center mt-3">
+          <Loading />
+        </div>
+      )}
+    </>
+  );
 }
