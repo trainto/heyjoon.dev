@@ -4,7 +4,7 @@ import { fetcher } from '@/lib/api/fetchers';
 import useSWR from 'swr';
 import Image from 'next/image';
 import useStore from '@/lib/store';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Storage } from '../../lib/utils-client';
 import TopTags from './top-tags';
 
@@ -16,6 +16,14 @@ const Side = () => {
     userInfo || !Storage.get('isLogin') ? null : fetcher,
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
   );
+
+  const redirectHost = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.protocol + '//' + window.location.host;
+    } else {
+      return 'https://heyjoon.dev';
+    }
+  }, []);
 
   useEffect(() => {
     if (userInfoFetched && userInfo == null) {
@@ -29,7 +37,9 @@ const Side = () => {
         {userInfo ? (
           <div>{userInfo.nickname}</div>
         ) : (
-          <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=812386537061-qc8e0lcpg5gopjtoh7q2ap39kqdr3c2g.apps.googleusercontent.com&redirect_uri=http://localhost:3000/places/auth/google-auth&response_type=token&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile">
+          <a
+            href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=812386537061-qc8e0lcpg5gopjtoh7q2ap39kqdr3c2g.apps.googleusercontent.com&redirect_uri=${redirectHost}/places/auth/google-auth&response_type=token&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
+          >
             <Image src="/continue-google.png" alt="Continue with Google" width={170} height={36} />
           </a>
         )}
