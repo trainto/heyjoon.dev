@@ -9,6 +9,9 @@ type PostType = {
 type Place = {
   id: number;
   desc: string;
+  email: string;
+  avatar: string;
+  nickname: string;
   createdAt: string;
   modifiedAt: string;
 };

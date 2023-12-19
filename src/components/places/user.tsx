@@ -1,5 +1,5 @@
 import useStore from '@/lib/store';
-import Image from 'next/image';
+import Avatar from './avatar';
 
 const User = () => {
   const { value: userInfo } = useStore('userInfo');
@@ -12,13 +12,7 @@ const User = () => {
     <>
       <div className="hidden sm:block">
         <div className="flex justify-center">
-          <Image
-            className="rounded-full"
-            src={userInfo.avatar}
-            alt="Avatar"
-            width="68"
-            height="68"
-          />
+          <Avatar size={72} src={userInfo.avatar} />
         </div>
         <div className="flex justify-center mt-3">
           <div className="text-sm">@{userInfo.nickname}</div>
