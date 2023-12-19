@@ -46,7 +46,7 @@ const Side = () => {
         )}
       </div>
 
-      <div className="text-xl font-bold mt-5 border-t border-gray-500 pt-5">Top tags:</div>
+      <div className="text-xl font-bold mt-3 border-t border-gray-500 pt-3">Top tags:</div>
       <div className="mt-1 px-1 text-sm">
         <TopTags />
       </div>

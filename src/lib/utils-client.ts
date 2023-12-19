@@ -25,8 +25,13 @@ export const Storage = (() => {
     return which(storage)?.getItem(key) || undefined;
   };
 
+  const remove = (key: Key, storage: 'local' | 'session' = 'local') => {
+    return which(storage)?.removeItem(key);
+  };
+
   return {
     set,
     get,
+    remove,
   };
 })();

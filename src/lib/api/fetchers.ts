@@ -28,9 +28,10 @@ export const sendRequest = async <T>(config: AxiosRequestConfig) => {
     return await axios<AxiosResponse<T>>(config);
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
-      return err.response;
+      return (
+        err.response || { status: 600, statusText: 'Axios error does not have response!', data: '' }
+      );
     }
-
     return { status: 600, statusText: (err as Error).message, data: '' };
   }
 };

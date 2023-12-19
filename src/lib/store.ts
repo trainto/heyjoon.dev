@@ -1,7 +1,7 @@
 import useSWR, { MutatorCallback, mutate } from 'swr';
 
 type Store = {
-  userInfo: UserInfo;
+  userInfo: UserInfo | null;
 };
 
 const createStore = () => {
