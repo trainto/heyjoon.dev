@@ -1,5 +1,3 @@
-'use client';
-
 import { fetcher } from '@/lib/api/fetchers';
 import { useScrollHitTheBottom } from '@/lib/hooks';
 import useSWRInfinite from 'swr/infinite';

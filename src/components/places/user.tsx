@@ -1,4 +1,4 @@
-import useStore, { dispatch } from '@/lib/store';
+import useStore from '@/lib/store';
 import Avatar from './avatar';
 import Button from '../button';
 import { useCallback } from 'react';
@@ -7,7 +7,7 @@ import { Storage } from '@/lib/utils-client';
 import { mutate } from 'swr';
 
 const User = () => {
-  const { value: userInfo } = useStore('userInfo');
+  const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
   const onSignout = useCallback(async () => {
     const res = await sendRequest<undefined>({ method: 'POST', url: '/places/auth/signout' });
@@ -15,9 +15,9 @@ const User = () => {
     if (res.status === 200) {
       Storage.remove('isLogin');
       mutate('/places/users/me', null);
-      dispatch('userInfo', null);
+      dispatchUserInfo(null);
     }
-  }, []);
+  }, [dispatchUserInfo]);
 
   if (!userInfo) {
     return null;

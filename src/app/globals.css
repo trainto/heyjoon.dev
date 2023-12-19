@@ -16,6 +16,16 @@ main a {
   @apply text-brand2
 }
 
+.layer-container {
+  background-color: #282c34;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%
+}
+
 .text-gray-300-animation {
   @apply text-gray-300;
 

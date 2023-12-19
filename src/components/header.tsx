@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <header
-      className={`flex justify-end items-end space-x-5 px-5 pt-3 pb-1 z-50 ${
+      className={`flex justify-end items-end space-x-5 px-5 pt-3 pb-1 z-40 ${
         sticky ? 'sticky top-0' : ''
       }`}
     >

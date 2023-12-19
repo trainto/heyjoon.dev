@@ -1,8 +1,12 @@
+'use client';
+
 import Feed from '@/components/places/feed';
+import Side from '@/components/places/side';
+import { Noto_Sans_KR } from 'next/font/google';
+import Layer from '@/components/layer';
+import useStore from '@/lib/store';
 
 import './places.css';
-import Side from '@/components/places/side';
-import { Noto_Sans_KR, Noto_Serif_KR } from 'next/font/google';
 
 const noto = Noto_Sans_KR({
   weight: ['400', '700'],
@@ -12,6 +16,8 @@ const noto = Noto_Sans_KR({
 });
 
 export default function Places() {
+  const { value: layer } = useStore('layer');
+
   return (
     <div className={noto.className}>
       <div className="flex flex-col sm:flex-row justify-center">
@@ -23,6 +29,8 @@ export default function Places() {
           <Side />
         </div>
       </div>
+
+      {layer && <Layer>{layer}</Layer>}
     </div>
   );
 }
