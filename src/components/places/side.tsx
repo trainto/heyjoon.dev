@@ -17,13 +17,11 @@ const Side = () => {
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
   );
 
-  const redirectHost = useMemo(() => {
-    if (typeof window !== 'undefined') {
-      return window.location.protocol + '//' + window.location.host;
-    } else {
-      return 'https://heyjoon.dev';
-    }
-  }, []);
+  const redirectHost = useMemo(
+    () =>
+      process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://heyjoon.dev',
+    [],
+  );
 
   useEffect(() => {
     if (userInfoFetched && userInfo == null) {
