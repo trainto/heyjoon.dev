@@ -1,9 +1,9 @@
-export default function Loading() {
+export default function Loading({ size = 8 }: { size: number }) {
   return (
     <>
       <svg
         aria-hidden="true"
-        className="w-8 h-8 text-gray-600 animate-spin fill-brand2"
+        className={`w-${size} h-${size} text-gray-600 animate-spin fill-brand2`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

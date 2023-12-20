@@ -19,9 +19,10 @@ const Button = ({
     }
 
     throttleRef.current = setTimeout(() => {
-      onClick();
       throttleRef.current = null;
     }, 1000);
+
+    onClick();
   };
 
   return (

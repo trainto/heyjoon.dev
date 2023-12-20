@@ -1,13 +1,15 @@
-import { ChangeEvent, memo, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import Avatar from './avatar';
 import useStore from '@/lib/store';
 import Button from '../button';
 import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
+import Loading from './loading';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
   const [taRows, setTaRows] = useState(2);
+  const [isUploading, setIsUploading] = useState(false);
 
   const { value: userInfo } = useStore('userInfo');
 
@@ -32,13 +34,31 @@ const Uploader = () => {
     }
   }, [desc]);
 
-  const handlePost = async () => {
-    const res = await sendRequest({ method: 'post', url: '/places', data: { desc } });
+  const handlePost = useCallback(async () => {
+    if (desc.trim() === '') {
+      setIsUploading(false);
+      return;
+    }
+
+    const res = await sendRequest({
+      method: 'post',
+      url: '/places',
+      data: { desc: desc.trim() },
+    });
+
     if (res.status === 200) {
       setDesc('');
       dispatchEvent('fetchPlaces');
     }
-  };
+
+    setIsUploading(false);
+  }, [desc]);
+
+  useEffect(() => {
+    if (isUploading) {
+      handlePost();
+    }
+  }, [handlePost, isUploading]);
 
   if (userInfo == null) {
     return null;
@@ -66,10 +86,22 @@ const Uploader = () => {
         <div className="self-end text-xs text-gray-400">{desc.length}/180</div>
       </div>
 
-      <div className="text-right mt-3">
-        <Button size="sm" color="indigo" onClick={handlePost}>
-          Post
-        </Button>
+      <div className="flex justify-end mt-3 h-7">
+        {isUploading ? (
+          <div className="px-4 pt-1">
+            <Loading size={5} />
+          </div>
+        ) : (
+          <Button
+            size="sm"
+            color="indigo"
+            onClick={() => {
+              setIsUploading(true);
+            }}
+          >
+            Post
+          </Button>
+        )}
       </div>
 
       <style jsx>{`
