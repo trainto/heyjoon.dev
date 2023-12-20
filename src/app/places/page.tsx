@@ -30,7 +30,7 @@ export default function Places() {
         </div>
       </div>
 
-      {layer && <Layer>{layer}</Layer>}
+      {layer && <Layer containerClassName={layer.containerClassName ?? ''}>{layer.node}</Layer>}
     </div>
   );
 }

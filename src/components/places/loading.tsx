@@ -1,4 +1,4 @@
-export default function Loading({ size = 8 }: { size: number }) {
+export default function Loading({ size = 8 }: { size?: number }) {
   return (
     <>
       <svg

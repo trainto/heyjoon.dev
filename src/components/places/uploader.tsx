@@ -1,10 +1,12 @@
 import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import Avatar from './avatar';
-import useStore from '@/lib/store';
+import useStore, { dispatch } from '@/lib/store';
 import Button from '../button';
 import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
 import Loading from './loading';
+import { Camera } from './svg';
+import PhotoEditor from './photo-editor';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
@@ -14,6 +16,7 @@ const Uploader = () => {
   const { value: userInfo } = useStore('userInfo');
 
   const taRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDescChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setDesc(e.target.value.slice(0, 180));
@@ -33,6 +36,24 @@ const Uploader = () => {
       setTaRows(2);
     }
   }, [desc]);
+
+  const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const files: File[] = [];
+      for (let i = 0; i < e.target.files.length; i += 1) {
+        const file = e.target.files.item(i);
+        if (file) {
+          files.push(file);
+        }
+      }
+
+      dispatch('layer', {
+        node: <PhotoEditor files={files} />,
+        containerClassName: 'w-full',
+      });
+    }
+    e.target.value = '';
+  };
 
   const handlePost = useCallback(async () => {
     if (desc.trim() === '') {
@@ -86,7 +107,12 @@ const Uploader = () => {
         <div className="self-end text-xs text-gray-400">{desc.length}/180</div>
       </div>
 
-      <div className="flex justify-end mt-3 h-7">
+      <div className="flex justify-between mt-3 h-9 border-t border-gray-600 ml-12 pt-2">
+        <div>
+          <div className="cursor-pointer" role="button" onClick={() => inputRef.current?.click()}>
+            <Camera />
+          </div>
+        </div>
         {isUploading ? (
           <div className="px-4 pt-1">
             <Loading size={5} />
@@ -102,6 +128,10 @@ const Uploader = () => {
             Post
           </Button>
         )}
+      </div>
+
+      <div className="hidden">
+        <input type="file" ref={inputRef} accept="image/jpeg" onChange={handleImages} multiple />
       </div>
 
       <style jsx>{`

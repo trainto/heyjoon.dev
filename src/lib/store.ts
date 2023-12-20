@@ -3,7 +3,7 @@ import useSWR, { MutatorCallback, mutate } from 'swr';
 
 type Store = {
   userInfo: UserInfo | null;
-  layer: ReactNode | null;
+  layer: { node: ReactNode; containerClassName?: string } | null;
 };
 
 const createStore = () => {
