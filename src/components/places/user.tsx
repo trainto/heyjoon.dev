@@ -33,10 +33,7 @@ const User = () => {
           <div className="text-sm">@{userInfo.nickname}</div>
         </div>
         <div className="flex justify-end mt-3">
-          <Button
-            className="text-xs text-gray-400 font-bold bg-black px-3 py-1 rounded-lg"
-            onClick={onSignout}
-          >
+          <Button color="zinc" size="xs" onClick={onSignout}>
             Sign out
           </Button>
         </div>

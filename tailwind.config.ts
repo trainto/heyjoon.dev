@@ -14,12 +14,25 @@ const config: Config = {
     },
     extend: {
       colors: {
+        'bg-main': '#282c34',
+        'bg-shadow': '#070709',
         brand1: colors.pink[600],
         brand2: colors.cyan[600],
       },
     },
   },
-  safelist: ['w-full', 'aspect-video'],
+  safelist: [
+    'w-full',
+    'aspect-video',
+    'bg-indigo-900',
+    'hover:bg-indigo-950',
+    'bg-zinc-900',
+    'hover:bg-zinc-950',
+    'text-xs',
+    'text-sm',
+    'text-base',
+    'text-lg',
+  ],
   plugins: [],
 };
 export default config;

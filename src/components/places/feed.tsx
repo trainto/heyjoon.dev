@@ -4,13 +4,18 @@ import useSWRInfinite from 'swr/infinite';
 import Place from './place';
 import { useCallback, useRef } from 'react';
 import Loading from './loading';
+import useStore from '@/lib/store';
+import Uploader from './uploader';
+import { useEventBus } from '@/lib/event-bus';
 
 export const PLACE_COUNT_PER_FETCH = 10;
 
 export default function Feed() {
   const noMoreFeed = useRef(false);
 
-  const { data, setSize } = useSWRInfinite<Place[]>((page, prevData) => {
+  const { value: userInfo } = useStore('userInfo');
+
+  const { data, setSize, mutate } = useSWRInfinite<Place[]>((page, prevData) => {
     if (prevData && prevData.length < PLACE_COUNT_PER_FETCH) {
       noMoreFeed.current = true;
       return null;
@@ -27,8 +32,12 @@ export default function Feed() {
     }, [setSize]),
   );
 
+  useEventBus('fetchPlaces', mutate);
+
   return (
     <>
+      {userInfo && <Uploader />}
+
       <div>{data?.map((arr) => arr.map((p) => <Place key={p.id} place={p} />))}</div>
 
       {data && !noMoreFeed.current && (
