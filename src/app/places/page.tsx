@@ -7,7 +7,6 @@ import Layer from '@/components/layer';
 import useStore from '@/lib/store';
 
 import './places.css';
-import LoginHandler from '@/components/places/login-handler';
 
 const noto = Noto_Sans_KR({
   weight: ['400', '700'],
@@ -32,7 +31,6 @@ export default function Places() {
       </div>
 
       {layer && <Layer>{layer}</Layer>}
-      <LoginHandler />
     </div>
   );
 }

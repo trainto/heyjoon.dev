@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Loading from '@/components/places/loading';
 
 export default function GoogleAuth() {
+  const doneRef = useRef(false);
+
   useEffect(() => {
     const tokenParam = window.location.hash.split('&').find((v) => {
       return v.includes('access_token=');
@@ -15,7 +17,10 @@ export default function GoogleAuth() {
 
     const token = tokenParam.split('=')[1];
 
-    window.opener.postMessage({ googleToken: token });
+    if (doneRef.current === false) {
+      window.opener.postMessage({ googleToken: token });
+      doneRef.current = true;
+    }
     window.close();
   }, []);
 

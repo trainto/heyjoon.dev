@@ -16,6 +16,11 @@ main a {
   @apply text-brand2
 }
 
+ul li {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
 .layer-container {
   background-color: #282c34;
   position: fixed;
@@ -47,14 +52,17 @@ main a {
   transition-timing-function: linear;
 }
 
-ul li {
-  list-style-type: disc;
-  margin-left: 1.5rem;
-}
-
 .cursor-animation::after {
   content: '|';
   animation: cursor .8s infinite;
+}
+
+.mobile-nav-hidden {
+  display: none;
+}
+
+.mobile-nav-show {
+  display: flex;
 }
 
 @keyframes cursor {
