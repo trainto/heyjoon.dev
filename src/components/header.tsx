@@ -2,69 +2,48 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import Signin from './places/signin';
 import useStore from '@/lib/store';
 import Avatar from './places/avatar';
 
 const Header = () => {
-  const [mobileNavHidden, setMobileNavHidden] = useState(false);
-
   const { value: userInfo } = useStore('userInfo');
 
   const pathname = usePathname();
 
+  const showSigninIcon = useMemo(
+    () => pathname.startsWith('/places') && !userInfo,
+    [pathname, userInfo],
+  );
+
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
-  const throttleRef = useRef<NodeJS.Timeout>();
-
-  useEffect(() => {
-    const handler = () => {
-      if (throttleRef.current) {
-        return;
-      }
-
-      throttleRef.current = setTimeout(() => {
-        if (document.documentElement.scrollTop > 200) {
-          setMobileNavHidden(true);
-        } else if (document.documentElement.scrollTop < 150) {
-          setMobileNavHidden(false);
-        }
-        throttleRef.current = undefined;
-      }, 100);
-    };
-
-    document.addEventListener('scroll', handler);
-
-    return () => document.removeEventListener('scroll', handler);
-  }, []);
-
   return (
-    <header className={`pt-3 pb-1 px-5 z-40 ${sticky ? 'sticky top-0' : ''}`}>
-      <div className="flex justify-between sm:justify-end items-end space-x-5 z-40">
-        <div className="sm:hidden">
-          {userInfo ? <Avatar src={userInfo.avatar} size={32} /> : <Signin width={130} />}
-        </div>
-        <div className="hidden sm:block">
-          <Nav />
-        </div>
-
-        <Link
-          href="/"
-          className={`text-2xl sm:text-4xl font-bold ${
-            pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
-          }`}
-        >
-          Joon.log()
-        </Link>
-      </div>
-
+    <header className={`pt-3 pb-2 px-5 z-40 ${sticky ? 'sticky top-0' : ''}`}>
       <div
-        className={`flex justify-end sm:hidden z-10 ${
-          mobileNavHidden ? 'mobile-nav-hidden' : 'mobile-nav-show'
-        }`}
+        className={`flex ${
+          pathname.startsWith('/places') ? 'justify-between' : 'justify-end'
+        } sm:justify-end items-end space-x-5 z-40`}
       >
-        <Nav />
+        <div className="sm:hidden">
+          {pathname.startsWith('/places') &&
+            (userInfo ? <Avatar src={userInfo.avatar} size={32} /> : <Signin width={130} />)}
+        </div>
+
+        <div className={`flex items-end space-x-3 sm:space-x-5`}>
+          <div className={`${showSigninIcon && 'hidden'} sm:block`}>
+            <Nav />
+          </div>
+          <Link
+            href="/"
+            className={`text-2xl sm:text-4xl font-bold ${
+              pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
+            }`}
+          >
+            Joon.log()
+          </Link>
+        </div>
       </div>
     </header>
   );
@@ -74,7 +53,7 @@ const Nav = () => {
   const pathname = usePathname();
 
   return (
-    <nav>
+    <nav className="text-sm sm:text-base">
       <span>
         <Link
           href="/about"

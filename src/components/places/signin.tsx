@@ -64,8 +64,8 @@ const Signin = ({ width }: { width: number }) => {
 
   const height = useMemo(
     () =>
-      // 378 * 80
-      (80 * width) / 378,
+      // 350 * 80
+      (80 * width) / 350,
     [width],
   );
 

@@ -7,7 +7,7 @@ const Side = () => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
   return (
-    <div className="sm:sticky sm:top-20 border border-gray-700 p-3 rounded">
+    <div className="hidden sm:block sm:sticky sm:top-20 border border-gray-700 p-3 rounded">
       <div>
         {userInfo ? (
           <div>
