@@ -32,7 +32,7 @@ const Uploader = () => {
     }
   }, [desc]);
 
-  const handleShare = async () => {
+  const handlePost = async () => {
     const res = await sendRequest({ method: 'post', url: '/places', data: { desc } });
     if (res.status === 200) {
       setDesc('');
@@ -67,8 +67,8 @@ const Uploader = () => {
       </div>
 
       <div className="text-right mt-3">
-        <Button size="sm" color="indigo" onClick={handleShare}>
-          Share
+        <Button size="sm" color="indigo" onClick={handlePost}>
+          Post
         </Button>
       </div>
 
