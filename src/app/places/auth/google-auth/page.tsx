@@ -1,31 +1,10 @@
 'use client';
 
-import { sendRequest } from '@/lib/api/fetchers';
-import { dispatch } from '@/lib/store';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Storage } from '../../../../lib/utils-client';
+import Loading from '@/components/places/loading';
 
 export default function GoogleAuth() {
-  const router = useRouter();
-
   useEffect(() => {
-    const signin = async (token: string) => {
-      const res = await sendRequest({
-        method: 'post',
-        url: '/places/auth/signin-with-google',
-        data: { token },
-      });
-
-      if (res?.status === 200) {
-        if (res.data) {
-          dispatch('userInfo', res.data);
-        }
-        Storage.set('isLogin', true);
-        router.push('/places');
-      }
-    };
-
     const tokenParam = window.location.hash.split('&').find((v) => {
       return v.includes('access_token=');
     });
@@ -35,7 +14,14 @@ export default function GoogleAuth() {
     }
 
     const token = tokenParam.split('=')[1];
-    signin(token);
-  }, [router]);
-  return <></>;
+
+    window.opener.postMessage({ googleToken: token });
+    window.close();
+  }, []);
+
+  return (
+    <div className="fixed h-screen w-screen bg-black top-0 left-0 z-50 grid place-content-center">
+      <Loading />
+    </div>
+  );
 }

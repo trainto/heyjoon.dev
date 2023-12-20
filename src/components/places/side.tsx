@@ -22,9 +22,15 @@ const Side = () => {
     }
   }, [dispatchUserInfo, userInfo, userInfoFetched]);
 
-  const redirectHost = useMemo(
+  const googleAuthUrl = useMemo(
     () =>
-      process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://heyjoon.dev',
+      'https://accounts.google.com/o/oauth2/v2/auth?' +
+      'client_id=812386537061-qc8e0lcpg5gopjtoh7q2ap39kqdr3c2g.apps.googleusercontent.com' +
+      `&redirect_uri=${
+        process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://heyjoon.dev'
+      }/places/auth/google-auth` +
+      '&response_type=token' +
+      '&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
     [],
   );
 
@@ -36,11 +42,13 @@ const Side = () => {
             <User />
           </div>
         ) : (
-          <a
-            href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=812386537061-qc8e0lcpg5gopjtoh7q2ap39kqdr3c2g.apps.googleusercontent.com&redirect_uri=${redirectHost}/places/auth/google-auth&response_type=token&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}
-          >
-            <Image src="/continue-google.png" alt="Continue with Google" width={170} height={36} />
-          </a>
+          <Image
+            src="/continue-google.png"
+            alt="Continue with Google"
+            width={170}
+            height={36}
+            onClick={() => window.open(googleAuthUrl, 'google-auth', 'width=480,height=640')}
+          />
         )}
       </div>
 
