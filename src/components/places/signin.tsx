@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import useStore from '@/lib/store';
 import useSWR from 'swr';
@@ -14,8 +14,11 @@ const Signin = ({ width }: { width: number }) => {
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
   );
 
+  const doneRef = useRef(false);
+
   const signin = useCallback(
     async (token: string) => {
+      doneRef.current = true;
       const res = await sendRequest({
         method: 'post',
         url: '/places/auth/signin-with-google',
@@ -40,6 +43,10 @@ const Signin = ({ width }: { width: number }) => {
 
   useEffect(() => {
     const handler = (ev: MessageEvent<{ googleToken: string }>) => {
+      if (doneRef.current) {
+        return;
+      }
+
       if (ev.data.googleToken) {
         signin(ev.data.googleToken);
       }
