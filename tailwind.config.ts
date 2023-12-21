@@ -32,6 +32,8 @@ const config: Config = {
     'text-sm',
     'text-base',
     'text-lg',
+    'w-5',
+    'w-8',
   ],
   plugins: [],
 };
