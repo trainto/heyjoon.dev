@@ -3,6 +3,7 @@ import queryString, { StringifiableRecord } from 'query-string';
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'https://api.heyjoon.dev' : '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.withCredentials = true;
 
 export const fetcher = async <T>(url: string, query?: StringifiableRecord) => {
   const axiosConfig: AxiosRequestConfig = {
