@@ -86,3 +86,25 @@ export const useScrollHitTheBottom = (callback: () => void) => {
 //     return () => document.removeEventListener('scroll', handler);
 //   }, [handler]);
 // };
+
+export const useResize = (callback: () => void, instant?: boolean) => {
+  const callbackRef = useRef(callback);
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
+  const handleRisize = useCallback(() => {
+    callbackRef.current();
+  }, []);
+
+  useEffect(() => {
+    instant && handleRisize();
+  }, [handleRisize, instant]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleRisize);
+
+    return () => window.removeEventListener('resize', handleRisize);
+  }, [handleRisize]);
+};

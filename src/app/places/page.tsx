@@ -31,6 +31,12 @@ export default function Places() {
       </div>
 
       {layer && <Layer containerClassName={layer.containerClassName ?? ''}>{layer.node}</Layer>}
+
+      <style jsx global>{`
+        .pt-75p {
+          padding-top: 75%;
+        }
+      `}</style>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import PhotoEditor from './photo-editor';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
+  const [blobs, setBlobs] = useState<Blob[]>([]);
   const [taRows, setTaRows] = useState(2);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -48,8 +49,8 @@ const Uploader = () => {
       }
 
       dispatch('layer', {
-        node: <PhotoEditor files={files} />,
-        containerClassName: 'w-full',
+        node: <PhotoEditor files={files} onComplete={setBlobs} />,
+        containerClassName: 'w-full sm:w-1/2',
       });
     }
     e.target.value = '';
@@ -108,10 +109,11 @@ const Uploader = () => {
       </div>
 
       <div className="flex justify-between mt-3 h-9 border-t border-gray-600 ml-12 pt-2">
-        <div>
+        <div className="flex space-x-1 items-end">
           <div className="cursor-pointer" role="button" onClick={() => inputRef.current?.click()}>
             <Camera />
           </div>
+          {blobs && <div className="text-xs text-gray-300">{blobs.length}/10</div>}
         </div>
         {isUploading ? (
           <div className="px-4 pt-1">
