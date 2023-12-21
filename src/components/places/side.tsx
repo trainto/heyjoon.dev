@@ -14,7 +14,7 @@ const Side = () => {
             <User />
           </div>
         ) : (
-          <Signin width={170} />
+          <Signin width={170} from="side" />
         )}
       </div>
 

@@ -28,7 +28,11 @@ const Header = () => {
       >
         <div className="sm:hidden">
           {pathname.startsWith('/places') &&
-            (userInfo ? <Avatar src={userInfo.avatar} size={32} /> : <Signin width={130} />)}
+            (userInfo ? (
+              <Avatar src={userInfo.avatar} size={32} />
+            ) : (
+              <Signin width={130} from="header" />
+            ))}
         </div>
 
         <div className={`flex items-end space-x-3 sm:space-x-5`}>

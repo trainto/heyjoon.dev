@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { fetcher, sendRequest } from '@/lib/api/fetchers';
 import { Storage } from '@/lib/utils-client';
 
-const Signin = ({ width }: { width: number }) => {
+const Signin = ({ width, from }: { width: number; from: string }) => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
   const { data: userInfoFetched } = useSWR<UserInfo>(
@@ -42,8 +42,12 @@ const Signin = ({ width }: { width: number }) => {
   }, [dispatchUserInfo, userInfo, userInfoFetched]);
 
   useEffect(() => {
-    const handler = (ev: MessageEvent<{ googleToken: string }>) => {
+    const handler = (ev: MessageEvent<{ googleToken: string; from: string }>) => {
       if (doneRef.current) {
+        return;
+      }
+
+      if (ev.data.from !== from) {
         return;
       }
 
@@ -55,7 +59,7 @@ const Signin = ({ width }: { width: number }) => {
     window.addEventListener('message', handler);
 
     return () => window.removeEventListener('message', handler);
-  }, [signin]);
+  }, [from, signin]);
 
   const googleAuthUrl = useMemo(
     () =>
@@ -82,7 +86,7 @@ const Signin = ({ width }: { width: number }) => {
       alt="Continue with Google"
       width={width}
       height={height}
-      onClick={() => window.open(googleAuthUrl, 'google-auth', 'width=480,height=640')}
+      onClick={() => window.open(googleAuthUrl, 'google-auth=' + from, 'width=480,height=640')}
     />
   );
 };

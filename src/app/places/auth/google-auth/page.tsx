@@ -18,7 +18,7 @@ export default function GoogleAuth() {
     const token = tokenParam.split('=')[1];
 
     if (doneRef.current === false) {
-      window.opener.postMessage({ googleToken: token });
+      window.opener.postMessage({ googleToken: token, from: window.name.split('=')[1] });
       doneRef.current = true;
     }
     window.close();
