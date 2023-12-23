@@ -1,3 +1,5 @@
+import { IMAGE_SIZE } from './constants';
+
 export const Storage = (() => {
   type Key = 'isLogin';
 
@@ -61,7 +63,11 @@ export const dataURItoBlob = (dataURI: string) => {
   return new Blob([ab], { type: mimeString });
 };
 
-export const resizeImages = (files: (string | File)[], maxWidth = 960, maxHeight = 960) => {
+export const resizeImages = (
+  files: (string | File)[],
+  maxWidth = IMAGE_SIZE,
+  maxHeight = IMAGE_SIZE,
+) => {
   return new Promise<Blob[]>((resolve) => {
     const ret: Blob[] = [];
 

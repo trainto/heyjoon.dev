@@ -50,7 +50,7 @@ const Uploader = () => {
 
       dispatch('layer', {
         node: <PhotoEditor files={files} onComplete={setBlobs} />,
-        containerClassName: 'w-full sm:w-1/2',
+        containerClassName: 'w-full sm:w-1/3',
       });
     }
     e.target.value = '';
