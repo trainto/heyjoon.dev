@@ -20,7 +20,7 @@ const Header = () => {
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
   return (
-    <header className={`pt-3 pb-2 px-5 z-40 ${sticky ? 'sticky top-0' : ''}`}>
+    <header className={`pt-3 pb-2 px-3 z-40 ${sticky ? 'sticky top-0' : ''}`}>
       <div
         className={`flex ${
           pathname.startsWith('/places') ? 'justify-between' : 'justify-end'

@@ -21,7 +21,7 @@ export default function Places() {
   return (
     <div className={noto.className}>
       <div className="flex flex-col sm:flex-row justify-center">
-        <div className="basis-full sm:basis-3/4 px-5">
+        <div className="basis-full sm:basis-3/4 px-1">
           <Feed />
         </div>
 
