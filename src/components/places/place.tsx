@@ -19,13 +19,14 @@ const Place = ({ place }: { place: Place }) => {
   const images = useMemo(() => place.images.split(','), [place.images]);
 
   return (
-    <div className="place border border-gray-700 p-2 rounded">
-      <div className="flex justify-between items-center">
+    <div className="place border border-gray-700 py-2 px-1 rounded">
+      <div className="flex justify-between items-center px-1">
         <div>
           <Avatar src={place.avatar} size={24} nickname={place.nickname} />
         </div>
         <div className="text-xs text-gray-500">{createdAt}</div>
       </div>
+
       <div className="img-container my-2 rounded-md">
         <div className="grid content-center">
           <Image
@@ -36,7 +37,7 @@ const Place = ({ place }: { place: Place }) => {
           />
         </div>
       </div>
-      <div>{built}</div>
+      <div className="px-1">{built}</div>
     </div>
   );
 };
