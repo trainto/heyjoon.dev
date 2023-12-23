@@ -2,24 +2,14 @@
 
 import Feed from '@/components/places/feed';
 import Side from '@/components/places/side';
-import { Noto_Sans_KR } from 'next/font/google';
 import Layer from '@/components/layer';
 import useStore from '@/lib/store';
-
-import './places.css';
-
-const noto = Noto_Sans_KR({
-  weight: ['400', '700'],
-  style: ['normal'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export default function Places() {
   const { value: layer } = useStore('layer');
 
   return (
-    <div className={noto.className}>
+    <>
       <div className="flex flex-col sm:flex-row justify-center">
         <div className="basis-full sm:basis-3/4 px-1">
           <Feed />
@@ -31,12 +21,6 @@ export default function Places() {
       </div>
 
       {layer && <Layer containerClassName={layer.containerClassName ?? ''}>{layer.node}</Layer>}
-
-      <style jsx global>{`
-        .pt-75p {
-          padding-top: 75%;
-        }
-      `}</style>
-    </div>
+    </>
   );
 }
