@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import Header from '../components/header';
 import Link from 'next/link';
@@ -16,6 +16,13 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Hakoon Sim - Joon.log()',
   description: 'A personal blog by Hakjoon Sim (심학준)',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
