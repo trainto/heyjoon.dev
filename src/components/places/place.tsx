@@ -3,6 +3,11 @@ import { memo, useMemo } from 'react';
 import Tag from './tag';
 import Image from 'next/image';
 import Avatar from './avatar';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const Place = ({ place }: { place: Place }) => {
   const built = useMemo(() => {
@@ -27,14 +32,20 @@ const Place = ({ place }: { place: Place }) => {
         <div className="text-xs text-gray-500">{createdAt}</div>
       </div>
 
-      <div className="img-container my-2 rounded-md">
-        <div className="grid content-center">
-          <Image
-            src={'https://cdn.heyjoon.dev/places/' + images[0]}
-            alt="food"
-            fill={true}
-            style={{ objectFit: 'contain' }}
-          />
+      <div className="relative bg-black w-full pt-75p my-2 rounded-md">
+        <div className="place-images absolute top-0 right-0 bottom-0 left-0 grid content-center">
+          <Swiper modules={[Pagination]} slidesPerView={1} pagination={{ clickable: true }}>
+            {images.map((src) => (
+              <SwiperSlide key={src.split('.')[0]}>
+                <Image
+                  src={'https://cdn.heyjoon.dev/places/' + src}
+                  alt="food"
+                  fill={true}
+                  style={{ objectFit: 'contain' }}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
       <div className="px-1">{built}</div>
