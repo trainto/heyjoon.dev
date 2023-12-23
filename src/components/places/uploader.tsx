@@ -7,7 +7,6 @@ import { dispatchEvent } from '@/lib/event-bus';
 import Loading from './loading';
 import { Camera } from './svg';
 import PhotoEditor from './photo-editor';
-import { fileToDataURL } from '@/lib/utils-client';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
@@ -103,7 +102,7 @@ const Uploader = () => {
         <div className="flex-grow">
           <textarea
             ref={taRef}
-            className="bg-transparent w-full px-2"
+            className="bg-transparent w-full px-2 text-sm"
             placeholder="Where do you want to share?"
             maxLength={180}
             value={desc}

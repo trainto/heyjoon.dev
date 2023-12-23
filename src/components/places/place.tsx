@@ -48,7 +48,7 @@ const Place = ({ place }: { place: Place }) => {
           </Swiper>
         </div>
       </div>
-      <div className="px-1">{built}</div>
+      <div className="px-1 text-sm">{built}</div>
     </div>
   );
 };
