@@ -4,9 +4,19 @@ import Feed from '@/components/places/feed';
 import Side from '@/components/places/side';
 import Layer from '@/components/layer';
 import useStore from '@/lib/store';
+import { useEffect } from 'react';
 
 export default function Places() {
   const { value: layer } = useStore('layer');
+
+  useEffect(() => {
+    const body = document.querySelector('body');
+    if (layer) {
+      body?.classList.add('overflow-hidden');
+    } else {
+      body?.classList.remove('overflow-hidden');
+    }
+  }, [layer]);
 
   return (
     <>
