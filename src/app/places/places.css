@@ -13,3 +13,7 @@
   bottom: 0;
   left: 0;
 }
+
+.swiper-pagination-bullet-active {
+  @apply bg-brand2 !important;
+}
