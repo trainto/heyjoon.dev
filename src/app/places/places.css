@@ -17,3 +17,8 @@
 .swiper-pagination-bullet-active {
   @apply bg-brand2 !important;
 }
+
+.swiper-lazy-preloader {
+  @apply border-brand2 !important;
+  border-top-color: transparent !important;
+}

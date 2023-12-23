@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Button from '../button';
 import Crop from './crop';
 import { dispatch } from '@/lib/store';
-import { dataURItoBlob, fileToDataURL, resizeImages } from '@/lib/utils-client';
+import { fileToDataURL, resizeImages } from '@/lib/utils-client';
 
 export default function PhotoEditor({
   files,

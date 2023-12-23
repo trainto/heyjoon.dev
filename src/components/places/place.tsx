@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Avatar from './avatar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import { CDN_URL } from '@/lib/constants';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -38,11 +39,13 @@ const Place = ({ place }: { place: Place }) => {
             {images.map((src) => (
               <SwiperSlide key={src.split('.')[0]}>
                 <Image
-                  src={'https://cdn.heyjoon.dev/places/' + src}
+                  src={CDN_URL + src}
                   alt="food"
                   fill={true}
                   style={{ objectFit: 'contain' }}
+                  loading="lazy"
                 />
+                <div className="swiper-lazy-preloader"></div>
               </SwiperSlide>
             ))}
           </Swiper>
