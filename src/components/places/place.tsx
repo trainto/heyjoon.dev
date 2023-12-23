@@ -32,7 +32,7 @@ const Place = ({ place }: { place: Place }) => {
         <div className="text-xs text-gray-500">{createdAt}</div>
       </div>
 
-      <div className="relative bg-black w-full pt-75p my-2 rounded-md">
+      <div className="relative bg-black w-full pt-100 my-2 rounded-md">
         <div className="place-images absolute top-0 right-0 bottom-0 left-0 grid content-center">
           <Swiper modules={[Pagination]} slidesPerView={1} pagination={{ clickable: true }}>
             {images.map((src) => (

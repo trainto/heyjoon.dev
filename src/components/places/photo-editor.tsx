@@ -50,7 +50,7 @@ export default function PhotoEditor({
 
   return (
     <div>
-      <div className="relative bg-black w-100 pt-75p rounded-md">
+      <div className="relative bg-black w-100 pt-100 rounded-md">
         <div className="crop-container absolute top-0 bottom-0 left-0 right-0 grid place-content-center">
           {ready && <Crop src={originalUrls[targetIndex]} />}
         </div>
@@ -69,7 +69,7 @@ export default function PhotoEditor({
             role="button"
             onClick={() => setTargetIndex(i)}
           >
-            <div className="relative bg-black w-20 pt-75p rounded-md">
+            <div className="relative bg-black w-20 pt-100 rounded-md">
               <div className="grid content-center absolute top-0 bottom-0 left-0 right-0 rounded-md">
                 {ready && (
                   <Image
