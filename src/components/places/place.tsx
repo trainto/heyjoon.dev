@@ -29,13 +29,10 @@ const Place = ({ place }: { place: Place }) => {
       <div className="img-container my-2 rounded-md">
         <div className="grid content-center">
           <Image
-            className="rounded-md my-auto"
             src={'https://cdn.heyjoon.dev/places/' + images[0]}
             alt="food"
-            sizes="100vw"
-            width={0}
-            height={0}
-            style={{ width: '100%', height: 'auto' }}
+            fill={true}
+            style={{ objectFit: 'contain' }}
           />
         </div>
       </div>

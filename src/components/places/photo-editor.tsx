@@ -50,7 +50,7 @@ export default function PhotoEditor({
 
   return (
     <div>
-      <div className="relative bg-black w-100 pt-75p">
+      <div className="relative bg-black w-100 pt-75p rounded-md">
         <div className="crop-container absolute top-0 bottom-0 left-0 right-0 grid place-content-center">
           {ready && <Crop src={originalUrls[targetIndex]} />}
         </div>
@@ -73,7 +73,6 @@ export default function PhotoEditor({
               <div className="grid content-center absolute top-0 bottom-0 left-0 right-0 rounded-md">
                 {ready && (
                   <Image
-                    className="rounded-md"
                     src={url}
                     fill={true}
                     style={{ objectFit: 'contain' }}
