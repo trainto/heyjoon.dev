@@ -89,7 +89,7 @@ export const resizeImages = (files: (string | File)[], maxWidth = 960, maxHeight
         canvas.width = width;
         canvas.height = height;
 
-        ctx?.drawImage(document.createElement('img'), 0, 0, canvas.width, canvas.height);
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
         const dataURI = canvas.toDataURL('image/jpeg');
 
         ret[i] = dataURItoBlob(dataURI);

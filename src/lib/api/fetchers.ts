@@ -25,6 +25,10 @@ export const fetcher = async <T>(url: string, query?: StringifiableRecord) => {
 };
 
 export const sendRequest = async <T>(config: AxiosRequestConfig) => {
+  if (config.data && typeof config.data.append === 'function') {
+    config.headers = { 'Content-Type': 'multipart/form-data' };
+  }
+
   try {
     return await axios<AxiosResponse<T>>(config);
   } catch (err: unknown) {

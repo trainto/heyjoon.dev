@@ -16,6 +16,8 @@ const Place = ({ place }: { place: Place }) => {
     [place.createdAt],
   );
 
+  const images = useMemo(() => place.images.split(','), [place.images]);
+
   return (
     <div className="place border border-gray-700 p-2 rounded">
       <div className="flex justify-between items-center">
@@ -28,7 +30,7 @@ const Place = ({ place }: { place: Place }) => {
         <div className="grid content-center">
           <Image
             className="rounded-md my-auto"
-            src="https://www.teenaagnel.com/wp-content/uploads/2019/12/food-photography-in-dubai.jpg"
+            src={'https://cdn.heyjoon.dev/places/' + images[0]}
             alt="food"
             sizes="100vw"
             width={0}

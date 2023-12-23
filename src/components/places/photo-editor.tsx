@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Button from '../button';
 import Crop from './crop';
 import { dispatch } from '@/lib/store';
-import { fileToDataURL, resizeImages } from '@/lib/utils-client';
+import { dataURItoBlob, fileToDataURL, resizeImages } from '@/lib/utils-client';
 
 export default function PhotoEditor({
   files,
@@ -43,6 +43,7 @@ export default function PhotoEditor({
 
   const onDone = useCallback(async () => {
     const resized = await resizeImages(originalUrls);
+    // const resized = originalUrls.map((u) => dataURItoBlob(u));
     onComplete(resized);
     dispatch('layer', null);
   }, [onComplete, originalUrls]);

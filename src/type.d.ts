@@ -9,6 +9,7 @@ type PostType = {
 type Place = {
   id: number;
   desc: string;
+  images: string;
   email: string;
   avatar: string;
   nickname: string;

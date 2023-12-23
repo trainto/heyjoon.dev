@@ -7,6 +7,7 @@ import { dispatchEvent } from '@/lib/event-bus';
 import Loading from './loading';
 import { Camera } from './svg';
 import PhotoEditor from './photo-editor';
+import { fileToDataURL } from '@/lib/utils-client';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
@@ -62,10 +63,16 @@ const Uploader = () => {
       return;
     }
 
+    const form = new FormData();
+    form.append('desc', desc.trim());
+    blobs.forEach((b, i) =>
+      form.append('files', new File([b], i + '.jpg', { type: 'image/jpeg' })),
+    );
+
     const res = await sendRequest({
       method: 'post',
       url: '/places',
-      data: { desc: desc.trim() },
+      data: form,
     });
 
     if (res.status === 200) {
@@ -74,7 +81,7 @@ const Uploader = () => {
     }
 
     setIsUploading(false);
-  }, [desc]);
+  }, [blobs, desc]);
 
   useEffect(() => {
     if (isUploading) {
