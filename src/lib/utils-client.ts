@@ -96,7 +96,7 @@ export const resizeImages = (
         canvas.height = height;
 
         ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
-        const dataURI = canvas.toDataURL('image/jpeg');
+        const dataURI = canvas.toDataURL('image/jpeg', 1);
 
         ret[i] = dataURItoBlob(dataURI);
 
