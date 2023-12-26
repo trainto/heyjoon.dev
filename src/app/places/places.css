@@ -22,3 +22,7 @@
   @apply border-brand2 !important;
   border-top-color: transparent !important;
 }
+
+.swiper-pagination {
+  position: static !important;
+}
