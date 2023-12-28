@@ -34,7 +34,7 @@ export default function About() {
       </div>
 
       <div className="mt-10">
-        <h3 className="font-bold text-3xl">Career</h3>
+        <h3 className="font-bold text-3xl">Work Experience</h3>
         <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-5">
           <div>
             <Image src="./skp.png" width={96} height={44.86} alt="SK planet" />
@@ -94,6 +94,25 @@ export default function About() {
             <span className="text-sm text-gray-400">Mar. 2002 ~ Feb. 2009</span>
           </li>
         </ul>
+      </div>
+
+      <div className="mt-14">
+        <h3 className="font-bold text-3xl">Skills</h3>
+        <div className="flex flex-wrap gap-2 mt-3 text-sm">
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">JavaScript</div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">TypeScript</div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">
+            React/Next.js
+          </div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Node.js</div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Deno</div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">
+            MySQL/MongoDB
+          </div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Java</div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Android</div>
+          <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Linux</div>
+        </div>
       </div>
     </div>
   );
