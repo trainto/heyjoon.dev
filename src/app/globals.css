@@ -73,3 +73,7 @@ ul li {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.h-cvh {
+  height: calc(100vh - 210px);
+}
