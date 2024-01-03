@@ -3,8 +3,9 @@ import { useCallback, useEffect, useState } from 'react';
 import Button from '../button';
 import Crop from './crop';
 import { dispatch } from '@/lib/store';
-import { fileToDataURL, resizeImages } from '@/lib/utils-client';
+import { imgToDataURL, resizeImages } from '@/lib/utils-client';
 import { IMAGE_SIZE } from '@/lib/constants';
+import { dispatchEvent } from '@/lib/event-bus';
 
 export default function PhotoEditor({
   files,
@@ -14,13 +15,14 @@ export default function PhotoEditor({
   onComplete: (blobs: Blob[]) => void;
 }) {
   const [originalUrls, setOriginalUrls] = useState<string[]>([]);
+  const [croppedUrls, setCroppedUrls] = useState<string[]>([]);
   const [targetIndex, setTargetIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [smallImages, setSmallImages] = useState<number[]>([]);
 
   useEffect(() => {
     files.map(async (f, i) => {
-      const url = await fileToDataURL(f);
+      const url = await imgToDataURL(f);
 
       setOriginalUrls((prev) => {
         prev[i] = url;
@@ -59,12 +61,22 @@ export default function PhotoEditor({
     });
   };
 
+  const onCrop = useCallback(
+    (dataUrl: string) => {
+      setCroppedUrls((p) => {
+        p[targetIndex] = dataUrl;
+        return [...p];
+      });
+    },
+    [targetIndex],
+  );
+
   const onDone = useCallback(async () => {
-    const resized = await resizeImages(originalUrls);
-    // const resized = originalUrls.map((u) => dataURItoBlob(u));
+    const images = originalUrls.map((u, i) => (croppedUrls[i] ? croppedUrls[i] : u));
+    const resized = await resizeImages(images);
     onComplete(resized);
     dispatch('layer', null);
-  }, [onComplete, originalUrls]);
+  }, [croppedUrls, onComplete, originalUrls]);
 
   return (
     <div>
@@ -74,17 +86,36 @@ export default function PhotoEditor({
         }`}
       >
         <div className="crop-container absolute top-0 bottom-0 left-0 right-0 grid place-content-center">
-          {ready && <Crop src={originalUrls[targetIndex]} />}
+          {ready &&
+            (croppedUrls[targetIndex] ? (
+              <Image
+                src={croppedUrls[targetIndex]}
+                fill={true}
+                style={{ objectFit: 'contain' }}
+                alt="Cropped"
+              />
+            ) : (
+              <Crop src={originalUrls[targetIndex]} onCrop={onCrop} />
+            ))}
         </div>
       </div>
       {smallImages.includes(targetIndex) ? (
         <div className="py-1 text-red-700 text-xs text-center">This image is too small!!</div>
       ) : (
         <div className="bg-black flex justify-center space-x-2 py-1">
-          <Button color="zinc" size="sm" onClick={() => null}>
+          <Button
+            color="zinc"
+            size="sm"
+            onClick={() =>
+              setCroppedUrls((p) => {
+                delete p[targetIndex];
+                return [...p];
+              })
+            }
+          >
             Revert
           </Button>
-          <Button color="indigo" size="sm" onClick={() => null}>
+          <Button color="indigo" size="sm" onClick={() => dispatchEvent('cropClicked')}>
             Crop
           </Button>
         </div>

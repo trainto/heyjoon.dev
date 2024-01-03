@@ -1,3 +1,4 @@
+import { Crop } from 'react-image-crop';
 import { IMAGE_SIZE } from './constants';
 
 export const Storage = (() => {
@@ -38,7 +39,7 @@ export const Storage = (() => {
   };
 })();
 
-export const fileToDataURL = (file: File) => {
+export const imgToDataURL = (file: File | Blob) => {
   return new Promise<string>((resolve) => {
     const fr = new FileReader();
 
@@ -77,6 +78,9 @@ export const resizeImages = (
       img.onload = () => {
         const canvas: HTMLCanvasElement = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.imageSmoothingQuality = 'high';
+        }
 
         let width = 0;
         let height = 0;
@@ -111,7 +115,53 @@ export const resizeImages = (
         }
       };
 
-      img.src = typeof item === 'string' ? item : await fileToDataURL(item);
+      img.src = typeof item === 'string' ? item : await imgToDataURL(item);
     });
   });
+};
+
+export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
+  const scaleX = img.naturalWidth / img.width;
+  const scaleY = img.naturalHeight / img.height;
+  const pixelRatio = window.devicePixelRatio;
+
+  const canvas = new OffscreenCanvas(
+    Math.floor(crop.width * scaleX * pixelRatio),
+    Math.floor(crop.height * scaleY * pixelRatio),
+  );
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    throw new Error('No 2d context');
+  }
+
+  ctx.scale(pixelRatio, pixelRatio);
+  ctx.imageSmoothingQuality = 'high';
+
+  const centerX = img.naturalWidth / 2;
+  const centerY = img.naturalHeight / 2;
+
+  const cropX = crop.x * scaleX;
+  const cropY = crop.y * scaleY;
+
+  ctx.translate(-cropX, -cropY);
+  ctx.translate(centerX, centerY);
+  ctx.scale(1, 1);
+  ctx.translate(-centerX, -centerY);
+
+  ctx.drawImage(
+    img,
+    0,
+    0,
+    img.naturalWidth,
+    img.naturalHeight,
+    0,
+    0,
+    img.naturalWidth,
+    img.naturalHeight,
+  );
+
+  const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 1 });
+  const dataUrl = await imgToDataURL(blob);
+
+  return dataUrl;
 };
