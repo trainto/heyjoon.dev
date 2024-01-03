@@ -55,6 +55,7 @@ const Crop = ({ src, onCrop }: { src: string; onCrop: (datUrl: string) => void }
   return (
     <ReactCrop
       crop={crop}
+      aspect={4 / 3}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onChange={setCrop}
