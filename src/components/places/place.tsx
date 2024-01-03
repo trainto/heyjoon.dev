@@ -43,6 +43,7 @@ const Place = ({ place }: { place: Place }) => {
             {images.map((src) => (
               <SwiperSlide key={src.split('.')[0]}>
                 <Image
+                  className="rounded-md"
                   src={CDN_URL + src}
                   alt="food"
                   fill={true}

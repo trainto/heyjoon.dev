@@ -125,9 +125,12 @@ export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
   const scaleY = img.naturalHeight / img.height;
   const pixelRatio = window.devicePixelRatio;
 
+  const canvasWidth = Math.floor(crop.width * scaleX * pixelRatio);
+  const canvasHeight = Math.floor(crop.height * scaleY * pixelRatio);
+
   const canvas = new OffscreenCanvas(
-    Math.floor(crop.width * scaleX * pixelRatio),
-    Math.floor(crop.height * scaleY * pixelRatio),
+    canvasWidth < IMAGE_SIZE ? IMAGE_SIZE : canvasWidth,
+    canvasHeight < IMAGE_SIZE ? IMAGE_SIZE : canvasHeight,
   );
   const ctx = canvas.getContext('2d');
   if (!ctx) {
@@ -145,7 +148,6 @@ export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
 
   ctx.translate(-cropX, -cropY);
   ctx.translate(centerX, centerY);
-  ctx.scale(1, 1);
   ctx.translate(-centerX, -centerY);
 
   ctx.drawImage(
