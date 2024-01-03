@@ -43,6 +43,22 @@ export default function PhotoEditor({
     }
   }, [files.length, originalUrls]);
 
+  const handleOrdering = (e: React.MouseEvent<HTMLDivElement>, from: number, to: number) => {
+    e.stopPropagation();
+
+    if (to < 0 || to > originalUrls.length - 1) {
+      return;
+    }
+
+    setOriginalUrls((p) => {
+      const temp = p[from];
+      p[from] = p[to];
+      p[to] = temp;
+
+      return [...p];
+    });
+  };
+
   const onDone = useCallback(async () => {
     const resized = await resizeImages(originalUrls);
     // const resized = originalUrls.map((u) => dataURItoBlob(u));
@@ -78,7 +94,7 @@ export default function PhotoEditor({
         {originalUrls.map((url, i) => (
           <div
             key={i}
-            className="rounded-md bg-black cursor-pointer"
+            className="relative rounded-md bg-black cursor-pointer"
             role="button"
             onClick={() => setTargetIndex(i)}
           >
@@ -101,6 +117,23 @@ export default function PhotoEditor({
                   />
                 )}
               </div>
+            </div>
+
+            <div className="flex justify-between px-2 font-bold text-brand2">
+              <div
+                role="button"
+                className={i === 0 ? 'text-gray-500' : ''}
+                onClick={(e) => handleOrdering(e, i, i - 1)}
+              >{`<`}</div>
+              <div
+                role="button"
+                className={i >= originalUrls.length - 1 ? 'text-gray-500' : ''}
+                onClick={(e) => handleOrdering(e, i, i + 1)}
+              >{`>`}</div>
+            </div>
+
+            <div className="absolute top-0 left-0 text-xs font-bold bg-brand1 rounded-full px-1">
+              {i + 1}
             </div>
           </div>
         ))}
