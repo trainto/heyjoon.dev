@@ -132,6 +132,7 @@ const Uploader = () => {
             onClick={() => {
               setIsUploading(true);
             }}
+            disabled={desc.trim() === '' || blobs.length === 0}
           >
             Post
           </Button>
