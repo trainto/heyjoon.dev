@@ -128,7 +128,10 @@ export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
   const canvasWidth = Math.floor(crop.width * scaleX * pixelRatio);
   const canvasHeight = Math.floor(crop.height * scaleY * pixelRatio);
 
-  const canvas = new OffscreenCanvas(canvasWidth, canvasHeight);
+  // const canvas = new OffscreenCanvas(canvasWidth, canvasHeight);
+  const canvas = document.createElement('canvas');
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
 
   const ctx = canvas.getContext('2d');
   if (!ctx) {
@@ -160,8 +163,23 @@ export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
     img.naturalHeight,
   );
 
-  const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 1 });
-  const dataUrl = URL.createObjectURL(blob);
+  // To reduce size
+  let dataUrl: string = '';
+  if (canvasWidth > 1500 || canvasHeight > 1500) {
+    const canvasResize = document.createElement('canvas');
+    canvasResize.width = canvasWidth > canvasHeight ? 1500 : (1500 * canvasWidth) / canvasHeight;
+    canvasResize.height = canvasHeight > canvasWidth ? 1500 : (1500 * canvasHeight) / canvasWidth;
+
+    const ctxResize = canvasResize.getContext('2d');
+    if (!ctxResize) {
+      throw new Error('No 2d context');
+    }
+
+    ctxResize.drawImage(canvas, 0, 0, canvasResize.width, canvasResize.height);
+    dataUrl = canvasResize.toDataURL('image/jpeg', 1);
+  } else {
+    dataUrl = canvas.toDataURL('image/jpeg', 1);
+  }
 
   return dataUrl;
 };
