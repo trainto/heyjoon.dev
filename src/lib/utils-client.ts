@@ -100,7 +100,7 @@ export const resizeImages = (
         canvas.height = height;
 
         ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
-        const dataURI = canvas.toDataURL('image/jpeg', 0.9);
+        const dataURI = canvas.toDataURL('image/jpeg', 0.95);
 
         ret[i] = dataURItoBlob(dataURI);
 
@@ -160,8 +160,8 @@ export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
     img.naturalHeight,
   );
 
-  const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 0.9 });
-  const dataUrl = await imgToDataURL(blob);
+  const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 1 });
+  const dataUrl = URL.createObjectURL(blob);
 
   return dataUrl;
 };
