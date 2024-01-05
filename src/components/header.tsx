@@ -60,17 +60,6 @@ const Nav = () => {
     <nav className="text-sm sm:text-base">
       <span>
         <Link
-          href="/about"
-          className={`${
-            pathname.startsWith('/about') ? 'text-brand2-animation' : 'text-gray-300-animation'
-          }`}
-        >
-          About
-        </Link>
-      </span>
-      <span className="text-xs text-gray-500 px-2">|</span>
-      <span>
-        <Link
           href="/"
           className={`${
             pathname.startsWith('/posts') || pathname === '/'
@@ -81,6 +70,20 @@ const Nav = () => {
           Blog
         </Link>
       </span>
+
+      <span className="text-xs text-gray-500 px-2">|</span>
+
+      <span>
+        <Link
+          href="/about"
+          className={`${
+            pathname.startsWith('/about') ? 'text-brand2-animation' : 'text-gray-300-animation'
+          }`}
+        >
+          CV
+        </Link>
+      </span>
+
       {/* <span className="text-xs text-gray-500 px-2">|</span>
       <span>
         <Link

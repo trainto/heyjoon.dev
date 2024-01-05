@@ -1,16 +1,24 @@
 import { format } from 'date-fns';
-import { memo, useMemo, useRef } from 'react';
+import { memo, useMemo, useRef, useState } from 'react';
 import Tag from './tag';
 import Image from 'next/image';
 import Avatar from './avatar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { CDN_URL } from '@/lib/constants';
+import { Heart } from './svg';
+import { sendRequest } from '@/lib/api/fetchers';
+import useStore from '@/lib/store';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const Place = ({ place }: { place: Place }) => {
+  const [liked, setLiked] = useState(() => !!place.likedByMe);
+  const [likes, setLikes] = useState(() => place.likes);
+
+  const { value: userInfo } = useStore('userInfo');
+
   const built = useMemo(() => {
     return place.desc
       .split(/(#[^\s#]+)/)
@@ -23,6 +31,22 @@ const Place = ({ place }: { place: Place }) => {
   );
 
   const images = useMemo(() => place.images.split(','), [place.images]);
+
+  const handleLike = async () => {
+    if (userInfo == null) {
+      return;
+    }
+
+    const current = liked;
+    const res = current
+      ? await sendRequest({ method: 'DELETE', url: '/places/likes/' + place.id })
+      : await sendRequest({ method: 'POST', url: '/places/likes/' + place.id });
+
+    if (res.status === 200) {
+      setLiked((p) => !p);
+      setLikes((p) => (current ? p - 1 : p + 1));
+    }
+  };
 
   return (
     <div className="place border border-gray-700 py-2 px-1 rounded">
@@ -61,6 +85,19 @@ const Place = ({ place }: { place: Place }) => {
       ></div>
 
       <div className="px-1 text-sm my-2">{built}</div>
+
+      <div className="flex justify-end items-center space-x-3 px-3 text-xs text-gray-400">
+        <div className="flex space-x-1">
+          <div role="button" onClick={handleLike}>
+            <Heart size={18} color={liked ? 'red' : 'empty'} />
+          </div>
+          <div>{likes}</div>
+        </div>
+
+        <div>|</div>
+
+        <div role="button">Comments: 0</div>
+      </div>
     </div>
   );
 };

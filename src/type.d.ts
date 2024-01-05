@@ -15,6 +15,8 @@ type Place = {
   nickname: string;
   createdAt: string;
   modifiedAt: string;
+  likes: number;
+  likedByMe?: number;
 };
 
 type UserInfo = {
