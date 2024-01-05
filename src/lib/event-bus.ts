@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-type EventType = 'fetchPlaces' | 'cropClicked';
+type EventType = 'fetchPlaces';
 
 export const useEventBus = (ev: EventType, callback: () => void) => {
   const callbackRef = useRef(callback);

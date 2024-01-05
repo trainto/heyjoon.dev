@@ -51,84 +51,47 @@ export const imgToDataURL = (file: File | Blob) => {
   });
 };
 
-export const dataURItoBlob = (dataURI: string) => {
-  const byteString = atob(dataURI.split(',')[1]);
-  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  const ab = new ArrayBuffer(byteString.length);
-  const ia = new Uint8Array(ab);
-
-  for (let i = 0; i < byteString.length; i += 1) {
-    ia[i] = byteString.charCodeAt(i);
+export const resize = (img: HTMLImageElement) => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    throw new Error('No 2d context');
   }
 
-  return new Blob([ab], { type: mimeString });
-};
+  ctx.imageSmoothingQuality = 'high';
 
-export const resizeImages = (
-  files: (string | File)[],
-  maxWidth = IMAGE_SIZE,
-  maxHeight = IMAGE_SIZE,
-) => {
-  return new Promise<Blob[]>((resolve) => {
-    const ret: Blob[] = [];
+  let width = 0;
+  let height = 0;
 
-    files.forEach(async (item, i) => {
-      const img: HTMLImageElement = document.createElement('img');
+  if (img.naturalWidth === img.naturalHeight) {
+    width = IMAGE_SIZE;
+    height = IMAGE_SIZE;
+  } else if (img.naturalWidth > img.naturalHeight) {
+    width = IMAGE_SIZE;
+    height = (img.naturalHeight * width) / img.naturalWidth;
+  } else {
+    height = IMAGE_SIZE;
+    width = (img.naturalWidth * height) / img.naturalHeight;
+  }
 
-      img.onload = () => {
-        const canvas: HTMLCanvasElement = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.imageSmoothingQuality = 'high';
-        }
+  canvas.width = width;
+  canvas.height = height;
 
-        let width = 0;
-        let height = 0;
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        if (img.naturalWidth === img.naturalHeight) {
-          width = maxWidth;
-          height = maxHeight;
-        } else if (img.naturalWidth > img.naturalHeight) {
-          width = maxWidth;
-          height = (img.naturalHeight * width) / img.naturalWidth;
-        } else {
-          height = maxHeight;
-          width = (img.naturalWidth * height) / img.naturalHeight;
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-
-        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
-        const dataURI = canvas.toDataURL('image/jpeg', 0.95);
-
-        ret[i] = dataURItoBlob(dataURI);
-
-        if (ret.length === files.length) {
-          for (let i = 0; i < files.length; i += 1) {
-            if (!ret[i]) {
-              return;
-            }
-          }
-
-          resolve(ret);
-        }
-      };
-
-      img.src = typeof item === 'string' ? item : await imgToDataURL(item);
-    });
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((blob) => (blob ? resolve(blob) : reject()), 'image/jpeg', 0.95);
   });
 };
 
-export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
-  const scaleX = img.naturalWidth / img.width;
-  const scaleY = img.naturalHeight / img.height;
+export const cropAndResize = (img: HTMLImageElement, crop: Crop & CropInfo) => {
+  const scaleX = crop.scaleX;
+  const scaleY = crop.scaleY;
   const pixelRatio = window.devicePixelRatio;
 
   const canvasWidth = Math.floor(crop.width * scaleX * pixelRatio);
   const canvasHeight = Math.floor(crop.height * scaleY * pixelRatio);
 
-  // const canvas = new OffscreenCanvas(canvasWidth, canvasHeight);
   const canvas = document.createElement('canvas');
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
@@ -163,23 +126,21 @@ export const cropImage = async (img: HTMLImageElement, crop: Crop) => {
     img.naturalHeight,
   );
 
-  // To reduce size
-  let dataUrl: string = '';
-  if (canvasWidth > 1500 || canvasHeight > 1500) {
-    const canvasResize = document.createElement('canvas');
-    canvasResize.width = canvasWidth > canvasHeight ? 1500 : (1500 * canvasWidth) / canvasHeight;
-    canvasResize.height = canvasHeight > canvasWidth ? 1500 : (1500 * canvasHeight) / canvasWidth;
+  // Resize
+  const canvasResize = document.createElement('canvas');
+  canvasResize.width =
+    canvasWidth > canvasHeight ? IMAGE_SIZE : (IMAGE_SIZE * canvasWidth) / canvasHeight;
+  canvasResize.height =
+    canvasHeight > canvasWidth ? IMAGE_SIZE : (IMAGE_SIZE * canvasHeight) / canvasWidth;
 
-    const ctxResize = canvasResize.getContext('2d');
-    if (!ctxResize) {
-      throw new Error('No 2d context');
-    }
-
-    ctxResize.drawImage(canvas, 0, 0, canvasResize.width, canvasResize.height);
-    dataUrl = canvasResize.toDataURL('image/jpeg', 1);
-  } else {
-    dataUrl = canvas.toDataURL('image/jpeg', 1);
+  const ctxResize = canvasResize.getContext('2d');
+  if (!ctxResize) {
+    throw new Error('No 2d context');
   }
 
-  return dataUrl;
+  ctxResize.drawImage(canvas, 0, 0, canvasResize.width, canvasResize.height);
+
+  return new Promise<Blob>((resolve, reject) => {
+    canvasResize.toBlob((blob) => (blob ? resolve(blob) : reject()), 'image/jpeg', 0.95);
+  });
 };

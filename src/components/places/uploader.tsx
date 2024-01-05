@@ -76,6 +76,7 @@ const Uploader = () => {
 
     if (res.status === 200) {
       setDesc('');
+      setBlobs([]);
       dispatchEvent('fetchPlaces');
     }
 

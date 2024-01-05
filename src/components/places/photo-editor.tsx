@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Button from '../button';
 import Crop from './crop';
-import { dispatch } from '@/lib/store';
-import { imgToDataURL, resizeImages } from '@/lib/utils-client';
+import useStore, { dispatch } from '@/lib/store';
+import { cropAndResize, imgToDataURL, resize } from '@/lib/utils-client';
 import { IMAGE_SIZE } from '@/lib/constants';
-import { dispatchEvent } from '@/lib/event-bus';
+import Loading from './loading';
 
 export default function PhotoEditor({
   files,
@@ -14,17 +14,20 @@ export default function PhotoEditor({
   files: File[];
   onComplete: (blobs: Blob[]) => void;
 }) {
-  const [originalUrls, setOriginalUrls] = useState<string[]>([]);
-  const [croppedUrls, setCroppedUrls] = useState<string[]>([]);
+  const [urls, setUrls] = useState<string[]>([]);
   const [targetIndex, setTargetIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [smallImages, setSmallImages] = useState<number[]>([]);
+  const [processingImgs, setprocessingImgs] = useState(false);
+
+  const { value: crops, dispatch: dispatchCrops } = useStore('crops');
+  const { value: aspect, dispatch: dispatchAspect } = useStore('aspect');
 
   useEffect(() => {
     files.map(async (f, i) => {
       const url = await imgToDataURL(f);
 
-      setOriginalUrls((prev) => {
+      setUrls((prev) => {
         prev[i] = url;
         return [...prev];
       });
@@ -34,7 +37,7 @@ export default function PhotoEditor({
   useEffect(() => {
     let check = true;
     for (let i = 0; i < files.length; i += 1) {
-      if (!originalUrls[i]) {
+      if (!urls[i]) {
         check = false;
         break;
       }
@@ -43,16 +46,28 @@ export default function PhotoEditor({
     if (check) {
       setReady(true);
     }
-  }, [files.length, originalUrls]);
+  }, [files.length, urls]);
 
   const handleOrdering = (e: React.MouseEvent<HTMLDivElement>, from: number, to: number) => {
     e.stopPropagation();
 
-    if (to < 0 || to > originalUrls.length - 1) {
+    if (to < 0 || to > urls.length - 1) {
       return;
     }
 
-    setOriginalUrls((p) => {
+    setUrls((p) => {
+      const temp = p[from];
+      p[from] = p[to];
+      p[to] = temp;
+
+      return [...p];
+    });
+
+    dispatchCrops((p) => {
+      if (p == null) {
+        return p;
+      }
+
       const temp = p[from];
       p[from] = p[to];
       p[to] = temp;
@@ -61,68 +76,77 @@ export default function PhotoEditor({
     });
   };
 
-  const onCrop = useCallback(
-    (dataUrl: string) => {
-      setCroppedUrls((p) => {
-        p[targetIndex] = dataUrl;
-        return [...p];
+  useEffect(() => {
+    if (processingImgs === true) {
+      const imgs: HTMLImageElement[] = [];
+      urls.forEach((_u, i) => {
+        const img = document.querySelector<HTMLImageElement>('#image-' + i);
+        if (img) {
+          imgs[i] = img;
+        }
       });
-    },
-    [targetIndex],
-  );
 
-  const onDone = useCallback(async () => {
-    const images = originalUrls.map((u, i) => (croppedUrls[i] ? croppedUrls[i] : u));
-    const resized = await resizeImages(images);
-    onComplete(resized);
-    dispatch('layer', null);
-  }, [croppedUrls, onComplete, originalUrls]);
+      const resized: Blob[] = [];
+      urls.forEach(async (_url, i) => {
+        if (crops && crops[i]) {
+          resized[i] = await cropAndResize(imgs[i], crops[i]!);
+        } else {
+          resized[i] = await resize(imgs[i]);
+        }
+
+        if (resized.length === urls.length) {
+          for (let i = 0; i < resize.length; i += 1) {
+            if (resized[i] == null) {
+              return;
+            }
+          }
+
+          onComplete(resized);
+          dispatch('layer', null);
+          dispatch('crops', null);
+        }
+      });
+    }
+  }, [crops, onComplete, processingImgs, urls]);
 
   return (
     <div>
       <div
-        className={`relative bg-black pt-100 rounded-md ${
+        className={`relative bg-black pt-100 ${
           smallImages.includes(targetIndex) ? 'border border-red-900' : ''
         }`}
       >
         <div className="crop-container absolute top-0 bottom-0 left-0 right-0 grid place-content-center">
-          {ready &&
-            (croppedUrls[targetIndex] ? (
-              <Image
-                src={croppedUrls[targetIndex]}
-                fill={true}
-                style={{ objectFit: 'contain' }}
-                alt="Cropped"
-              />
-            ) : (
-              <Crop src={originalUrls[targetIndex]} onCrop={onCrop} />
-            ))}
+          {ready && <Crop src={urls[targetIndex]} index={targetIndex} />}
         </div>
       </div>
       {smallImages.includes(targetIndex) ? (
         <div className="py-1 text-red-700 text-xs text-center">This image is too small!!</div>
       ) : (
-        <div className="bg-black flex justify-center space-x-2 py-1">
-          <Button
-            color="zinc"
-            size="sm"
-            onClick={() =>
-              setCroppedUrls((p) => {
-                delete p[targetIndex];
-                return [...p];
-              })
-            }
+        <div className="bg-black flex py-1 justify-center space-x-3 text-gray-300">
+          <div
+            role="button"
+            className={`font-bold text-sm border border-dashed rounded-md px-2 ${
+              aspect === 1 ? 'border-brand2' : 'border-gray-400 text-gray-500'
+            }`}
+            onClick={() => dispatchAspect(1)}
           >
-            Revert
-          </Button>
-          <Button color="indigo" size="sm" onClick={() => dispatchEvent('cropClicked')}>
-            Crop
-          </Button>
+            1 : 1
+          </div>
+          <div
+            role="button"
+            className={`font-bold text-sm border border-dashed rounded-md px-2 ${
+              aspect === 4 / 3 ? 'border-brand2' : 'border-gray-400 text-gray-500'
+            }`}
+            onClick={() => dispatchAspect(4 / 3)}
+          >
+            4 : 3
+          </div>
         </div>
       )}
 
       <div className="flex space-x-3 mt-3 py-3 border-t border-gray-500 overflow-auto">
-        {originalUrls.map((url, i) => (
+        {urls.map((url, i) => (
           <div
             key={i}
             className="relative rounded-md bg-black cursor-pointer"
@@ -133,6 +157,7 @@ export default function PhotoEditor({
               <div className="grid content-center absolute top-0 bottom-0 left-0 right-0 rounded-md">
                 {ready && (
                   <Image
+                    id={`image-${i}`}
                     src={url}
                     fill={true}
                     style={{ objectFit: 'contain' }}
@@ -158,7 +183,7 @@ export default function PhotoEditor({
               >{`<`}</div>
               <div
                 role="button"
-                className={i >= originalUrls.length - 1 ? 'text-gray-500' : ''}
+                className={i >= urls.length - 1 ? 'text-gray-500' : ''}
                 onClick={(e) => handleOrdering(e, i, i + 1)}
               >{`>`}</div>
             </div>
@@ -170,10 +195,14 @@ export default function PhotoEditor({
         ))}
       </div>
 
-      <div className="flex justify-end border-t border-gray-500 py-2">
-        <Button color="indigo" onClick={onDone}>
-          Upload
-        </Button>
+      <div className="flex justify-end py-2">
+        {processingImgs ? (
+          <Loading />
+        ) : (
+          <Button color="indigo" onClick={() => setprocessingImgs(true)}>
+            Complete
+          </Button>
+        )}
       </div>
     </div>
   );

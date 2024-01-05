@@ -25,3 +25,8 @@ type UserInfo = {
   intro?: string;
   createdAt: string;
 };
+
+type CropInfo = {
+  scaleX: number;
+  scaleY: number;
+};

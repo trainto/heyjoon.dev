@@ -1,9 +1,12 @@
 import { ReactNode } from 'react';
+import { Crop } from 'react-image-crop';
 import useSWR, { MutatorCallback, mutate } from 'swr';
 
 type Store = {
   userInfo: UserInfo | null;
   layer: { node: ReactNode; containerClassName?: string } | null;
+  aspect: number | null;
+  crops: ((Crop & CropInfo) | undefined)[] | null;
 };
 
 const createStore = () => {
