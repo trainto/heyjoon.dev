@@ -21,7 +21,7 @@ const Header = () => {
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
   const onAvatarClick = useCallback(() => {
-    dispatch('layer', { node: <MyInfo /> });
+    dispatch('layer', { node: <MyInfo />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
   return (

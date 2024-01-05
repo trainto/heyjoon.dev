@@ -22,7 +22,7 @@ const User = () => {
   }, [dispatchUserInfo]);
 
   const onAvatarClick = useCallback(() => {
-    dispatch('layer', { node: <MyInfo /> });
+    dispatch('layer', { node: <MyInfo />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
   if (!userInfo) {

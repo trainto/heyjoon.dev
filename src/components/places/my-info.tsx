@@ -44,12 +44,12 @@ export default function MyInfo() {
   }
 
   return (
-    <div className="user-info-container text-sm">
+    <div>
       <div className="flex justify-center">
         <Avatar src={userInfo.avatar} size={92} />
       </div>
 
-      <div className="border border-gray-600 mt-5 px-2 py-2">
+      <div className="border border-gray-600 mt-5 px-2 py-2 text-sm">
         <div className="flex items-center">
           <div className="basis-20">Email:</div>
           <div className="px-1 py-1">{userInfo.email}</div>
@@ -114,10 +114,6 @@ export default function MyInfo() {
       </div>
 
       <style jsx>{`
-        .user-info-container {
-          width: 20rem;
-        }
-
         input:focus {
           outline: none !important;
         }
