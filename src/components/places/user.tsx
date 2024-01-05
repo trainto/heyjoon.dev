@@ -1,4 +1,4 @@
-import useStore from '@/lib/store';
+import useStore, { dispatch } from '@/lib/store';
 import Avatar from './avatar';
 import Button from '../button';
 import { useCallback } from 'react';
@@ -6,6 +6,7 @@ import { sendRequest } from '@/lib/api/fetchers';
 import { Storage } from '@/lib/utils-client';
 import { mutate } from 'swr';
 import { format } from 'date-fns';
+import MyInfo from './my-info';
 
 const User = () => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
@@ -20,6 +21,10 @@ const User = () => {
     }
   }, [dispatchUserInfo]);
 
+  const onAvatarClick = useCallback(() => {
+    dispatch('layer', { node: <MyInfo /> });
+  }, []);
+
   if (!userInfo) {
     return null;
   }
@@ -28,7 +33,7 @@ const User = () => {
     <>
       <div className="hidden sm:block">
         <div className="flex justify-center">
-          <Avatar size={92} src={userInfo.avatar} />
+          <Avatar size={92} src={userInfo.avatar} onClick={onAvatarClick} />
         </div>
         <div className="flex justify-end mt-3">
           <div className="text-sm">@{userInfo.nickname}</div>

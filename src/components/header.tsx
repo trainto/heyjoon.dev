@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import Signin from './places/signin';
-import useStore from '@/lib/store';
+import useStore, { dispatch } from '@/lib/store';
 import Avatar from './places/avatar';
+import MyInfo from './places/my-info';
 
 const Header = () => {
   const { value: userInfo } = useStore('userInfo');
@@ -19,6 +20,10 @@ const Header = () => {
 
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
+  const onAvatarClick = useCallback(() => {
+    dispatch('layer', { node: <MyInfo /> });
+  }, []);
+
   return (
     <header className={`pt-3 pb-2 px-3 z-40 ${sticky ? 'sticky top-0' : ''}`}>
       <div
@@ -29,7 +34,7 @@ const Header = () => {
         <div className="sm:hidden">
           {pathname.startsWith('/places') &&
             (userInfo ? (
-              <Avatar src={userInfo.avatar} size={32} />
+              <Avatar src={userInfo.avatar} size={32} onClick={onAvatarClick} />
             ) : (
               <Signin width={130} from="header" />
             ))}
