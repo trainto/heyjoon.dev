@@ -17,6 +17,12 @@ export default function MyInfo() {
     await signout();
   }, []);
 
+  const onCancel = useCallback(() => {
+    setEdit(false);
+    setNickname(userInfo?.nickname ?? '');
+    setIntro(userInfo?.intro ?? '');
+  }, [userInfo?.intro, userInfo?.nickname]);
+
   const onSave = useCallback(async () => {
     //
     const res = await sendRequest({
@@ -80,7 +86,7 @@ export default function MyInfo() {
         <div className="flex justify-end mt-2">
           {edit ? (
             <div className="flex space-x-2">
-              <Button color="zinc" size="xs" onClick={() => setEdit(false)}>
+              <Button color="zinc" size="xs" onClick={onCancel}>
                 Cancel
               </Button>
               <Button color="indigo" size="xs" onClick={onSave}>
