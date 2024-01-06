@@ -1,19 +1,12 @@
-import { fetcher, sendRequest } from '@/lib/api/fetchers';
+import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
 import useStore from '@/lib/store';
 import { storage } from '@/lib/utils-client';
 import Image from 'next/image';
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import useSWR from 'swr';
 
 const Signin = ({ width, from }: { width: number; from: string }) => {
-  const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
-
-  const { data: userInfoFetched } = useSWR<UserInfo>(
-    '/places/users/me',
-    userInfo || !storage.get('isLogin') ? null : fetcher,
-    { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
-  );
+  const { dispatch: dispatchUserInfo } = useStore('userInfo');
 
   const doneRef = useRef(false);
 
@@ -36,12 +29,6 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
     },
     [dispatchUserInfo],
   );
-
-  useEffect(() => {
-    if (userInfoFetched && userInfo == null) {
-      dispatchUserInfo(userInfoFetched);
-    }
-  }, [dispatchUserInfo, userInfo, userInfoFetched]);
 
   useEffect(() => {
     const handler = (ev: MessageEvent<{ googleToken: string; from: string }>) => {

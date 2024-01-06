@@ -1,22 +1,20 @@
 'use client';
 
+import { useAuthState } from '@/lib/hooks';
+import useStore, { dispatch } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import Signin from './places/signin';
-import useStore, { dispatch } from '@/lib/store';
 import Avatar from './places/avatar';
 import MyInfo from './places/my-info';
+import Signin from './places/signin';
 
 const Header = () => {
   const { value: userInfo } = useStore('userInfo');
 
   const pathname = usePathname();
 
-  const showSigninIcon = useMemo(
-    () => pathname.startsWith('/places') && !userInfo,
-    [pathname, userInfo],
-  );
+  const authIconKind = useAuthState();
 
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
@@ -32,16 +30,15 @@ const Header = () => {
         } sm:justify-end items-end space-x-5 z-40`}
       >
         <div className="sm:hidden">
-          {pathname.startsWith('/places') &&
-            (userInfo ? (
-              <Avatar src={userInfo.avatar} size={32} onClick={onAvatarClick} />
-            ) : (
-              <Signin width={130} from="header" />
-            ))}
+          {authIconKind === 'google' ? (
+            <Signin width={130} from="header" />
+          ) : authIconKind === 'avatar' && userInfo ? (
+            <Avatar src={userInfo?.avatar ?? ''} size={32} onClick={onAvatarClick} />
+          ) : null}
         </div>
 
         <div className={`flex items-end space-x-3 sm:space-x-5`}>
-          <div className={`${showSigninIcon && 'hidden'} sm:block`}>
+          <div className={`${authIconKind === 'google' && 'hidden'} sm:block`}>
             <Nav />
           </div>
           <Link

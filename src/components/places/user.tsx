@@ -7,7 +7,7 @@ import Avatar from './avatar';
 import MyInfo from './my-info';
 
 const User = () => {
-  const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
+  const { value: userInfo } = useStore('userInfo');
 
   const onSignout = useCallback(async () => {
     await signout();

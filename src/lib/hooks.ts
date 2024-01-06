@@ -1,4 +1,9 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import useSWR from 'swr';
+import { fetcher } from './api/fetchers';
+import useStore from './store';
+import { storage } from './utils-client';
 
 export const useScrollHitTheBottom = (callback: () => void) => {
   const callbackRef = useRef(callback);
@@ -107,4 +112,45 @@ export const useResize = (callback: () => void, instant?: boolean) => {
 
     return () => window.removeEventListener('resize', handleRisize);
   }, [handleRisize]);
+};
+
+export const useAuthState = () => {
+  const [authIconKind, setAuthIconKind] = useState<null | 'google' | 'avatar'>(null);
+
+  const pathname = usePathname();
+
+  const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
+
+  const { data: userInfoFetched } = useSWR<UserInfo>(
+    '/places/users/me',
+    userInfo || !storage.get('isLogin') ? null : fetcher,
+    { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
+  );
+
+  useEffect(() => {
+    if (userInfoFetched && userInfo == null) {
+      dispatchUserInfo(userInfoFetched);
+    }
+  }, [dispatchUserInfo, userInfo, userInfoFetched]);
+
+  useEffect(() => {
+    if (!pathname.startsWith('/places')) {
+      setAuthIconKind(null);
+      return;
+    }
+
+    if (!storage.get('isLogin')) {
+      setAuthIconKind('google');
+      return;
+    } else {
+      if (!userInfo) {
+        setAuthIconKind(null);
+        return;
+      } else {
+        setAuthIconKind('avatar');
+      }
+    }
+  }, [pathname, userInfo]);
+
+  return authIconKind;
 };
