@@ -1,25 +1,17 @@
+import { signout } from '@/lib/api';
 import useStore, { dispatch } from '@/lib/store';
-import Avatar from './avatar';
-import Button from '../button';
-import { useCallback } from 'react';
-import { sendRequest } from '@/lib/api/fetchers';
-import { Storage } from '@/lib/utils-client';
-import { mutate } from 'swr';
 import { format } from 'date-fns';
+import { useCallback } from 'react';
+import Button from '../button';
+import Avatar from './avatar';
 import MyInfo from './my-info';
 
 const User = () => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
   const onSignout = useCallback(async () => {
-    const res = await sendRequest<undefined>({ method: 'POST', url: '/places/auth/signout' });
-
-    if (res.status === 200) {
-      Storage.remove('isLogin');
-      mutate('/places/users/me', null);
-      dispatchUserInfo(null);
-    }
-  }, [dispatchUserInfo]);
+    await signout();
+  }, []);
 
   const onAvatarClick = useCallback(() => {
     dispatch('layer', { node: <MyInfo />, containerClassName: 'w-full sm:w-96' });

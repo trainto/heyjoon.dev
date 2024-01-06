@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import Button from '../button';
-import Crop from './crop';
+import { IMAGE_SIZE } from '@/lib/constants';
 import useStore, { dispatch } from '@/lib/store';
 import { cropAndResize, imgToDataURL, resize } from '@/lib/utils-client';
-import { IMAGE_SIZE } from '@/lib/constants';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import Button from '../button';
+import Crop from './crop';
 import Loading from './loading';
 
 export default function PhotoEditor({

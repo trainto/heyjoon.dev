@@ -1,12 +1,12 @@
 import { fetcher } from '@/lib/api/fetchers';
-import { useScrollHitTheBottom } from '@/lib/hooks';
-import useSWRInfinite from 'swr/infinite';
-import Place from './place';
-import { useCallback, useRef } from 'react';
-import Loading from './loading';
-import useStore from '@/lib/store';
-import Uploader from './uploader';
 import { useEventBus } from '@/lib/event-bus';
+import { useScrollHitTheBottom } from '@/lib/hooks';
+import useStore from '@/lib/store';
+import { useCallback, useRef } from 'react';
+import useSWRInfinite from 'swr/infinite';
+import Loading from './loading';
+import Place from './place';
+import Uploader from './uploader';
 
 export const PLACE_COUNT_PER_FETCH = 10;
 

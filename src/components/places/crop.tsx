@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 
-import ReactCrop, { type Crop } from 'react-image-crop';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useResize } from '@/lib/hooks';
 import { IMAGE_SIZE } from '@/lib/constants';
+import { useResize } from '@/lib/hooks';
 import useStore from '@/lib/store';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import ReactCrop, { type Crop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
 

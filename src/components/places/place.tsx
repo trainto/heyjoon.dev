@@ -1,14 +1,14 @@
-import { format } from 'date-fns';
-import { memo, useMemo, useRef, useState } from 'react';
-import Tag from './tag';
-import Image from 'next/image';
-import Avatar from './avatar';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-import { CDN_URL } from '@/lib/constants';
-import { Heart } from './svg';
 import { sendRequest } from '@/lib/api/fetchers';
+import { CDN_URL } from '@/lib/constants';
 import useStore from '@/lib/store';
+import { format } from 'date-fns';
+import Image from 'next/image';
+import { memo, useEffect, useMemo, useState } from 'react';
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import Avatar from './avatar';
+import { Heart } from './svg';
+import Tag from './tag';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -31,6 +31,10 @@ const Place = ({ place }: { place: Place }) => {
   );
 
   const images = useMemo(() => place.images.split(','), [place.images]);
+
+  useEffect(() => {
+    setLiked(!!userInfo && !!place.likedByMe);
+  }, [place, userInfo]);
 
   const handleLike = async () => {
     if (userInfo == null) {

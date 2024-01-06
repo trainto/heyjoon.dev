@@ -1,11 +1,10 @@
-import useStore, { dispatch } from '@/lib/store';
-import Avatar from './avatar';
-import { format } from 'date-fns';
-import Button from '../button';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { signout } from '@/lib/api';
 import { sendRequest } from '@/lib/api/fetchers';
-import { Storage } from '@/lib/utils-client';
-import { mutate } from 'swr';
+import useStore from '@/lib/store';
+import { format } from 'date-fns';
+import { useCallback, useState } from 'react';
+import Button from '../button';
+import Avatar from './avatar';
 
 export default function MyInfo() {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
@@ -15,15 +14,8 @@ export default function MyInfo() {
   const [intro, setIntro] = useState(() => userInfo?.intro ?? '');
 
   const onSignout = useCallback(async () => {
-    const res = await sendRequest<undefined>({ method: 'POST', url: '/places/auth/signout' });
-
-    if (res.status === 200) {
-      Storage.remove('isLogin');
-      mutate('/places/users/me', null);
-      dispatchUserInfo(null);
-      dispatch('layer', null);
-    }
-  }, [dispatchUserInfo]);
+    await signout();
+  }, []);
 
   const onSave = useCallback(async () => {
     //

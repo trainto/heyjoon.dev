@@ -1,7 +1,7 @@
 import { Crop } from 'react-image-crop';
 import { IMAGE_SIZE } from './constants';
 
-export const Storage = (() => {
+export const storage = (() => {
   type Key = 'isLogin';
 
   const which = (which: 'local' | 'session') => {

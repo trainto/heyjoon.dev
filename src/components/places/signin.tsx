@@ -1,16 +1,17 @@
-import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import Image from 'next/image';
-import useStore from '@/lib/store';
-import useSWR from 'swr';
 import { fetcher, sendRequest } from '@/lib/api/fetchers';
-import { Storage } from '@/lib/utils-client';
+import { dispatchEvent } from '@/lib/event-bus';
+import useStore from '@/lib/store';
+import { storage } from '@/lib/utils-client';
+import Image from 'next/image';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import useSWR from 'swr';
 
 const Signin = ({ width, from }: { width: number; from: string }) => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
   const { data: userInfoFetched } = useSWR<UserInfo>(
     '/places/users/me',
-    userInfo || !Storage.get('isLogin') ? null : fetcher,
+    userInfo || !storage.get('isLogin') ? null : fetcher,
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
   );
 
@@ -28,7 +29,8 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
       if (res?.status === 200) {
         if (res.data) {
           dispatchUserInfo(res.data);
-          Storage.set('isLogin', true);
+          storage.set('isLogin', true);
+          dispatchEvent('fetchPlaces');
         }
       }
     },
