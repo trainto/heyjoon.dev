@@ -1,5 +1,6 @@
-import { memo } from 'react';
+import { CDN_URL } from '@/lib/constants';
 import Image from 'next/image';
+import { memo } from 'react';
 
 const Avatar = ({
   src,
@@ -16,7 +17,7 @@ const Avatar = ({
     <Image
       role={onClick ? 'button' : undefined}
       className={`rounded-full`}
-      src={src}
+      src={src.startsWith('http') ? src : CDN_URL + src}
       width={size}
       height={size}
       alt={nickname ?? 'Avatar'}

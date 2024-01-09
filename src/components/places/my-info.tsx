@@ -1,17 +1,31 @@
 import { signout } from '@/lib/api';
 import { sendRequest } from '@/lib/api/fetchers';
 import useStore from '@/lib/store';
+import { imgToDataURL } from '@/lib/utils-client';
 import { format } from 'date-fns';
-import { useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import Button from '../button';
 import Avatar from './avatar';
+import AvatarEditor from './avatar-editor';
+import { Edit } from './svg';
 
 export default function MyInfo() {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
+  const [avatarEdit, setAvatarEdit] = useState<string>();
   const [edit, setEdit] = useState(false);
   const [nickname, setNickname] = useState(() => userInfo?.nickname ?? '');
   const [intro, setIntro] = useState(() => userInfo?.intro ?? '');
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarSelected = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.item(0);
+    if (file) {
+      const url = await imgToDataURL(file);
+      setAvatarEdit(url);
+    }
+  };
 
   const onSignout = useCallback(async () => {
     await signout();
@@ -24,7 +38,6 @@ export default function MyInfo() {
   }, [userInfo?.intro, userInfo?.nickname]);
 
   const onSave = useCallback(async () => {
-    //
     const res = await sendRequest({
       method: 'PATCH',
       url: '/places/users/me',
@@ -41,13 +54,33 @@ export default function MyInfo() {
     return null;
   }
 
+  if (avatarEdit) {
+    return <AvatarEditor src={avatarEdit} onComplete={() => setAvatarEdit(undefined)} />;
+  }
+
   return (
     <div>
       <div className="flex justify-center">
-        <Avatar src={userInfo.avatar} size={92} />
+        <div className="relative">
+          <div className="">
+            <Avatar src={userInfo.avatar} size={92} />
+          </div>
+
+          <div role="button" className="edit-btn" onClick={() => fileInputRef.current?.click()}>
+            <Edit size={18} />
+          </div>
+          <div className="hidden">
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/jpeg, image/png"
+              onChange={handleAvatarSelected}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="border border-gray-600 mt-5 px-2 py-2 text-sm">
+      <div className="border border-gray-600 mt-5 px-2 py-2 text-sm rounded-md">
         <div className="flex items-center">
           <div className="basis-20">Email:</div>
           <div className="px-1 py-1">{userInfo.email}</div>
@@ -114,6 +147,13 @@ export default function MyInfo() {
       <style jsx>{`
         input:focus {
           outline: none !important;
+        }
+
+        .edit-btn {
+          position: absolute;
+          top: 0;
+          right: 0;
+          margin-right: -12px;
         }
       `}</style>
     </div>

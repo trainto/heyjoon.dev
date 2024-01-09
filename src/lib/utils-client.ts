@@ -84,7 +84,7 @@ export const resize = (img: HTMLImageElement) => {
   });
 };
 
-export const cropAndResize = (img: HTMLImageElement, crop: Crop & CropInfo) => {
+export const cropAndResize = (img: HTMLImageElement, crop: Crop & CropInfo, resize?: number) => {
   const scaleX = crop.scaleX;
   const scaleY = crop.scaleY;
   const pixelRatio = window.devicePixelRatio;
@@ -127,11 +127,10 @@ export const cropAndResize = (img: HTMLImageElement, crop: Crop & CropInfo) => {
   );
 
   // Resize
+  const size = resize ? resize : IMAGE_SIZE;
   const canvasResize = document.createElement('canvas');
-  canvasResize.width =
-    canvasWidth > canvasHeight ? IMAGE_SIZE : (IMAGE_SIZE * canvasWidth) / canvasHeight;
-  canvasResize.height =
-    canvasHeight > canvasWidth ? IMAGE_SIZE : (IMAGE_SIZE * canvasHeight) / canvasWidth;
+  canvasResize.width = canvasWidth > canvasHeight ? size : (size * canvasWidth) / canvasHeight;
+  canvasResize.height = canvasHeight > canvasWidth ? size : (size * canvasHeight) / canvasWidth;
 
   const ctxResize = canvasResize.getContext('2d');
   if (!ctxResize) {

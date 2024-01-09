@@ -8,7 +8,17 @@ import ReactCrop, { type Crop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
-const Crop = ({ src, index }: { src: string; index: number }) => {
+const Crop = ({
+  src,
+  index,
+  circular,
+  min,
+}: {
+  src: string;
+  index: number;
+  circular?: boolean;
+  min?: number;
+}) => {
   const [crop, setCrop] = useState<Crop>();
   const [maxHeight, setMaxHeight] = useState(0);
   const [minSize, setMinSize] = useState(0);
@@ -71,7 +81,7 @@ const Crop = ({ src, index }: { src: string; index: number }) => {
     const initCrop = () => {
       const { width, height, naturalWidth } = e.currentTarget ?? imgRef.current;
 
-      setMinSize((width * IMAGE_SIZE) / naturalWidth);
+      setMinSize((width * (min ? min : IMAGE_SIZE)) / naturalWidth);
 
       setCrop({
         x: 0,
@@ -101,6 +111,7 @@ const Crop = ({ src, index }: { src: string; index: number }) => {
       style={{ maxHeight }}
       minWidth={minSize}
       minHeight={minSize}
+      circularCrop={circular}
     >
       <img src={src} alt="Image to crop" ref={imgRef} onLoad={handleImageLoaded} />
     </ReactCrop>
