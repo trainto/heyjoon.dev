@@ -1,6 +1,6 @@
 import { sendRequest } from '@/lib/api/fetchers';
 import { CDN_URL } from '@/lib/constants';
-import useStore from '@/lib/store';
+import useStore, { dispatch } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { memo, useEffect, useMemo, useState } from 'react';
@@ -12,6 +12,7 @@ import Tag from './tag';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Comments from './comments';
 
 const Place = ({ place }: { place: Place }) => {
   const [liked, setLiked] = useState(() => !!place.likedByMe);
@@ -50,6 +51,13 @@ const Place = ({ place }: { place: Place }) => {
       setLiked((p) => !p);
       setLikes((p) => (current ? p - 1 : p + 1));
     }
+  };
+
+  const handleCommentsClick = () => {
+    dispatch('layer', {
+      node: <Comments place={place} />,
+      containerClassName: 'w-full sm:w-1/3',
+    });
   };
 
   return (
@@ -100,7 +108,9 @@ const Place = ({ place }: { place: Place }) => {
 
         <div>|</div>
 
-        <div role="button">Comments: 0</div>
+        <div role="button" onClick={handleCommentsClick}>
+          Comments: {place.comments}
+        </div>
       </div>
     </div>
   );
