@@ -26,3 +26,12 @@
 .swiper-pagination {
   position: static !important;
 }
+
+.dark-scroller::-webkit-scrollbar {
+  @apply bg-bg-main;
+  width: 2px;
+}
+
+.dark-scroller::-webkit-scrollbar-thumb {
+  @apply bg-brand1;
+}

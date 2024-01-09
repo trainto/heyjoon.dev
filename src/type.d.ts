@@ -29,6 +29,17 @@ type UserInfo = {
   createdAt: string;
 };
 
+type CommentInfo = {
+  id: number;
+  comment: string;
+  place: number;
+  email: string;
+  nickname: string;
+  avatar: string;
+  createdAt: string;
+  modifiedAt?: string;
+};
+
 type CropInfo = {
   scaleX: number;
   scaleY: number;
