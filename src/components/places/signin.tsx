@@ -19,11 +19,18 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
         data: { token },
       });
 
-      if (res?.status === 200) {
+      if (res.status === 200) {
         if (res.data) {
           dispatchUserInfo(res.data);
           storage.set('isLogin', true);
           dispatchEvent('fetchPlaces');
+        }
+      } else if (res.status === 201) {
+        if (res.data) {
+          // show signup form
+        } else {
+          // show alert
+          alert('Your sign-up has been reviewing.');
         }
       }
     },
