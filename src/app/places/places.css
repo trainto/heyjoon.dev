@@ -1,4 +1,4 @@
-.place+.place {
+.place + .place {
   margin-top: 1rem;
 }
 
@@ -34,4 +34,18 @@
 
 .dark-scroller::-webkit-scrollbar-thumb {
   @apply bg-brand1;
+}
+
+.modal-hidden {
+  display: none;
+}
+
+.modal-show {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
 }

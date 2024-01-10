@@ -3,7 +3,7 @@ import { CDN_URL } from '@/lib/constants';
 import useStore, { dispatch } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './avatar';
@@ -13,6 +13,7 @@ import Tag from './tag';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Comments from './comments';
+import UserDetail from './user-detail';
 
 const Place = ({ place }: { place: Place }) => {
   const [liked, setLiked] = useState(() => !!place.likedByMe);
@@ -60,11 +61,23 @@ const Place = ({ place }: { place: Place }) => {
     });
   };
 
+  const onAvatarClicked = useCallback(() => {
+    dispatch('layer', {
+      node: <UserDetail userEmail={place.email} />,
+      containerClassName: 'w-full sm:w-1/3',
+    });
+  }, [place.email]);
+
   return (
     <div className="place border border-gray-700 py-2 px-1 rounded">
       <div className="flex justify-between items-center px-1">
         <div>
-          <Avatar src={place.avatar} size={24} nickname={place.nickname} />
+          <Avatar
+            src={place.avatar}
+            size={24}
+            nickname={place.nickname}
+            onClick={onAvatarClicked}
+          />
         </div>
         <div className="text-xs text-gray-500">{createdAt}</div>
       </div>

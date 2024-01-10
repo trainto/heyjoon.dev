@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { useCallback } from 'react';
 import Button from '../button';
 import Avatar from './avatar';
-import MyInfo from './my-info';
+import UserDetail from './user-detail';
 
 const User = () => {
   const { value: userInfo } = useStore('userInfo');
@@ -14,7 +14,7 @@ const User = () => {
   }, []);
 
   const onAvatarClick = useCallback(() => {
-    dispatch('layer', { node: <MyInfo />, containerClassName: 'w-full sm:w-96' });
+    dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
   if (!userInfo) {

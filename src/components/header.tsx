@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import Avatar from './places/avatar';
-import MyInfo from './places/my-info';
 import Signin from './places/signin';
+import UserDetail from './places/user-detail';
 
 const Header = () => {
   const { value: userInfo } = useStore('userInfo');
@@ -19,7 +19,7 @@ const Header = () => {
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
 
   const onAvatarClick = useCallback(() => {
-    dispatch('layer', { node: <MyInfo />, containerClassName: 'w-full sm:w-96' });
+    dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
   return (

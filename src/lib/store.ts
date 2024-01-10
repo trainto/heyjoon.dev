@@ -5,6 +5,7 @@ import useSWR, { MutatorCallback, mutate } from 'swr';
 type Store = {
   userInfo: UserInfo | null;
   layer: { node: ReactNode; containerClassName?: string } | null;
+  modal: { msg: string; onConfirm?: () => void; hasCancel?: boolean } | null;
   aspect: number | null;
   crops: ((Crop & CropInfo) | undefined)[] | null;
 };

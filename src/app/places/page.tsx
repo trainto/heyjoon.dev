@@ -1,13 +1,15 @@
 'use client';
 
-import Feed from '@/components/places/feed';
-import Side from '@/components/places/side';
 import Layer from '@/components/layer';
+import Feed from '@/components/places/feed';
+import Modal from '@/components/places/modal';
+import Side from '@/components/places/side';
 import useStore from '@/lib/store';
 import { useEffect } from 'react';
 
 export default function Places() {
   const { value: layer } = useStore('layer');
+  const { value: modal } = useStore('modal');
 
   useEffect(() => {
     const body = document.querySelector('body');
@@ -31,6 +33,12 @@ export default function Places() {
       </div>
 
       {layer && <Layer containerClassName={layer.containerClassName ?? ''}>{layer.node}</Layer>}
+
+      <div className={`modal-${modal ? 'show' : 'hidden'}`}>
+        <div className="flex justify-center w-full">
+          <Modal />
+        </div>
+      </div>
     </>
   );
 }

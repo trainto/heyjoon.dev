@@ -1,9 +1,11 @@
 import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
-import useStore from '@/lib/store';
+import useStore, { dispatch } from '@/lib/store';
 import { storage } from '@/lib/utils-client';
 import Image from 'next/image';
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import google from '../../../public/continue-google.png';
+import UserDetail from './user-detail';
 
 const Signin = ({ width, from }: { width: number; from: string }) => {
   const { dispatch: dispatchUserInfo } = useStore('userInfo');
@@ -13,6 +15,10 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
   const signin = useCallback(
     async (token: string) => {
       doneRef.current = true;
+      setTimeout(() => {
+        doneRef.current = false;
+      }, 3000);
+
       const res = await sendRequest({
         method: 'post',
         url: '/places/auth/signin-with-google',
@@ -25,12 +31,16 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
           storage.set('isLogin', true);
           dispatchEvent('fetchPlaces');
         }
-      } else if (res.status === 201) {
+      } else if (res.status === 202) {
         if (res.data) {
-          // show signup form
+          dispatch('layer', {
+            node: <UserDetail userInfo={res.data} isSignUp={true} />,
+            containerClassName: 'w-full sm:w-1/3',
+          });
         } else {
-          // show alert
-          alert('Your sign-up has been reviewing.');
+          dispatch('modal', {
+            msg: 'Your sign-up is being reviewed. Please wait for the approval. Thank you!',
+          });
         }
       }
     },
@@ -69,19 +79,13 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
     [],
   );
 
-  const height = useMemo(
-    () =>
-      // 350 * 80
-      (80 * width) / 350,
-    [width],
-  );
-
   return (
     <Image
-      src="/continue-google.png"
+      src={google}
+      role="button"
       alt="Continue with Google"
       width={width}
-      height={height}
+      style={{ height: 'auto' }}
       onClick={() => window.open(googleAuthUrl, 'google-auth=' + from, 'width=480,height=640')}
     />
   );
