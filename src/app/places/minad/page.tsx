@@ -2,15 +2,27 @@
 
 import Button from '@/components/button';
 import Avatar from '@/components/places/avatar';
-import { fetcher } from '@/lib/api/fetchers';
+import { fetcher, sendRequest } from '@/lib/api/fetchers';
 import { format } from 'date-fns';
 import useSWR from 'swr';
 
 export default function Minad() {
-  const { data: waitingList, error } = useSWR<UserInfo[]>('/places/admin/users-waiting', fetcher);
+  const {
+    data: waitingList,
+    error,
+    mutate: mutateWaitingList,
+  } = useSWR<UserInfo[]>('/places/admin/users/waitings', fetcher);
 
-  const approve = (email: string) => {
-    //
+  const approve = async (email: string) => {
+    const res = await sendRequest({
+      method: 'post',
+      url: '/places/admin/users/approve/' + email,
+      data: { approved: 1 },
+    });
+
+    if (res.status === 200) {
+      mutateWaitingList();
+    }
   };
 
   if (error) {

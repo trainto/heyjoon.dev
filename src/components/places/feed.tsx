@@ -2,6 +2,7 @@ import { fetcher } from '@/lib/api/fetchers';
 import { useEventBus } from '@/lib/event-bus';
 import { useScrollHitTheBottom } from '@/lib/hooks';
 import useStore from '@/lib/store';
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useRef } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import Loading from './loading';
@@ -14,6 +15,7 @@ export default function Feed() {
   const noMoreFeed = useRef(false);
 
   const { value: userInfo } = useStore('userInfo');
+  const params = useSearchParams();
 
   const { data, setSize, mutate } = useSWRInfinite<Place[]>((page, prevData) => {
     if (prevData && prevData.length < PLACE_COUNT_PER_FETCH) {
@@ -23,7 +25,7 @@ export default function Feed() {
 
     return `/places?limit=${PLACE_COUNT_PER_FETCH}${
       page !== 0 && prevData ? '&lastId=' + prevData[prevData.length - 1].id : ''
-    }`;
+    }${params.get('tags') ? '&tags=' + params.get('tags') : ''}`;
   }, fetcher);
 
   useScrollHitTheBottom(

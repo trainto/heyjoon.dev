@@ -3,7 +3,13 @@ import { memo } from 'react';
 
 function Tag({ tag }: { tag: string }) {
   return (
-    <Link href={`/places/tag/${tag.replace(/#/g, '')}`} prefetch={false}>
+    // <Link href={`#${tag.replace(/#/g, '')}`} prefetch={false} shallow={true} scroll={false}>
+    <Link
+      href={{ pathname: '/places', query: { tags: tag.replace(/#/g, '') } }}
+      prefetch={false}
+      shallow={true}
+      scroll={false}
+    >
       {tag}
     </Link>
   );

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import React from 'react';
 import { Noto_Sans_KR } from 'next/font/google';
+import React from 'react';
 
+import Layout from '@/components/places/layout';
 import './places.css';
 
 export const metadata: Metadata = {
@@ -17,5 +18,9 @@ const noto = Noto_Sans_KR({
 });
 
 export default function PlaceLayout({ children }: { children: React.ReactNode }) {
-  return <div className={noto.className}>{children}</div>;
+  return (
+    <div className={noto.className}>
+      <Layout>{children}</Layout>
+    </div>
+  );
 }
