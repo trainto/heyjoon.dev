@@ -26,7 +26,7 @@ export default function Minad() {
   };
 
   if (error) {
-    return <div className="text-center">Who the fucking are you?</div>;
+    return <div className="text-center">Who the fuck are you?</div>;
   }
 
   return (

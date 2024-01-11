@@ -24,11 +24,13 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       {layer && <Layer containerClassName={layer.containerClassName ?? ''}>{layer.node}</Layer>}
 
-      <div className={`modal-${modal ? 'show' : 'hidden'}`}>
-        <div className="flex justify-center w-full">
-          <Modal />
+      {modal && (
+        <div className="modal-container">
+          <div className="flex justify-center w-full modal-window">
+            <Modal />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
