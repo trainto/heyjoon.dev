@@ -35,7 +35,7 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
         if (res.data) {
           dispatch('layer', {
             node: <UserDetail userInfo={res.data} isSignUp={true} />,
-            containerClassName: 'w-full sm:w-1/3',
+            containerClassName: 'w-full sm:w-96',
           });
         } else {
           dispatch('modal', {

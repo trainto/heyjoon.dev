@@ -64,7 +64,7 @@ const Place = ({ place }: { place: Place }) => {
   const onAvatarClicked = useCallback(() => {
     dispatch('layer', {
       node: <UserDetail userEmail={place.email} />,
-      containerClassName: 'w-full sm:w-1/3',
+      containerClassName: 'w-full sm:w-96',
     });
   }, [place.email]);
 
