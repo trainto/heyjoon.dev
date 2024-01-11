@@ -45,6 +45,11 @@ export default function Comments({ place }: { place: Place }) {
     <div className="text-sm relative pb-20" ref={contentDiv}>
       <div className="h-full overflow-y-auto dark-scroller px-2">
         {comments && comments.map((c) => <CommentMemo key={c.id} commentInfo={c} />)}
+        {comments && comments.length === 0 && (
+          <div className="text-center h-full grid items-center">
+            Be the first to comment on this post. &#128516;
+          </div>
+        )}
       </div>
 
       <div className="absolute bottom-0 w-full">
