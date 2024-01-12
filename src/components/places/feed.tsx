@@ -1,7 +1,6 @@
 import { fetcher } from '@/lib/api/fetchers';
 import { useEventBus } from '@/lib/event-bus';
 import { useScrollHitTheBottom } from '@/lib/hooks';
-import useStore from '@/lib/store';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useRef } from 'react';
 import useSWRInfinite from 'swr/infinite';
@@ -14,7 +13,6 @@ export const PLACE_COUNT_PER_FETCH = 10;
 export default function Feed() {
   const noMoreFeed = useRef(false);
 
-  const { value: userInfo } = useStore('userInfo');
   const params = useSearchParams();
 
   const { data, setSize, mutate } = useSWRInfinite<Place[]>((page, prevData) => {
@@ -38,7 +36,7 @@ export default function Feed() {
 
   return (
     <>
-      {userInfo && <Uploader />}
+      <Uploader />
 
       <div>{data?.map((arr) => arr.map((p) => <Place key={p.id} place={p} />))}</div>
 

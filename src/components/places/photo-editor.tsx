@@ -2,7 +2,7 @@ import { IMAGE_SIZE } from '@/lib/constants';
 import useStore, { dispatch } from '@/lib/store';
 import { cropAndResize, imgToDataURL, resize } from '@/lib/utils-client';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Button from '../button';
 import Crop from './crop';
 import Loading from './loading';
@@ -18,7 +18,7 @@ export default function PhotoEditor({
   const [targetIndex, setTargetIndex] = useState(0);
   const [ready, setReady] = useState(false);
   const [smallImages, setSmallImages] = useState<number[]>([]);
-  const [processingImgs, setprocessingImgs] = useState(false);
+  const [processingImgs, setProcessingImgs] = useState(false);
 
   const { value: crops, dispatch: dispatchCrops } = useStore('crops');
   const { value: aspect, dispatch: dispatchAspect } = useStore('aspect');
@@ -76,8 +76,9 @@ export default function PhotoEditor({
     });
   };
 
-  useEffect(() => {
-    if (processingImgs === true) {
+  const onCompleteClicked = useCallback(() => {
+    setProcessingImgs(true);
+    setTimeout(() => {
       const imgs: HTMLImageElement[] = [];
       urls.forEach((_u, i) => {
         const img = document.querySelector<HTMLImageElement>('#image-' + i);
@@ -106,8 +107,8 @@ export default function PhotoEditor({
           dispatch('crops', null);
         }
       });
-    }
-  }, [crops, onComplete, processingImgs, urls]);
+    }, 0);
+  }, [crops, onComplete, urls]);
 
   return (
     <div>
@@ -199,7 +200,7 @@ export default function PhotoEditor({
         {processingImgs ? (
           <Loading />
         ) : (
-          <Button color="indigo" onClick={() => setprocessingImgs(true)}>
+          <Button color="indigo" onClick={onCompleteClicked}>
             Complete
           </Button>
         )}

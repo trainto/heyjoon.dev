@@ -1,12 +1,12 @@
-import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
-import Avatar from './avatar';
-import useStore, { dispatch } from '@/lib/store';
-import Button from '../button';
 import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
+import useStore, { dispatch } from '@/lib/store';
+import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
+import Button from '../button';
+import Avatar from './avatar';
 import Loading from './loading';
-import { Camera } from './svg';
 import PhotoEditor from './photo-editor';
+import { Camera } from './svg';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
