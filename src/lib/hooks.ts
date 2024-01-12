@@ -114,6 +114,29 @@ export const useResize = (callback: () => void, instant?: boolean) => {
   }, [handleRisize]);
 };
 
+export const useClickOutside = (callback: (e: MouseEvent) => void) => {
+  const callbackRef = useRef(callback);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (containerRef.current && e.target && !containerRef.current.contains(e.target as Node)) {
+        callbackRef.current(e);
+      }
+    };
+
+    document.addEventListener('mousedown', handler);
+
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  return containerRef;
+};
+
 export const useAuthState = () => {
   const [authIconKind, setAuthIconKind] = useState<null | 'google' | 'avatar'>(null);
 

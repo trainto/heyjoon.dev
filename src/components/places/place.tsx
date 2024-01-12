@@ -79,7 +79,15 @@ const Place = ({ place }: { place: Place }) => {
             onClick={onAvatarClicked}
           />
         </div>
-        <div className="text-xs text-gray-500">{createdAt}</div>
+        <div className="flex items-center space-x-1">
+          <div className="text-xs text-gray-500">{createdAt}</div>
+
+          {/* {userInfo?.email === place.email ? (
+            <div role="button">
+              <MoreDrop iconSize={20} menu={[]} />
+            </div>
+          ) : null} */}
+        </div>
       </div>
 
       <div className="relative bg-black w-full pt-100 mt-2 rounded-md">

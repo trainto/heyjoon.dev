@@ -110,3 +110,26 @@ export const Edit = ({ size = 24 }: { size?: number }) => {
     </svg>
   );
 };
+
+export const More = ({ size = 24 }: { size?: number }) => {
+  return (
+    <svg
+      viewBox="0 0 1024 1024"
+      fill="#cbd5e1"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      transform="rotate(90)"
+      width={size}
+      height={size}
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M820.8 512c0 44.8 36 80.8 80.8 80.8s80.8-36 80.8-80.8-36-80.8-80.8-80.8-80.8 36-80.8 80.8zM431.2 512c0 44.8 36 80.8 80.8 80.8S592.8 556.8 592.8 512 556.8 431.2 512 431.2 431.2 467.2 431.2 512zM40.8 512c0 44.8 36 80.8 80.8 80.8S203.2 556.8 203.2 512s-36-80.8-80.8-80.8S41.6 467.2 40.8 512z"
+          fill=""
+        ></path>
+      </g>
+    </svg>
+  );
+};
