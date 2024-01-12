@@ -13,6 +13,7 @@ import Tag from './tag';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Comments from './comments';
+import Likes from './likes';
 import UserDetail from './user-detail';
 
 const Place = ({ place }: { place: Place }) => {
@@ -124,7 +125,18 @@ const Place = ({ place }: { place: Place }) => {
           <div role="button" onClick={handleLike}>
             <Heart size={18} color={liked ? 'red' : 'empty'} />
           </div>
-          <div>{likes}</div>
+          <div
+            role={likes > 0 ? 'button' : undefined}
+            onClick={() =>
+              likes > 0 &&
+              dispatch('layer', {
+                node: <Likes placeId={place.id} />,
+                containerClassName: 'w-full sm:w-96',
+              })
+            }
+          >
+            {likes}
+          </div>
         </div>
 
         <div>|</div>
