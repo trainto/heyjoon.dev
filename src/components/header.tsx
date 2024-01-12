@@ -86,7 +86,7 @@ const Nav = () => {
         </Link>
       </span>
 
-      {/* <span className="text-xs text-gray-500 px-2">|</span>
+      <span className="text-xs text-gray-500 px-2">|</span>
       <span>
         <Link
           href="/places"
@@ -96,7 +96,7 @@ const Nav = () => {
         >
           Places
         </Link>
-      </span> */}
+      </span>
     </nav>
   );
 };
