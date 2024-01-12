@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  -webkit-tap-highlight-color: #1d2026;
+  -webkit-tap-highlight-color: rgba(29, 32, 38, 0.5);
 }
 
 body {
