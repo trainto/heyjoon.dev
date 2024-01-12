@@ -87,7 +87,8 @@ export const resize = (img: HTMLImageElement) => {
 export const cropAndResize = (img: HTMLImageElement, crop: Crop & CropInfo, resize?: number) => {
   const scaleX = crop.scaleX;
   const scaleY = crop.scaleY;
-  const pixelRatio = window.devicePixelRatio;
+  // const pixelRatio = window.devicePixelRatio;
+  const pixelRatio = 1;
 
   const canvasWidth = Math.floor(crop.width * scaleX * pixelRatio);
   const canvasHeight = Math.floor(crop.height * scaleY * pixelRatio);
