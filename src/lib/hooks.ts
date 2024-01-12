@@ -1,8 +1,9 @@
+import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 import { fetcher } from './api/fetchers';
-import useStore from './store';
+import useStore, { dispatch } from './store';
 import { storage } from './utils-client';
 
 export const useScrollHitTheBottom = (callback: () => void) => {
@@ -144,7 +145,7 @@ export const useAuthState = () => {
 
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
-  const { data: userInfoFetched } = useSWR<UserInfo>(
+  const { data: userInfoFetched, error } = useSWR<UserInfo>(
     '/places/users/me',
     userInfo || !storage.get('isLogin') ? null : fetcher,
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
@@ -155,6 +156,13 @@ export const useAuthState = () => {
       dispatchUserInfo(userInfoFetched);
     }
   }, [dispatchUserInfo, userInfo, userInfoFetched]);
+
+  useEffect(() => {
+    if (error && axios.isAxiosError(error) && error.response && error.response.status === 401) {
+      storage.remove('isLogin');
+      dispatch('userInfo', null);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (!pathname.startsWith('/places')) {
