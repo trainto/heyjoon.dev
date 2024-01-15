@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Places',
     short_name: 'Places',
     description: 'Hot places shared by ordinary people',
-    theme_color: '#db2777',
+    theme_color: '#282c34',
     background_color: '#282c34',
     start_url: '/places',
     scope: '/places',
