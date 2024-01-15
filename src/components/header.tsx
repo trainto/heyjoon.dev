@@ -47,7 +47,7 @@ const Header = () => {
             href={isStandalone ? '/places' : '/'}
             className={`text-2xl sm:text-4xl font-bold ${
               pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
-            }`}
+            } ${isStandalone ? 'italic' : ''}`}
           >
             {isStandalone ? 'Places' : 'Joon.log()'}
           </Link>
