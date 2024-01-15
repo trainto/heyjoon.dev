@@ -38,7 +38,13 @@ export default function Feed() {
     <>
       <Uploader />
 
-      <div>{data?.map((arr) => arr.map((p) => <Place key={p.id} place={p} />))}</div>
+      <div>
+        {data?.map((arr, i) =>
+          arr.map((p, j) => (
+            <Place key={p.id} place={p} priority={i === 0 && (j === 0 || j === 1)} />
+          )),
+        )}
+      </div>
 
       {data && !noMoreFeed.current && (
         <div className="flex justify-center mt-3">

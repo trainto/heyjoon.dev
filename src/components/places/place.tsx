@@ -16,7 +16,7 @@ import Comments from './comments';
 import Likes from './likes';
 import UserDetail from './user-detail';
 
-const Place = ({ place }: { place: Place }) => {
+const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   const [liked, setLiked] = useState(() => !!place.likedByMe);
   const [likes, setLikes] = useState(() => place.likes);
 
@@ -98,7 +98,7 @@ const Place = ({ place }: { place: Place }) => {
             slidesPerView={1}
             pagination={{ clickable: true, el: `.swiper-pagination-container-${place.id}` }}
           >
-            {images.map((src) => (
+            {images.map((src, i) => (
               <SwiperSlide key={src.split('.')[0]}>
                 <Image
                   className="rounded-md"
@@ -106,7 +106,7 @@ const Place = ({ place }: { place: Place }) => {
                   alt="food"
                   fill={true}
                   style={{ objectFit: 'contain' }}
-                  loading="lazy"
+                  priority={i === 0 && priority}
                 />
                 <div className="swiper-lazy-preloader"></div>
               </SwiperSlide>
