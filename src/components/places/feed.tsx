@@ -6,6 +6,7 @@ import { useCallback, useRef } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import Loading from './loading';
 import Place from './place';
+import PlaceLoading from './place-loading';
 import Uploader from './uploader';
 
 export const PLACE_COUNT_PER_FETCH = 10;
@@ -15,7 +16,7 @@ export default function Feed() {
 
   const params = useSearchParams();
 
-  const { data, setSize, mutate } = useSWRInfinite<Place[]>((page, prevData) => {
+  const { data, setSize, mutate, isLoading } = useSWRInfinite<Place[]>((page, prevData) => {
     if (prevData && prevData.length < PLACE_COUNT_PER_FETCH) {
       noMoreFeed.current = true;
       return null;
@@ -33,6 +34,10 @@ export default function Feed() {
   );
 
   useEventBus('fetchPlaces', mutate);
+
+  if (isLoading && data == null) {
+    return <PlaceLoading />;
+  }
 
   return (
     <>
