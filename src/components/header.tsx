@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuthState } from '@/lib/hooks';
+import { useAuthState, useStandalone } from '@/lib/hooks';
 import useStore, { dispatch } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -17,6 +17,8 @@ const Header = () => {
   const authIconKind = useAuthState();
 
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
+
+  const isStandalone = useStandalone();
 
   const onAvatarClick = useCallback(() => {
     dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });
@@ -38,16 +40,16 @@ const Header = () => {
         </div>
 
         <div className={`flex items-end space-x-3 sm:space-x-5`}>
-          <div className={`${authIconKind === 'google' && 'hidden'} sm:block`}>
+          <div className={`${(authIconKind === 'google' || isStandalone) && 'hidden'} sm:block`}>
             <Nav />
           </div>
           <Link
-            href="/"
+            href={isStandalone ? '/places' : '/'}
             className={`text-2xl sm:text-4xl font-bold ${
               pathname === '/' ? 'text-gray-300-animation' : 'text-brand1-animation'
             }`}
           >
-            Joon.log()
+            {isStandalone ? 'Places' : 'Joon.log()'}
           </Link>
         </div>
       </div>

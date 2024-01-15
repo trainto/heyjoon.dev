@@ -185,3 +185,18 @@ export const useAuthState = () => {
 
   return authIconKind;
 };
+
+export const useStandalone = () => {
+  const [isStandalone, setIsStandAlone] = useState(false);
+
+  useEffect(() => {
+    const mqStandAlone = '(display-mode: standalone)';
+    if (window.matchMedia(mqStandAlone).matches) {
+      setIsStandAlone(true);
+    } else {
+      setIsStandAlone(false);
+    }
+  }, []);
+
+  return isStandalone;
+};
