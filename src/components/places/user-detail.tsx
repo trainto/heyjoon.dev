@@ -222,8 +222,8 @@ export default function UserDetail({
       <div className="flex justify-end mt-3 mb-1">
         {isSignUp ? (
           <Button
-            color="zinc"
-            size="sm"
+            color="indigo"
+            size="base"
             onClick={onSignUp}
             disabled={nickname.trim() === '' || nickname.trim().length < 3}
           >
