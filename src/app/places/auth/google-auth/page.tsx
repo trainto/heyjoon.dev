@@ -2,20 +2,14 @@
 
 import Loading from '@/components/places/loading';
 import { signin } from '@/lib/api';
-import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef } from 'react';
 
 export default function GoogleAuth() {
   const doneRef = useRef(false);
-  const router = useRouter();
 
-  const signIn = useCallback(
-    async (token: string) => {
-      router.replace('/places');
-      await signin(token);
-    },
-    [router],
-  );
+  const signIn = useCallback(async (token: string) => {
+    await signin(token);
+  }, []);
 
   useEffect(() => {
     const tokenParam = window.location.hash.split('&').find((v) => {
