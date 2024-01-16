@@ -1,51 +1,19 @@
-import { sendRequest } from '@/lib/api/fetchers';
-import { dispatchEvent } from '@/lib/event-bus';
-import useStore, { dispatch } from '@/lib/store';
-import { storage } from '@/lib/utils-client';
+import { signin } from '@/lib/api';
 import Image from 'next/image';
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import google from '../../../public/continue-google.png';
-import UserDetail from './user-detail';
 
 const Signin = ({ width, from }: { width: number; from: string }) => {
-  const { dispatch: dispatchUserInfo } = useStore('userInfo');
-
   const doneRef = useRef(false);
 
-  const signin = useCallback(
-    async (token: string) => {
-      doneRef.current = true;
-      setTimeout(() => {
-        doneRef.current = false;
-      }, 3000);
+  const signIn = useCallback(async (token: string) => {
+    doneRef.current = true;
+    setTimeout(() => {
+      doneRef.current = false;
+    }, 3000);
 
-      const res = await sendRequest({
-        method: 'post',
-        url: '/places/auth/signin-with-google',
-        data: { token },
-      });
-
-      if (res.status === 200) {
-        if (res.data) {
-          dispatchUserInfo(res.data);
-          storage.set('isLogin', true);
-          dispatchEvent('fetchPlaces');
-        }
-      } else if (res.status === 202) {
-        if (res.data) {
-          dispatch('layer', {
-            node: <UserDetail userInfo={res.data} isSignUp={true} />,
-            containerClassName: 'w-full sm:w-96',
-          });
-        } else {
-          dispatch('modal', {
-            msg: 'Your sign-up is being reviewed. Please wait for the approval. Thank you!',
-          });
-        }
-      }
-    },
-    [dispatchUserInfo],
-  );
+    await signin(token);
+  }, []);
 
   useEffect(() => {
     const handler = (ev: MessageEvent<{ googleToken: string; from: string }>) => {
@@ -58,14 +26,14 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
       }
 
       if (ev.data.googleToken) {
-        signin(ev.data.googleToken);
+        signIn(ev.data.googleToken);
       }
     };
 
     window.addEventListener('message', handler);
 
     return () => window.removeEventListener('message', handler);
-  }, [from, signin]);
+  }, [from, signIn]);
 
   const googleAuthUrl = useMemo(
     () =>

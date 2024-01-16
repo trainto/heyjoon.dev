@@ -1,8 +1,8 @@
+import Layout from '@/components/places/layout';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import React from 'react';
 
-import Layout from '@/components/places/layout';
 import './places.css';
 
 export const metadata: Metadata = {
