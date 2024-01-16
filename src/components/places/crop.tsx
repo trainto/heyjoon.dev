@@ -35,6 +35,8 @@ const Crop = ({
   useEffect(() => {
     if (crops && crops[index]) {
       setCrop(crops[index]);
+    } else {
+      setCrop(undefined);
     }
   }, [crops, index]);
 
@@ -67,6 +69,7 @@ const Crop = ({
               scaleY: imgRef.current ? imgRef.current.naturalHeight / imgRef.current.height : 1,
             })
           : crop;
+
         return ret;
       });
     },
@@ -93,11 +96,17 @@ const Crop = ({
     };
 
     const { width } = e.currentTarget;
-    if (width === 0) {
-      setTimeout(initCrop, 100);
-    } else {
-      initCrop();
-    }
+    const checkLoadedAndTryCrop = () => {
+      setTimeout(() => {
+        if (width === 0) {
+          checkLoadedAndTryCrop();
+        } else {
+          initCrop();
+        }
+      }, 100);
+    };
+
+    checkLoadedAndTryCrop();
   };
 
   return (

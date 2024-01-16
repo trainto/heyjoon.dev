@@ -15,6 +15,7 @@ const Uploader = () => {
   const [isUploading, setIsUploading] = useState(false);
 
   const { value: userInfo } = useStore('userInfo');
+  const { value: layer, dispatch: dispatchLayer } = useStore('layer');
 
   const taRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,6 +39,12 @@ const Uploader = () => {
     }
   }, [desc]);
 
+  useEffect(() => {
+    if (layer == null) {
+      dispatch('crops', []);
+    }
+  }, [layer]);
+
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const files: File[] = [];
@@ -48,7 +55,7 @@ const Uploader = () => {
         }
       }
 
-      dispatch('layer', {
+      dispatchLayer({
         node: <PhotoEditor files={files} onComplete={setBlobs} />,
         containerClassName: 'w-full sm:w-1/3',
       });
