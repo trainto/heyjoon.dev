@@ -20,7 +20,8 @@ export default function Modal() {
       <div className="text-lg pb-2 px-1 font-bold text-brand1">Places</div>
 
       <div
-        className="border-t border-gray-500 pt-2 pb-3 px-2"
+        // className="border-t border-gray-500 pt-2 pb-3 px-2"
+        className="pt-2 pb-3 px-2 text-gray-300"
         dangerouslySetInnerHTML={{ __html: info?.msg ?? '' }}
       ></div>
 

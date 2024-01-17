@@ -35,6 +35,10 @@ export default function PhotoEditor({
   }, [files]);
 
   useEffect(() => {
+    if (urls.length !== files.length) {
+      return;
+    }
+
     let check = true;
     for (let i = 0; i < files.length; i += 1) {
       if (!urls[i]) {

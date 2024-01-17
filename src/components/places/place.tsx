@@ -56,6 +56,11 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   };
 
   const handleCommentsClick = () => {
+    if (userInfo == null) {
+      dispatch('modal', { msg: 'Please sign in to cotinue!' });
+      return;
+    }
+
     dispatch('layer', {
       node: <Comments place={place} />,
       containerClassName: 'w-full sm:w-1/3',
