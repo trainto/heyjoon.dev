@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
-import Header from '../components/header';
 import Link from 'next/link';
 import Script from 'next/script';
+import Header from '../components/header';
 
 import './globals.css';
 
@@ -14,7 +14,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Hakoon Sim - Joon.log()',
+  title: 'Hakoon Sim (심학준) - Joon.log()',
   description: 'A personal blog by Hakjoon Sim (심학준)',
 };
 
