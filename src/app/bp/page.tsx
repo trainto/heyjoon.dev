@@ -1,6 +1,8 @@
 'use client';
 
 import Button from '@/components/button';
+import { sendRequest } from '@/lib/api/fetchers';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function BP() {
@@ -9,6 +11,8 @@ export default function BP() {
 
   const systolicRef = useRef<HTMLInputElement>(null);
   const diastolicRef = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     systolicRef.current && systolicRef.current.focus();
@@ -20,7 +24,12 @@ export default function BP() {
     }
   }, [systolic]);
 
-  const onConfirm = useCallback(() => {}, []);
+  const onConfirm = useCallback(async () => {
+    const res = await sendRequest({ method: 'post', url: '/bp', data: { systolic, diastolic } });
+    if (res.status === 200) {
+      router.push('/bp/history');
+    }
+  }, [diastolic, router, systolic]);
 
   return (
     <>
@@ -65,7 +74,7 @@ export default function BP() {
       </div>
 
       <div className="text-end pt-10 pr-10 mb-40">
-        <Button color="indigo" size="lg" onClick={onConfirm}>
+        <Button color="indigo" size="lg" onClick={onConfirm} disabled={!systolic || !diastolic}>
           Confirm
         </Button>
       </div>
