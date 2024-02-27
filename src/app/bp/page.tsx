@@ -1,11 +1,24 @@
 'use client';
 
 import Button from '@/components/button';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function BP() {
-  const [systolic, setSystolic] = useState<number>();
-  const [diastolic, setDiastolic] = useState<number>();
+  const [systolic, setSystolic] = useState<number | string>('');
+  const [diastolic, setDiastolic] = useState<number | string>('');
+
+  const systolicRef = useRef<HTMLInputElement>(null);
+  const diastolicRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    systolicRef.current && systolicRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    if (Number.isInteger(systolic) && (systolic as number) > 100) {
+      diastolicRef.current && diastolicRef.current.focus();
+    }
+  }, [systolic]);
 
   const onConfirm = useCallback(() => {}, []);
 
@@ -15,9 +28,17 @@ export default function BP() {
         <div className="flex items-end space-x-2">
           <input
             type="number"
-            className="text-center bg-bg-main border-b w-20 text-3xl p-1 outline-none"
+            className="text-center bg-bg-main border-b w-20 text-3xl p-1 outline-none placeholder-gray-700"
+            placeholder="120"
+            ref={systolicRef}
             value={systolic}
-            onChange={(e) => setSystolic(parseInt(e.target.value))}
+            onChange={(e) => {
+              if (parseInt(e.target.value)) {
+                setSystolic(parseInt(e.target.value));
+              } else {
+                setSystolic('');
+              }
+            }}
           />
         </div>
 
@@ -26,9 +47,17 @@ export default function BP() {
         <div className="flex justify-end items-end space-x-2">
           <input
             type="number"
-            className="text-center bg-bg-main border-b w-20 text-3xl p-1 outline-none"
+            className="text-center bg-bg-main border-b w-20 text-3xl p-1 outline-none placeholder-gray-700"
+            placeholder="80"
+            ref={diastolicRef}
             value={diastolic}
-            onChange={(e) => setDiastolic(parseInt(e.target.value))}
+            onChange={(e) => {
+              if (parseInt(e.target.value)) {
+                setDiastolic(parseInt(e.target.value));
+              } else {
+                setDiastolic('');
+              }
+            }}
           />
         </div>
 
