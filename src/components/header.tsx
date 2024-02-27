@@ -3,8 +3,8 @@
 import { useAuthState, useStandalone } from '@/lib/hooks';
 import useStore, { dispatch } from '@/lib/store';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useCallback, useMemo, useRef } from 'react';
 import Avatar from './places/avatar';
 import Signin from './places/signin';
 import UserDetail from './places/user-detail';
@@ -12,8 +12,8 @@ import UserDetail from './places/user-detail';
 const Header = () => {
   const { value: userInfo } = useStore('userInfo');
 
+  const router = useRouter();
   const pathname = usePathname();
-
   const authIconKind = useAuthState();
 
   const sticky = useMemo(() => pathname === '/' || pathname.startsWith('/places'), [pathname]);
@@ -24,8 +24,31 @@ const Header = () => {
     dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
+  const bpTimer = useRef<NodeJS.Timeout>();
+  const bpEventCount = useRef(0);
+  const handleMouseDown = () => {
+    if (bpTimer.current) {
+      clearTimeout(bpTimer.current);
+    }
+
+    if (bpEventCount.current >= 4) {
+      bpEventCount.current = 0;
+      router.push('/bp');
+      return;
+    }
+
+    bpEventCount.current = bpEventCount.current + 1;
+    bpTimer.current = setTimeout(() => {
+      bpEventCount.current = 0;
+      bpTimer.current = undefined;
+    }, 500);
+  };
+
   return (
-    <header className={`pt-3 pb-2 px-3 z-40 ${sticky ? 'sticky top-0' : ''}`}>
+    <header
+      className={`pt-3 pb-2 px-3 z-40 ${sticky ? 'sticky top-0' : ''}`}
+      onMouseDown={handleMouseDown}
+    >
       <div
         className={`flex ${
           pathname.startsWith('/places') ? 'justify-between' : 'justify-end'
