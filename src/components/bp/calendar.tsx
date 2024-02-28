@@ -146,7 +146,7 @@ const Cell = memo(({ date }: { date: Date }) => {
     <div className={`border-t border-e border-gray-600 ${date == null && 'bg-gray-800'}`}>
       {date ? (
         <div>
-          <div className="text-center text-sm">
+          <div className="text-center text-xs">
             <div className="text-gray-500">{getDayString(date)}</div>
             <div className="text-gray-400">{getDate(date)}</div>
           </div>
