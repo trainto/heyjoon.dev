@@ -5,12 +5,14 @@ const Button = ({
   color = 'zinc',
   size = 'base',
   disabled = false,
+  throttle = 1000,
   onClick,
 }: {
   children: ReactNode;
   color?: 'zinc' | 'indigo';
   size?: 'xs' | 'sm' | 'base' | 'lg';
   disabled?: boolean;
+  throttle?: number;
   onClick: () => void;
 }) => {
   const throttleRef = useRef<NodeJS.Timeout | null>(null);
@@ -22,7 +24,7 @@ const Button = ({
 
     throttleRef.current = setTimeout(() => {
       throttleRef.current = null;
-    }, 1000);
+    }, throttle);
 
     onClick();
   };
