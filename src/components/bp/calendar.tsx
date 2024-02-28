@@ -89,7 +89,7 @@ export default function Calendar() {
 
   return (
     <>
-      <div className="flex items-center space-x-1 px-3 mb-3">
+      <div className="flex items-end space-x-1 px-3 mb-3">
         <div>
           <Button size="xs" throttle={300} onClick={() => setStart(subMonths(start, 1))}>
             {'<'}
@@ -100,7 +100,7 @@ export default function Calendar() {
             {'>'}
           </Button>
         </div>
-        <div className="ps-3">
+        <div className="grow text-right text-lg">
           {getMonthString(start)} {getYear(start)}
         </div>
       </div>
