@@ -1,5 +1,6 @@
 'use client';
 
+import { fetcher } from '@/lib/api/fetchers';
 import {
   addDays,
   addMonths,
@@ -9,11 +10,13 @@ import {
   getMonth,
   getYear,
   isBefore,
+  isSameDay,
   isSameMonth,
   startOfMonth,
   subMonths,
 } from 'date-fns';
 import { memo, useEffect, useMemo, useState } from 'react';
+import useSWR from 'swr';
 import Button from '../button';
 
 export default function Calendar() {
@@ -22,6 +25,13 @@ export default function Calendar() {
   const [start, setStart] = useState(() => startOfMonth(today));
   const [end, setEnd] = useState(() => endOfMonth(today));
   const [daysArr, setDaysArr] = useState<Date[][]>([]);
+
+  const { data } = useSWR<BP[]>(() => {
+    if (isBefore(end, start)) {
+      return null;
+    }
+    return `/bp?start=${start.getTime()}&end=${end.getTime()}`;
+  }, fetcher);
 
   useEffect(() => {
     setEnd(endOfMonth(start));
@@ -108,7 +118,11 @@ export default function Calendar() {
         {daysArr.map((week, i) => (
           <div key={i} className="grid grid-cols-7">
             {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-              <Cell key={week[i]?.getTime() ?? i} date={week[i]} />
+              <Cell
+                key={week[i]?.getTime() ?? i}
+                date={week[i]}
+                data={data?.filter((bp) => isSameDay(new Date(bp.createdAt), week[i])) ?? []}
+              />
             ))}
           </div>
         ))}
@@ -117,7 +131,7 @@ export default function Calendar() {
   );
 }
 
-const Cell = memo(({ date }: { date: Date }) => {
+const Cell = memo(({ date, data }: { date: Date; data: BP[] }) => {
   const getDayString = useMemo(
     () => (date: Date) => {
       switch (getDay(date)) {
@@ -143,17 +157,33 @@ const Cell = memo(({ date }: { date: Date }) => {
   );
 
   return (
-    <div className={`border-t border-e border-gray-600 ${date == null && 'bg-gray-800'}`}>
+    <div
+      className={`bp-cell border-t border-e border-gray-600 ${date == null && 'bg-gray-800'} p-1`}
+    >
       {date ? (
-        <div>
-          <div className="text-center text-xs">
+        <div className="text-xs text-center">
+          <div>
             <div className="text-gray-500">{getDayString(date)}</div>
             <div className="text-gray-400">{getDate(date)}</div>
+          </div>
+
+          <div className="mt-1">
+            {data.map((bp) => (
+              <div key={bp.id}>
+                {bp.systolic}/{bp.diastolic}
+              </div>
+            ))}
           </div>
         </div>
       ) : (
         <div></div>
       )}
+
+      <style jsx>{`
+        .bp-cell {
+          height: 6.5rem;
+        }
+      `}</style>
     </div>
   );
 });

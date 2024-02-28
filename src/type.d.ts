@@ -43,3 +43,10 @@ type CropInfo = {
   scaleX: number;
   scaleY: number;
 };
+
+type BP = {
+  id: number;
+  systolic: number;
+  diastolic: number;
+  createdAt: string;
+};
