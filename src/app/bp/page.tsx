@@ -2,6 +2,7 @@
 
 import Button from '@/components/button';
 import { sendRequest } from '@/lib/api/fetchers';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -73,10 +74,14 @@ export default function BP() {
         <div className="text-gray-600 text-sm">mmHg</div>
       </div>
 
-      <div className="text-end pt-10 pr-10 mb-40">
+      <div className="text-end pt-10 pr-10 mb-10">
         <Button color="indigo" size="lg" onClick={onConfirm} disabled={!systolic || !diastolic}>
           Confirm
         </Button>
+      </div>
+
+      <div className="text-center mb-40">
+        <Link href="/bp/history">Go to hisotry</Link>
       </div>
     </>
   );
