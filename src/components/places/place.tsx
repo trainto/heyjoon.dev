@@ -77,13 +77,14 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   return (
     <div className="place border border-gray-700 py-2 px-1 rounded">
       <div className="flex justify-between items-center px-1">
-        <div>
+        <div className="flex space-x-1 items-center">
           <Avatar
             src={place.avatar}
             size={24}
             nickname={place.nickname}
             onClick={onAvatarClicked}
           />
+          <div className="text-sm text-gray-300">{place.nickname}</div>
         </div>
         <div className="flex items-center space-x-1">
           <div className="text-xs text-gray-500">{createdAt}</div>
