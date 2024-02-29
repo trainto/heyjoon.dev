@@ -1,10 +1,12 @@
 'use client';
 
 import { fetcher } from '@/lib/api/fetchers';
+import { dispatch } from '@/lib/store';
 import {
   addDays,
   addMonths,
   endOfMonth,
+  format,
   getDate,
   getDay,
   getMonth,
@@ -156,9 +158,34 @@ const Cell = memo(({ date, data }: { date: Date; data: BP[] }) => {
     [],
   );
 
+  const handleClick = () => {
+    if (data.length === 0) {
+      return;
+    }
+
+    dispatch('layer', {
+      node: (
+        <div className="mb-3">
+          {data.map((d) => (
+            <div key={d.id} className="flex space-x-3 justify-center">
+              <div className="text-gray-400">{format(d.createdAt, 'HH:mm')}</div>
+              <div>
+                {d.systolic}/{d.diastolic}
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+      containerClassName: 'w-60',
+    });
+  };
+
   return (
     <div
-      className={`bp-cell border-t border-e border-gray-600 ${date == null && 'bg-gray-800'} p-1`}
+      className={`bp-cell border-t border-e border-gray-600 p-1 ${date == null && 'bg-gray-800'} ${
+        data.length > 0 && 'cursor-pointer'
+      }`}
+      onClick={handleClick}
     >
       {date ? (
         <div className="text-xs text-center">
