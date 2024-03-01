@@ -76,6 +76,12 @@ const Header = () => {
           </Link>
         </div>
       </div>
+
+      <style jsx>{`
+        header {
+          -webkit-user-select: none;
+        }
+      `}</style>
     </header>
   );
 };
