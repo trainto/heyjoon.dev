@@ -207,7 +207,7 @@ const Cell = memo(({ date, data, today }: { date: Date; data: BP[]; today?: bool
         <div></div>
       )}
 
-      {today && <div className="absolute right-0 top-0 pr-1 text-green-500">&#7;</div>}
+      {today && <div className="absolute right-0 top-0 pr-1 text-green-500">&bull;</div>}
 
       <style jsx>{`
         .bp-cell {
