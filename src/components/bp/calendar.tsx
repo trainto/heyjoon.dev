@@ -124,6 +124,7 @@ export default function Calendar() {
                 key={week[i]?.getTime() ?? i}
                 date={week[i]}
                 data={data?.filter((bp) => isSameDay(new Date(bp.createdAt), week[i])) ?? []}
+                today={isSameDay(today, week[i])}
               />
             ))}
           </div>
@@ -133,7 +134,7 @@ export default function Calendar() {
   );
 }
 
-const Cell = memo(({ date, data }: { date: Date; data: BP[] }) => {
+const Cell = memo(({ date, data, today }: { date: Date; data: BP[]; today?: boolean }) => {
   const getDayString = useMemo(
     () => (date: Date) => {
       switch (getDay(date)) {
@@ -182,9 +183,9 @@ const Cell = memo(({ date, data }: { date: Date; data: BP[] }) => {
 
   return (
     <div
-      className={`bp-cell border-t border-e border-gray-600 p-1 ${date == null && 'bg-gray-800'} ${
-        data.length > 0 && 'cursor-pointer'
-      }`}
+      className={`relative bp-cell border-t border-e border-gray-600 p-1 ${
+        date == null && 'bg-gray-800'
+      } ${data.length > 0 && 'cursor-pointer'}`}
       onClick={handleClick}
     >
       {date ? (
@@ -205,6 +206,8 @@ const Cell = memo(({ date, data }: { date: Date; data: BP[] }) => {
       ) : (
         <div></div>
       )}
+
+      {today && <div className="absolute right-0 top-0 pr-1 text-green-500">&#7;</div>}
 
       <style jsx>{`
         .bp-cell {
