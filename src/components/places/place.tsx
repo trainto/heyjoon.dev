@@ -97,7 +97,10 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
         </div>
       </div>
 
-      <div className="relative bg-black w-full pt-100 mt-2 rounded-md">
+      <div
+        className="relative bg-black w-full pt-100 mt-2 rounded-md cursor-pointer"
+        onDoubleClick={handleLike}
+      >
         <div className="place-images absolute top-0 right-0 bottom-0 left-0 grid content-center">
           <Swiper
             modules={[Pagination]}
