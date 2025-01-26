@@ -7,7 +7,7 @@ import Side from './side';
 export default function Main() {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
+      navigator.serviceWorker.register('/sw.js', { scope: '/places' });
     }
   }, []);
 
