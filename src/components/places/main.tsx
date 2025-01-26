@@ -1,10 +1,16 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import Feed from './feed';
 import Side from './side';
 
 export default function Main() {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  }, []);
+
   return (
     <div className="flex flex-col sm:flex-row justify-center">
       <div className="basis-full sm:basis-3/4 px-1">
