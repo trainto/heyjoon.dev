@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next';
+// import { MetadataRoute } from 'next';
 
-export default function manifest(): MetadataRoute.Manifest {
+export default function manifest() {
   return {
     name: 'Places',
     short_name: 'Places',
@@ -14,6 +14,10 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       { src: '/icons/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
       { src: '/icons/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    screenshots: [
+      { src: '/screenshot.png', sizes: '420x752', type: 'image/png' },
+      { src: '/screenshot-wide.png', sizes: '639x350', type: 'image/png', form_factor: 'wide' },
     ],
   };
 }
