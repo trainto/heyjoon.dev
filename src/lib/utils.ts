@@ -1,7 +1,7 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import { join } from 'path';
 import { micromark } from 'micromark';
+import { join } from 'path';
 
 export const Posts = (() => {
   const postsDir = join(process.cwd(), 'posts');
@@ -25,9 +25,7 @@ export const Posts = (() => {
     .sort((a, b) => {
       const aDate = a.date.replaceAll(/\D/g, '');
       const bDate = b.date.replaceAll(/\D/g, '');
-      if (aDate > bDate) {
-        return -1;
-      }
+      if (aDate > bDate) return -1;
 
       return 0;
     });

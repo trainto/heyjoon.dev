@@ -19,12 +19,16 @@ export default function BP() {
   const router = useRouter();
 
   useEffect(() => {
-    systolicRef.current && systolicRef.current.focus();
+    if (systolicRef.current) {
+      systolicRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
     if (Number.isInteger(systolic) && (systolic as number) > 100) {
-      diastolicRef.current && diastolicRef.current.focus();
+      if (diastolicRef.current) {
+        diastolicRef.current.focus();
+      }
     }
   }, [systolic]);
 

@@ -100,19 +100,21 @@ export const useResize = (callback: () => void, instant?: boolean) => {
     callbackRef.current = callback;
   }, [callback]);
 
-  const handleRisize = useCallback(() => {
+  const handleResize = useCallback(() => {
     callbackRef.current();
   }, []);
 
   useEffect(() => {
-    instant && handleRisize();
-  }, [handleRisize, instant]);
+    if (instant) {
+      handleResize();
+    }
+  }, [handleResize, instant]);
 
   useEffect(() => {
-    window.addEventListener('resize', handleRisize);
+    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleRisize);
-  }, [handleRisize]);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
 };
 
 export const useClickOutside = (callback: (e: MouseEvent) => void) => {

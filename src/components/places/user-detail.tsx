@@ -58,7 +58,7 @@ export default function UserDetail({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    let info = userInfo ? userInfo : userInfoFetched ? userInfoFetched : myInfo;
+    const info = userInfo ? userInfo : userInfoFetched ? userInfoFetched : myInfo;
 
     setInfo(info ?? undefined);
     setNickname(info?.nickname ?? '');

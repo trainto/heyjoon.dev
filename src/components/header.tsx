@@ -24,7 +24,7 @@ const Header = () => {
     dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
-  const bpTimer = useRef<NodeJS.Timeout>();
+  const bpTimer = useRef<NodeJS.Timeout>(undefined);
   const bpEventCount = useRef(0);
   const handleMouseDown = () => {
     if (bpTimer.current) {

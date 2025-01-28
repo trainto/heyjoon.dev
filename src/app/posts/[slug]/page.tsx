@@ -1,19 +1,19 @@
 import { Posts, markdownToHtml } from '@/lib/utils';
-import Prism from 'prismjs';
 import { format } from 'date-fns';
 import { Source_Code_Pro } from 'next/font/google';
+import Prism from 'prismjs';
 
 import './article.css';
 
-import './prism-tomorrow.css';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-kotlin';
-import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-nginx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-yaml';
+import './prism-tomorrow.css';
 
 const sourceCodePro = Source_Code_Pro({
   weight: ['400'],
@@ -22,8 +22,8 @@ const sourceCodePro = Source_Code_Pro({
   display: 'swap',
 });
 
-export default function Post({ params }: { params: { slug: string } }) {
-  const post = Posts.getPost(params.slug);
+export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
+  const post = Posts.getPost((await params).slug);
 
   if (!post) {
     return <div>Oops...</div>;
