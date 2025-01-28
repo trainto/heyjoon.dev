@@ -1,6 +1,7 @@
 // import { MetadataRoute } from 'next';
 
 export const dynamic = 'force-static';
+export const revalidate = 0;
 
 export default function manifest() {
   return {
