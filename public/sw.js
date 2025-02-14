@@ -1,18 +1,42 @@
 const CACHE_NAME = 'heyjoon.dev/places-cache';
 
+const putInCache = async (request, response) => {
+  const cache = await caches.open(CACHE_NAME);
+  await cache.put(request, response);
+};
+
+const cacheFirst = async ({ request }) => {
+  const cached = await caches.match(request);
+  if (cached) {
+    if (cached.headers.get('Content-Type') !== 'application/json') {
+      return cached;
+    }
+  }
+
+  try {
+    const responseFromNetwork = await fetch(request);
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
+  } catch {
+    if (cached) {
+      return cached;
+    }
+
+    return new Response('Network error happened', {
+      status: 408,
+      headers: { 'Content-Type': 'text/plain' },
+    });
+  }
+};
+
 self.addEventListener('fetch', (event) => {
+  if (event.request.url.startsWith('chrome-extension://') || event.request.method === 'POST') {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return fetch(event.request)
-        .then((res) => {
-          if (!res || res.status !== 200 || res.type !== 'basic') return res;
-
-          const responseToCache = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
-
-          return res;
-        })
-        .catch(() => cached);
+    cacheFirst({
+      request: event.request,
     }),
   );
 });
