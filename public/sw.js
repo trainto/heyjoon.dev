@@ -2,17 +2,17 @@ const CACHE_NAME = 'heyjoon.dev/places-cache';
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) return response;
+    caches.match(event.request).then((cached) => {
+      return fetch(event.request)
+        .then((res) => {
+          if (!res || res.status !== 200 || res.type !== 'basic') return res;
 
-      return fetch(event.request).then((response) => {
-        if (!response || response.status !== 200 || response.type !== 'basic') return response;
+          const responseToCache = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
 
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
-
-        return response;
-      });
+          return res;
+        })
+        .catch(() => cached);
     }),
   );
 });
