@@ -40,3 +40,7 @@ self.addEventListener('fetch', (event) => {
     }),
   );
 });
+
+self.addEventListener('install', () => {
+  self.skipWaiting();
+});
