@@ -1,9 +1,6 @@
-// import { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next';
 
-export const dynamic = 'force-static';
-export const revalidate = 0;
-
-export default function manifest() {
+export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Places',
     short_name: 'Places',
@@ -24,3 +21,5 @@ export default function manifest() {
     ],
   };
 }
+
+export const dynamic = 'force-static';
