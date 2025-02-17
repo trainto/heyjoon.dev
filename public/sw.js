@@ -6,6 +6,7 @@ const putInCache = async (request, response) => {
 };
 
 const cacheFirst = async ({ request }) => {
+  console.log(request.url);
   const cached = await caches.match(request);
   if (cached) {
     if (cached.headers.get('Content-Type') !== 'application/json' && cached.status === 200) {
@@ -42,6 +43,5 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('install', () => {
-  console.log('install')
   self.skipWaiting();
 });
