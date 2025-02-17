@@ -6,12 +6,9 @@ const putInCache = async (request, response) => {
 };
 
 const cacheFirst = async ({ request }) => {
-  console.log(request.url);
   const cached = await caches.match(request);
   if (cached) {
-    if (cached.headers.get('Content-Type') !== 'application/json' && cached.status === 200) {
-      return cached;
-    }
+    return cached;
   }
 
   try {
@@ -31,15 +28,13 @@ const cacheFirst = async ({ request }) => {
 };
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.startsWith('chrome-extension://') || event.request.method === 'POST') {
-    return;
+  if (event.request.url.includes('/_next/static/')) {
+    event.respondWith(
+      cacheFirst({
+        request: event.request,
+      }),
+    );
   }
-
-  event.respondWith(
-    cacheFirst({
-      request: event.request,
-    }),
-  );
 });
 
 self.addEventListener('install', () => {
