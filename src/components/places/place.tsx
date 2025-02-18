@@ -3,7 +3,7 @@ import { CDN_URL } from '@/lib/constants';
 import useStore, { dispatch } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './avatar';
@@ -41,8 +41,12 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
     setLiked(!!userInfo && !!place.likedByMe);
   }, [place, userInfo]);
 
-  const handleLike = async () => {
-    if (userInfo == null) {
+  const handleLike = async (e: MouseEvent) => {
+    if (
+      userInfo == null ||
+      (e.target as HTMLElement).classList.contains('swiper-button-prev') ||
+      (e.target as HTMLElement).classList.contains('swiper-button-next')
+    ) {
       return;
     }
 
