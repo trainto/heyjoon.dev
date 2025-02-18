@@ -4,21 +4,23 @@ import useStore, { dispatch } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './avatar';
-import { Heart } from './svg';
-import Tag from './tag';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
 import Comments from './comments';
 import Likes from './likes';
+import { Heart } from './svg';
+import Tag from './tag';
 import UserDetail from './user-detail';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   const [liked, setLiked] = useState(() => !!place.likedByMe);
   const [likes, setLikes] = useState(() => place.likes);
+  const [mouseOn, setMouseOn] = useState(false);
 
   const { value: userInfo } = useStore('userInfo');
 
@@ -101,11 +103,17 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
         className="relative bg-black w-full pt-100 mt-2 rounded-md cursor-pointer"
         onDoubleClick={handleLike}
       >
-        <div className="place-images absolute top-0 right-0 bottom-0 left-0 grid content-center">
+        <div
+          className="place-images absolute top-0 right-0 bottom-0 left-0 grid content-center"
+          onMouseEnter={() => setMouseOn(true)}
+          onMouseLeave={() => setMouseOn(false)}
+        >
           <Swiper
-            modules={[Pagination]}
+            modules={[Pagination, Navigation]}
             slidesPerView={1}
+            navigation
             pagination={{ clickable: true, el: `.swiper-pagination-container-${place.id}` }}
+            className={`${mouseOn ? 'hover' : ''}`}
           >
             {images.map((src, i) => (
               <SwiperSlide key={src.split('.')[0]}>
@@ -123,6 +131,7 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
           </Swiper>
         </div>
       </div>
+
       <div
         className={`swiper-pagination-container-${place.id} swiper-pagination swiper-pagination-clickable swiper-pagination-horizontal`}
       ></div>

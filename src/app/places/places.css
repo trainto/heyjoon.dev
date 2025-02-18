@@ -27,6 +27,25 @@
   position: static !important;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  visibility: hidden;
+}
+
+@media screen(sm) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply text-brand2 !important;
+  }
+
+  .hover {
+    .swiper-button-prev,
+    .swiper-button-next {
+      visibility: visible;
+    }
+  }
+}
+
 .dark-scroller::-webkit-scrollbar {
   @apply bg-bg-main;
   width: 2px;
