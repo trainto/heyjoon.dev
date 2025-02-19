@@ -1,12 +1,11 @@
 import { dispatch } from '@/lib/store';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { Xicon } from './places/svg';
 
 export default function Layer({
   children,
   containerClassName,
-}: {
-  children: ReactNode;
+}: PropsWithChildren & {
   containerClassName?: string;
 }) {
   return (

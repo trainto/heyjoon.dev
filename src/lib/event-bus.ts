@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-type EventType = 'fetchPlaces';
+type EventType = 'fetchPlaces' | 'bpDeleted';
 
 export const useEventBus = (ev: EventType, callback: () => void) => {
   const callbackRef = useRef(callback);
