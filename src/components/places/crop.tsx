@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { IMAGE_SIZE } from '@/lib/constants';
 import { useResize } from '@/lib/hooks';
 import useStore from '@/lib/store';
@@ -81,32 +79,34 @@ const Crop = ({
       return;
     }
 
-    const initCrop = () => {
-      const { width, height, naturalWidth } = e.currentTarget ?? imgRef.current;
+    const initCrop = (elem: HTMLImageElement) => {
+      const { width, height, naturalWidth } = elem;
 
-      setMinSize((width * (min ? min : IMAGE_SIZE)) / naturalWidth);
+      const minSize = (width * (min ? min : IMAGE_SIZE)) / naturalWidth;
+      setMinSize(minSize);
+
+      const dimension = width > height ? height : width;
 
       setCrop({
-        x: 0,
-        y: 0,
-        width,
-        height,
+        x: width > height ? (width - height) / 2 : 0,
+        y: width > height ? 0 : (height - width) / 2,
+        width: dimension,
+        height: dimension,
         unit: 'px',
       });
     };
 
-    const { width } = e.currentTarget;
-    const checkLoadedAndTryCrop = () => {
+    const checkLoadedAndTryCrop = (elem: HTMLImageElement) => {
       setTimeout(() => {
-        if (width === 0) {
-          checkLoadedAndTryCrop();
+        if (elem.width === 0) {
+          checkLoadedAndTryCrop(elem);
         } else {
-          initCrop();
+          initCrop(elem);
         }
       }, 100);
     };
 
-    checkLoadedAndTryCrop();
+    checkLoadedAndTryCrop(e.currentTarget);
   };
 
   return (

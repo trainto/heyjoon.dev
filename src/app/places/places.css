@@ -46,13 +46,21 @@
   }
 }
 
-.dark-scroller::-webkit-scrollbar {
-  @apply bg-bg-main;
-  width: 2px;
-}
+.dark-scroller {
+  &::-webkit-scrollbar {
+   @apply bg-bg-main;
+   width: 2px;
+  }
 
-.dark-scroller::-webkit-scrollbar-thumb {
-  @apply bg-brand1;
+  &::-webkit-scrollbar-thumb {
+    @apply bg-brand1;
+  }
+
+  &.x-thin {
+    &::-webkit-scrollbar {
+      height: 2px;
+    }
+  }
 }
 
 .modal-container {

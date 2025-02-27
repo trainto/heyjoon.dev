@@ -1,7 +1,9 @@
 import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
 import useStore, { dispatch } from '@/lib/store';
+import Image from 'next/image';
 import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from '../button';
 import Avatar from './avatar';
 import Loading from './loading';
@@ -129,6 +131,7 @@ const Uploader = () => {
           </div>
           {blobs && <div className="text-xs text-gray-300">{blobs.length}/10</div>}
         </div>
+
         {isUploading ? (
           <div className="px-4 pt-1">
             <Loading size={5} />
@@ -146,6 +149,18 @@ const Uploader = () => {
           </Button>
         )}
       </div>
+
+      {blobs && blobs.length > 0 && (
+        <div className="mt-3 ml-12 h-10">
+          <Swiper slidesPerView="auto" className="h-10" spaceBetween={5}>
+            {blobs.map((blob, i) => (
+              <SwiperSlide key={i} style={{ width: 'auto' }}>
+                <Image src={URL.createObjectURL(blob)} alt="food" width={40} height={40} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
 
       <div className="hidden">
         <input type="file" ref={inputRef} accept="image/jpeg" onChange={handleImages} multiple />
