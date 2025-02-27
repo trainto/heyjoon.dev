@@ -155,7 +155,13 @@ const Uploader = () => {
           <Swiper slidesPerView="auto" className="h-10" spaceBetween={5}>
             {blobs.map((blob, i) => (
               <SwiperSlide key={i} style={{ width: 'auto' }}>
-                <Image src={URL.createObjectURL(blob)} alt="food" width={40} height={40} />
+                <Image
+                  src={URL.createObjectURL(blob)}
+                  alt="food"
+                  width={40}
+                  height={40}
+                  className="rounded-md"
+                />
               </SwiperSlide>
             ))}
           </Swiper>
