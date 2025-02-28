@@ -16,8 +16,6 @@ export default function Feed() {
 
   const params = useSearchParams();
 
-  console.log(params.get('tags'));
-
   const { data, setSize, mutate, isLoading } = useSWRInfinite<Place[]>((page, prevData) => {
     if (prevData && prevData.length < PLACE_COUNT_PER_FETCH) {
       noMoreFeed.current = true;

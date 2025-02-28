@@ -84,6 +84,8 @@ export const Heart = memo(
   },
 );
 
+Heart.displayName = 'Heart';
+
 export const Edit = ({ size = 24 }: { size?: number }) => {
   return (
     <svg
