@@ -24,7 +24,7 @@ export default function Feed() {
 
     return `/places?limit=${PLACE_COUNT_PER_FETCH}${
       page !== 0 && prevData ? '&lastId=' + prevData[prevData.length - 1].id : ''
-    }${params.get('tags') ? '&tags=' + params.get('tags') : ''}`;
+    }${params.get('tags') ? '&tags=' + params.get('tags') : ''}${params.get('by') ? '&by=' + params.get('by') : ''}`;
   }, fetcher);
 
   useScrollHitTheBottom(

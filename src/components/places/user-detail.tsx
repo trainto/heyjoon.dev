@@ -3,6 +3,7 @@ import { fetcher, sendRequest } from '@/lib/api/fetchers';
 import useStore, { dispatch } from '@/lib/store';
 import { imgToDataURL } from '@/lib/utils-client';
 import { format } from 'date-fns';
+import Link from 'next/link';
 import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useSWR from 'swr';
 import Button from '../button';
@@ -210,8 +211,16 @@ export default function UserDetail({
       </div>
 
       {!isSignUp && (
-        <div className="mt-3 text-xs flex justify-end text-gray-400">
-          Since: {format(new Date(info.createdAt), 'MMM dd, yyyy')}
+        <div className="mt-3 text-xs flex justify-between text-gray-400">
+          <div>
+            <Link
+              href={{ pathname: '/places', query: { by: info.email } }}
+              onClick={() => dispatch('layer', null)}
+            >
+              All Places by {info.nickname}
+            </Link>
+          </div>
+          <div>Since: {format(new Date(info.createdAt), 'MMM dd, yyyy')}</div>
         </div>
       )}
 
