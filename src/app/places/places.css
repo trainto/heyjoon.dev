@@ -1,3 +1,17 @@
+textarea {
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
 .place + .place {
   margin-top: 1rem;
 }

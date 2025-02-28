@@ -171,16 +171,6 @@ const Uploader = () => {
       <div className="hidden">
         <input type="file" ref={inputRef} accept="image/jpeg" onChange={handleImages} multiple />
       </div>
-
-      <style jsx>{`
-        textarea {
-          resize: none;
-        }
-
-        textarea:focus {
-          outline: none !important;
-        }
-      `}</style>
     </div>
   );
 };
