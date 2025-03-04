@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import Contributions from '@/components/contributions';
 import './terminal.css';
 
 export default function About() {
@@ -114,6 +115,8 @@ export default function About() {
           <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Linux</div>
         </div>
       </div>
+
+      <Contributions />
     </div>
   );
 }

@@ -50,3 +50,15 @@ type BP = {
   diastolic: number;
   createdAt: string;
 };
+
+type GithubPR = {
+  id: number;
+  title: string;
+  html_url: string;
+  repository_url: string;
+  created_at: string;
+  state: 'open' | 'closed';
+  pull_request: {
+    merged_at: string | null;
+  };
+};
