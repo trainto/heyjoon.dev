@@ -148,7 +148,7 @@ export const useAuthState = () => {
   const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
   const { data: userInfoFetched, error } = useSWR<UserInfo>(
-    '/places/users/me',
+    pathname.startsWith('/places') ? '/places/users/me' : null,
     userInfo || !storage.get('isLogin') ? null : fetcher,
     { revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false },
   );
