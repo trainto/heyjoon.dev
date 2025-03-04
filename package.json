@@ -13,14 +13,14 @@
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "micromark": "^4.0.1",
-    "next": "15.1.7",
+    "next": "15.2.1",
     "prismjs": "^1.29.0",
     "query-string": "^8.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-image-crop": "^11.0.1",
     "swiper": "^11.2.1",
-    "swr": "^2.3.0"
+    "swr": "^2.3.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -30,7 +30,7 @@
     "@types/react-dom": "^19.0.3",
     "autoprefixer": "^10.4.16",
     "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "15.2.1",
     "eslint-config-prettier": "^10.0.1",
     "postcss": "^8.4.31",
     "prettier": "^3.4.2",
