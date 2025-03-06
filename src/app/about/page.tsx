@@ -25,7 +25,7 @@ export default function About() {
               SK planet.
             </a>
             <br />
-            I&apos;m living in Seoul, struggling to get over all things that I&apos;ve been through.
+            I&apos;m living in Seoul, passionate about development and learning new technologies.
           </div>
         </div>
         <div className="mx-2 mb-3">
