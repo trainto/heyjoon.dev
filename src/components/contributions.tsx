@@ -7,16 +7,16 @@ import { useCallback } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
 const Contributions = () => {
-  const { data, setSize, isLoading } = useSWRInfinite<{ items: GithubPR[]; total_count: number }>(
-    (page, prevData) => {
-      if (prevData && prevData.items.length < 30) {
-        return null;
-      }
+  const { data, setSize, isLoading } = useSWRInfinite<{
+    items: GithubPR[];
+    total_count: number;
+  }>((page, prevData) => {
+    if (prevData && prevData.items.length < 30) {
+      return null;
+    }
 
-      return '/github/pr?page=' + (page + 1);
-    },
-    fetcher,
-  );
+    return '/github/pr?page=' + (page + 1);
+  }, fetcher);
 
   const loadMore = useCallback(() => {
     if (data && data[data.length - 1].items.length < 30) {
@@ -28,7 +28,7 @@ const Contributions = () => {
 
   useScrollHitTheBottom(loadMore);
 
-  if (isLoading && data == null) {
+  if (isLoading || data == null) {
     return null;
   }
 

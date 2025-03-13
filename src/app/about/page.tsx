@@ -20,6 +20,11 @@ export default function About() {
             <Image src="./me.jpg" className="rounded-full" width={80} height={80} alt="Hakjoon" />
           </div>
           <div>
+            <div>
+              <h2 className="text-lg">
+                Hakjoon Sim<span className="text-sm"> (심학준)</span>
+              </h2>
+            </div>
             I&apos;m a software engineer who works for{' '}
             <a href="https://skplanet.com" target="_blank">
               SK planet.
