@@ -45,7 +45,7 @@ const Side = () => {
       <div className="flex mt-2 rounded-md border border-gray-700 items-center">
         <div className="p-1 pl-2 text-brand2">#</div>
         <input
-          className="bg-bg-main p-1 text-gray-400 text-sm"
+          className="bg-bg-main p-1 text-gray-400 text-sm min-w-0 w-full"
           placeholder="Search by tags"
           value={search}
           onChange={(e) => setSearch(e.target.value)}

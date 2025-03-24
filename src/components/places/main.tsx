@@ -19,7 +19,7 @@ export default function Main() {
         </Suspense>
       </div>
 
-      <div className="sm:block grow">
+      <div className="sm:block basis-1/4">
         <Side />
       </div>
     </div>
