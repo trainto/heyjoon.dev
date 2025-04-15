@@ -1,5 +1,5 @@
 import { signout } from '@/lib/api';
-import { fetcher, sendRequest } from '@/lib/api/fetchers';
+import { sendRequest } from '@/lib/api/fetchers';
 import useStore, { dispatch } from '@/lib/store';
 import { imgToDataURL } from '@/lib/utils-client';
 import { format } from 'date-fns';
@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useSWR from 'swr';
 import Button from '../common/button';
+import Fetcher from '../common/fetcher';
 import Avatar from './avatar';
 import AvatarEditor from './avatar-editor';
 import { Edit } from './svg';
@@ -20,6 +21,8 @@ export default function UserDetail({
   userInfo?: UserInfo;
   isSignUp?: boolean;
 }) {
+  const fetcherKey = useMemo(() => (userEmail ? '/places/users/' + userEmail : null), [userEmail]);
+
   const [info, setInfo] = useState<UserInfo>();
   const [avatarEdit, setAvatarEdit] = useState<string>();
   const [edit, setEdit] = useState(() => (isSignUp ? true : false));
@@ -28,15 +31,7 @@ export default function UserDetail({
 
   const { value: myInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
 
-  const { data: userInfoFetched } = useSWR<UserInfo>(
-    userEmail ? '/places/users/' + userEmail : null,
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+  const { data: userInfoFetched } = useSWR<UserInfo>(fetcherKey);
 
   const isMe = useMemo(() => {
     if (myInfo) {
@@ -115,144 +110,144 @@ export default function UserDetail({
     }
   }, [intro, nickname, userInfo]);
 
-  if (info == null) {
-    return null;
-  }
-
   if (avatarEdit) {
     return <AvatarEditor src={avatarEdit} onComplete={() => setAvatarEdit(undefined)} />;
   }
 
   return (
-    <div>
-      <div className="flex justify-center">
-        <div className="relative">
-          <div className="">
-            <Avatar src={info.avatar} size={92} />
+    <Fetcher swrKey={fetcherKey} revalidation={false}>
+      <div>
+        <div className="flex justify-center">
+          <div className="relative">
+            <div className="">{info && <Avatar src={info.avatar} size={92} />}</div>
+
+            {!isSignUp && isMe && (
+              <>
+                <div
+                  role="button"
+                  className="edit-btn"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Edit size={18} />
+                </div>
+                <div className="hidden">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    accept="image/jpeg, image/png"
+                    onChange={handleAvatarSelected}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="border border-gray-600 mt-5 px-2 py-2 text-sm rounded-md">
+          <div className="flex items-center">
+            <div className="basis-20">Email:</div>
+            <div className="px-1 py-1">{info?.email}</div>
+          </div>
+
+          <div className="flex mt-2 items-center">
+            <div className="basis-20">Nickname:</div>
+            <div className="grow">
+              {edit ? (
+                <input
+                  className="w-full bg-bg-main border border-gray-700 px-1 py-1 focus:border-brand1"
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value.slice(0, 20))}
+                />
+              ) : (
+                <div className="px-1 py-1">{nickname}</div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex mt-2 items-center">
+            <div className="basis-20">Intro:</div>
+            <div className="grow">
+              {edit ? (
+                <input
+                  className="w-full bg-bg-main border border-gray-700 px-1 py-1 focus:border-brand1"
+                  value={intro}
+                  onChange={(e) => setIntro(e.target.value.slice(0, 100))}
+                />
+              ) : (
+                <div className="px-1 py-1">{intro}</div>
+              )}
+            </div>
           </div>
 
           {!isSignUp && isMe && (
-            <>
-              <div role="button" className="edit-btn" onClick={() => fileInputRef.current?.click()}>
-                <Edit size={18} />
-              </div>
-              <div className="hidden">
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  accept="image/jpeg, image/png"
-                  onChange={handleAvatarSelected}
-                />
-              </div>
-            </>
+            <div className="flex justify-end mt-2">
+              {edit ? (
+                <div className="flex space-x-2">
+                  <Button color="zinc" size="xs" onClick={onCancel}>
+                    Cancel
+                  </Button>
+                  <Button
+                    color="indigo"
+                    size="xs"
+                    onClick={onSave}
+                    disabled={nickname.trim() === '' || nickname.trim().length < 3}
+                  >
+                    Save
+                  </Button>
+                </div>
+              ) : (
+                <Button color="indigo" size="xs" onClick={() => setEdit(true)}>
+                  Edit
+                </Button>
+              )}
+            </div>
           )}
         </div>
-      </div>
 
-      <div className="border border-gray-600 mt-5 px-2 py-2 text-sm rounded-md">
-        <div className="flex items-center">
-          <div className="basis-20">Email:</div>
-          <div className="px-1 py-1">{info.email}</div>
-        </div>
-
-        <div className="flex mt-2 items-center">
-          <div className="basis-20">Nickname:</div>
-          <div className="grow">
-            {edit ? (
-              <input
-                className="w-full bg-bg-main border border-gray-700 px-1 py-1 focus:border-brand1"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value.slice(0, 20))}
-              />
-            ) : (
-              <div className="px-1 py-1">{nickname}</div>
-            )}
-          </div>
-        </div>
-
-        <div className="flex mt-2 items-center">
-          <div className="basis-20">Intro:</div>
-          <div className="grow">
-            {edit ? (
-              <input
-                className="w-full bg-bg-main border border-gray-700 px-1 py-1 focus:border-brand1"
-                value={intro}
-                onChange={(e) => setIntro(e.target.value.slice(0, 100))}
-              />
-            ) : (
-              <div className="px-1 py-1">{intro}</div>
-            )}
-          </div>
-        </div>
-
-        {!isSignUp && isMe && (
-          <div className="flex justify-end mt-2">
-            {edit ? (
-              <div className="flex space-x-2">
-                <Button color="zinc" size="xs" onClick={onCancel}>
-                  Cancel
-                </Button>
-                <Button
-                  color="indigo"
-                  size="xs"
-                  onClick={onSave}
-                  disabled={nickname.trim() === '' || nickname.trim().length < 3}
-                >
-                  Save
-                </Button>
-              </div>
-            ) : (
-              <Button color="indigo" size="xs" onClick={() => setEdit(true)}>
-                Edit
-              </Button>
-            )}
+        {!isSignUp && (
+          <div className="mt-3 text-xs flex justify-between text-gray-400">
+            <div>
+              <Link
+                href={{ pathname: '/places', query: { by: info?.email } }}
+                onClick={() => dispatch('layer', null)}
+              >
+                All Places by {info?.nickname}
+              </Link>
+            </div>
+            <div>Since: {info && format(new Date(info.createdAt), 'MMM dd, yyyy')}</div>
           </div>
         )}
-      </div>
 
-      {!isSignUp && (
-        <div className="mt-3 text-xs flex justify-between text-gray-400">
-          <div>
-            <Link
-              href={{ pathname: '/places', query: { by: info.email } }}
-              onClick={() => dispatch('layer', null)}
+        <div className="flex justify-end mt-3 mb-1">
+          {isSignUp ? (
+            <Button
+              color="indigo"
+              size="base"
+              onClick={onSignUp}
+              disabled={nickname.trim() === '' || nickname.trim().length < 3}
             >
-              All Places by {info.nickname}
-            </Link>
-          </div>
-          <div>Since: {format(new Date(info.createdAt), 'MMM dd, yyyy')}</div>
+              Sign Up
+            </Button>
+          ) : isMe ? (
+            <Button color="zinc" size="sm" onClick={onSignout}>
+              Sign Out
+            </Button>
+          ) : null}
         </div>
-      )}
 
-      <div className="flex justify-end mt-3 mb-1">
-        {isSignUp ? (
-          <Button
-            color="indigo"
-            size="base"
-            onClick={onSignUp}
-            disabled={nickname.trim() === '' || nickname.trim().length < 3}
-          >
-            Sign Up
-          </Button>
-        ) : isMe ? (
-          <Button color="zinc" size="sm" onClick={onSignout}>
-            Sign Out
-          </Button>
-        ) : null}
+        <style jsx>{`
+          input:focus {
+            outline: none !important;
+          }
+
+          .edit-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-right: -12px;
+          }
+        `}</style>
       </div>
-
-      <style jsx>{`
-        input:focus {
-          outline: none !important;
-        }
-
-        .edit-btn {
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin-right: -12px;
-        }
-      `}</style>
-    </div>
+    </Fetcher>
   );
 }

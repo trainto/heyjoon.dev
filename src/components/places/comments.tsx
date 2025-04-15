@@ -1,14 +1,17 @@
-import { fetcher, sendRequest } from '@/lib/api/fetchers';
+import { sendRequest } from '@/lib/api/fetchers';
 import { format } from 'date-fns';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useSWR from 'swr';
 import Button from '../common/button';
+import Fetcher from '../common/fetcher';
 import Avatar from './avatar';
 
 export default function Comments({ place }: { place: Place }) {
+  const fetcherKey = '/places/comments/' + place.id;
+
   const [newComment, setNewComment] = useState('');
 
-  const { data: comments, mutate } = useSWR<CommentInfo[]>('/places/comments/' + place.id, fetcher);
+  const { data: comments, mutate } = useSWR<CommentInfo[]>(fetcherKey);
 
   const canPost = useMemo(() => newComment.length >= 3, [newComment.length]);
 
@@ -42,38 +45,40 @@ export default function Comments({ place }: { place: Place }) {
   }, [mutate, newComment, place.id]);
 
   return (
-    <div className="text-sm relative pb-20" ref={contentDiv}>
-      <div className="h-full overflow-y-auto dark-scroller px-2">
-        {comments && comments.map((c) => <CommentMemo key={c.id} commentInfo={c} />)}
-        {comments && comments.length === 0 && (
-          <div className="text-center h-full grid items-center">
-            Be the first to comment on this post. &#128516;
-          </div>
-        )}
-      </div>
-
-      <div className="absolute bottom-0 w-full">
-        <input
-          className="w-full bg-bg-main border-b p-1"
-          placeholder="Your comment"
-          maxLength={100}
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value.slice(0, 100))}
-        />
-
-        <div className="flex justify-end mt-2">
-          <Button color="indigo" size="sm" onClick={onPost} disabled={!canPost}>
-            Post
-          </Button>
+    <Fetcher swrKey={fetcherKey}>
+      <div className="text-sm relative pb-20" ref={contentDiv}>
+        <div className="h-full overflow-y-auto dark-scroller px-2">
+          {comments && comments.map((c) => <CommentMemo key={c.id} commentInfo={c} />)}
+          {comments && comments.length === 0 && (
+            <div className="text-center h-full grid items-center">
+              Be the first to comment on this post. &#128516;
+            </div>
+          )}
         </div>
-      </div>
 
-      <style jsx>{`
-        input {
-          outline: none !important;
-        }
-      `}</style>
-    </div>
+        <div className="absolute bottom-0 w-full">
+          <input
+            className="w-full bg-bg-main border-b p-1"
+            placeholder="Your comment"
+            maxLength={100}
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value.slice(0, 100))}
+          />
+
+          <div className="flex justify-end mt-2">
+            <Button color="indigo" size="sm" onClick={onPost} disabled={!canPost}>
+              Post
+            </Button>
+          </div>
+        </div>
+
+        <style jsx>{`
+          input {
+            outline: none !important;
+          }
+        `}</style>
+      </div>
+    </Fetcher>
   );
 }
 

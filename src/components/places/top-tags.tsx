@@ -1,18 +1,22 @@
-import { fetcher } from '@/lib/api/fetchers';
 import useSWR from 'swr';
+import Fetcher from '../common/fetcher';
 import Tag from './tag';
 
 const TopTags = () => {
-  const { data: topTags } = useSWR<string[]>('/places/tags/top?limit=5', fetcher);
+  const fetcherKey = '/places/tags/top?limit=5';
+
+  const { data: topTags } = useSWR<string[]>(fetcherKey);
 
   return (
-    <div>
-      {topTags?.map((t) => (
-        <div key={t}>
-          <Tag tag={'#' + t} />
-        </div>
-      ))}
-    </div>
+    <Fetcher swrKey={fetcherKey} fallbackData={[]}>
+      <div>
+        {topTags?.map((t) => (
+          <div key={t}>
+            <Tag tag={'#' + t} />
+          </div>
+        ))}
+      </div>
+    </Fetcher>
   );
 };
 

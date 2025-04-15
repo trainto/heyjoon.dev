@@ -1,15 +1,15 @@
-import { fetcher } from '@/lib/api/fetchers';
 import { dispatch } from '@/lib/store';
 import { useCallback, useEffect, useRef } from 'react';
 import useSWR from 'swr';
+import Fetcher from '../common/fetcher';
 import Avatar from './avatar';
 import UserDetail from './user-detail';
 
 export default function Likes({ placeId }: { placeId: number }) {
-  const { data: likes } = useSWR<{ nickname: string; avatar: string; intro?: string }[]>(
-    `/places/likes/${placeId}`,
-    fetcher,
-  );
+  const fetcherKey = `/places/likes/${placeId}`;
+
+  const { data: likes } =
+    useSWR<{ nickname: string; avatar: string; intro?: string }[]>(fetcherKey);
 
   const contentDiv = useRef<HTMLDivElement>(null);
 
@@ -32,20 +32,22 @@ export default function Likes({ placeId }: { placeId: number }) {
   }, []);
 
   return (
-    <div className="overflow-y-auto dark-scroller" ref={contentDiv}>
-      {likes &&
-        likes.map((l) => (
-          <div key={l.nickname} className="flex space-x-5 items-center like my-5">
-            <div className="flex-none">
-              <Avatar src={l.avatar} size={38} onClick={onAvatarClick} />
-            </div>
+    <Fetcher swrKey={fetcherKey}>
+      <div className="overflow-y-auto dark-scroller" ref={contentDiv}>
+        {likes &&
+          likes.map((l) => (
+            <div key={l.nickname} className="flex space-x-5 items-center like my-5">
+              <div className="flex-none">
+                <Avatar src={l.avatar} size={38} onClick={onAvatarClick} />
+              </div>
 
-            <div className="text-sm">
-              <div className="text-gray-300">@{l.nickname}</div>
-              {l.intro && <div>{l.intro}</div>}
+              <div className="text-sm">
+                <div className="text-gray-300">@{l.nickname}</div>
+                {l.intro && <div>{l.intro}</div>}
+              </div>
             </div>
-          </div>
-        ))}
-    </div>
+          ))}
+      </div>
+    </Fetcher>
   );
 }
