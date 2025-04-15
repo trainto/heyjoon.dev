@@ -2,7 +2,7 @@
 
 import useStore from '@/lib/store';
 import { ReactNode, useEffect } from 'react';
-import Layer from '../layer';
+import Layer from '../common/layer';
 import Modal from './modal';
 
 export default function Layout({ children }: { children: ReactNode }) {

@@ -1,6 +1,6 @@
 import useStore from '@/lib/store';
 import { useCallback } from 'react';
-import Button from '../button';
+import Button from '../common/button';
 
 export default function Modal() {
   const { value: info, dispatch } = useStore('modal');

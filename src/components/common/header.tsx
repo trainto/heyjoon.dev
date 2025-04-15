@@ -5,9 +5,9 @@ import useStore, { dispatch } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
-import Avatar from './places/avatar';
-import Signin from './places/signin';
-import UserDetail from './places/user-detail';
+import Avatar from '../places/avatar';
+import Signin from '../places/signin';
+import UserDetail from '../places/user-detail';
 
 const Header = () => {
   const { value: userInfo } = useStore('userInfo');

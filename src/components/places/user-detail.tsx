@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useSWR from 'swr';
-import Button from '../button';
+import Button from '../common/button';
 import Avatar from './avatar';
 import AvatarEditor from './avatar-editor';
 import { Edit } from './svg';

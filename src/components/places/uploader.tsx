@@ -4,7 +4,7 @@ import useStore, { dispatch } from '@/lib/store';
 import Image from 'next/image';
 import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Button from '../button';
+import Button from '../common/button';
 import Avatar from './avatar';
 import Loading from './loading';
 import PhotoEditor from './photo-editor';

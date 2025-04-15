@@ -2,7 +2,7 @@ import { sendRequest } from '@/lib/api/fetchers';
 import useStore, { dispatch } from '@/lib/store';
 import { cropAndResize } from '@/lib/utils-client';
 import { useCallback, useEffect } from 'react';
-import Button from '../button';
+import Button from '../common/button';
 import Crop from './crop';
 
 export default function AvatarEditor({ src, onComplete }: { src: string; onComplete: () => void }) {

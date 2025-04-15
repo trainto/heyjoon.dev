@@ -8,6 +8,7 @@ const putInCache = async (request, response) => {
 const cacheFirst = async ({ request }) => {
   const cached = await caches.match(request);
   if (cached) {
+    console.log('Cache hit for', request.url);
     return cached;
   }
 

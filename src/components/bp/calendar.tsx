@@ -17,7 +17,7 @@ import {
 } from 'date-fns';
 import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
-import Button from '../button';
+import Button from '../common/button';
 import Cell from './Cell';
 
 export default function Calendar() {

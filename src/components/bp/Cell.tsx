@@ -3,7 +3,7 @@ import { dispatchEvent } from '@/lib/event-bus';
 import { dispatch } from '@/lib/store';
 import { format, getDate, getDay } from 'date-fns';
 import { memo, useEffect, useMemo, useState } from 'react';
-import Button from '../button';
+import Button from '../common/button';
 import { Trash } from '../places/svg';
 
 const Cell = memo(({ date, data, today }: { date: Date; data: BP[]; today?: boolean }) => {

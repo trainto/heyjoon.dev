@@ -1,6 +1,6 @@
 import { dispatch } from '@/lib/store';
 import { PropsWithChildren } from 'react';
-import { Xicon } from './places/svg';
+import { Xicon } from '../places/svg';
 
 export default function Layer({
   children,

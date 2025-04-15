@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/components/button';
+import Button from '@/components/common/button';
 import Avatar from '@/components/places/avatar';
 import { fetcher, sendRequest } from '@/lib/api/fetchers';
 import { format } from 'date-fns';

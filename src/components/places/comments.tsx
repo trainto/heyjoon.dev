@@ -2,7 +2,7 @@ import { fetcher, sendRequest } from '@/lib/api/fetchers';
 import { format } from 'date-fns';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useSWR from 'swr';
-import Button from '../button';
+import Button from '../common/button';
 import Avatar from './avatar';
 
 export default function Comments({ place }: { place: Place }) {

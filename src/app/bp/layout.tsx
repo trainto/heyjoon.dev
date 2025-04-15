@@ -1,6 +1,6 @@
 'use client';
 
-import Layer from '@/components/layer';
+import Layer from '@/components/common/layer';
 import useStore from '@/lib/store';
 import { Noto_Sans_KR } from 'next/font/google';
 

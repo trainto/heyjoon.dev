@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/components/button';
+import Button from '@/components/common/button';
 import { sendRequest } from '@/lib/api/fetchers';
 import useStore from '@/lib/store';
 import Link from 'next/link';

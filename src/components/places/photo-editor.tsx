@@ -3,7 +3,7 @@ import useStore, { dispatch } from '@/lib/store';
 import { cropAndResize, imgToDataURL, resize } from '@/lib/utils-client';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import Button from '../button';
+import Button from '../common/button';
 import Crop from './crop';
 import Loading from './loading';
 
