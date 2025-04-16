@@ -1,3 +1,5 @@
+'use client';
+
 import useSWR from 'swr';
 import Fetcher from '../common/fetcher';
 import Tag from './tag';

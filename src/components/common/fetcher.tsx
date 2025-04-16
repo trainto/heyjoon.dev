@@ -1,23 +1,23 @@
 import { fetcher } from '@/lib/api/fetchers';
-import { PropsWithChildren, Suspense } from 'react';
+import { PropsWithChildren, ReactNode, Suspense } from 'react';
 import useSWR, { Key } from 'swr';
-import Loading from '../places/loading';
 
 type Props = {
   swrKey: Key;
   revalidation?: boolean;
+  loading?: ReactNode;
   fallbackData?: unknown;
 };
 
-const Fetcher = ({ swrKey, revalidation, fallbackData, children }: PropsWithChildren<Props>) => {
+const Fetcher = ({
+  swrKey,
+  revalidation,
+  loading,
+  fallbackData,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
-    <Suspense
-      fallback={
-        <div className="flex justify-center my-8">
-          <Loading />
-        </div>
-      }
-    >
+    <Suspense fallback={loading ?? <div className="flex justify-center h-full">Loading...</div>}>
       <FetcherInner swrKey={swrKey} revalidation={revalidation} fallbackData={fallbackData}>
         {children}
       </FetcherInner>

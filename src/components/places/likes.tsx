@@ -32,7 +32,7 @@ export default function Likes({ placeId }: { placeId: number }) {
   }, []);
 
   return (
-    <Fetcher swrKey={fetcherKey}>
+    <Fetcher swrKey={fetcherKey} loading={<div style={{ height: '320px' }}></div>}>
       <div className="overflow-y-auto dark-scroller" ref={contentDiv}>
         {likes &&
           likes.map((l) => (

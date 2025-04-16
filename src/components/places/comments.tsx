@@ -45,7 +45,10 @@ export default function Comments({ place }: { place: Place }) {
   }, [mutate, newComment, place.id]);
 
   return (
-    <Fetcher swrKey={fetcherKey}>
+    <Fetcher
+      swrKey={fetcherKey}
+      loading={<div className="pb-20" style={{ height: '320px' }}></div>}
+    >
       <div className="text-sm relative pb-20" ref={contentDiv}>
         <div className="h-full overflow-y-auto dark-scroller px-2">
           {comments && comments.map((c) => <CommentMemo key={c.id} commentInfo={c} />)}

@@ -115,7 +115,11 @@ export default function UserDetail({
   }
 
   return (
-    <Fetcher swrKey={fetcherKey} revalidation={false}>
+    <Fetcher
+      swrKey={fetcherKey}
+      revalidation={false}
+      loading={<div style={{ height: '260px' }}></div>}
+    >
       <div>
         <div className="flex justify-center">
           <div className="relative">

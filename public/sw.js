@@ -27,16 +27,14 @@ const cacheFirst = async ({ request }) => {
   }
 };
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('/_next/static/')) {
-    event.respondWith(
-      cacheFirst({
-        request: event.request,
-      }),
-    );
-  }
-});
-
-self.addEventListener('install', () => {
-  self.skipWaiting();
-});
+if (location.hostname === 'heyjoon.dev') {
+  self.addEventListener('fetch', (event) => {
+    if (event.request.url.includes('/_next/static/')) {
+      event.respondWith(
+        cacheFirst({
+          request: event.request,
+        }),
+      );
+    }
+  });
+}
