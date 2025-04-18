@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import { IMAGE_SIZE } from '@/lib/constants';
 import { useResize } from '@/lib/hooks';
-import useStore from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactCrop, { type Crop } from 'react-image-crop';
 
@@ -21,14 +22,13 @@ const Crop = ({
   const [maxHeight, setMaxHeight] = useState(0);
   const [minSize, setMinSize] = useState(0);
 
-  const { value: aspect, dispatch: dispatchAspect } = useStore('aspect');
-  const { value: crops, dispatch: dispatchCrop } = useStore('crops');
+  const { aspect, crops } = useSante(['aspect', 'crops']);
 
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    dispatchAspect(null);
-  }, [dispatchAspect, index]);
+    dispatch('aspect', null);
+  }, [index]);
 
   useEffect(() => {
     if (crops && crops[index]) {
@@ -47,9 +47,9 @@ const Crop = ({
 
   const onDragStart = useCallback(() => {
     if (!aspect) {
-      dispatchAspect(1);
+      dispatch('aspect', 1);
     }
-  }, [aspect, dispatchAspect]);
+  }, [aspect]);
 
   const onDragEnd = useCallback(() => {
     if (crop?.width === 0 || crop?.height === 0) {
@@ -59,7 +59,7 @@ const Crop = ({
 
   const onComplete = useCallback(
     (crop: Crop) => {
-      dispatchCrop((p) => {
+      dispatch('crops', (p) => {
         const ret = p ? [...p] : [];
         ret[index] = crop
           ? Object.assign(crop, {
@@ -71,7 +71,7 @@ const Crop = ({
         return ret;
       });
     },
-    [dispatchCrop, index],
+    [index],
   );
 
   const handleImageLoaded = (e: React.SyntheticEvent<HTMLImageElement>) => {

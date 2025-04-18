@@ -1,13 +1,12 @@
 'use client';
 
-import useStore from '@/lib/store';
+import { useSante } from '@/lib/store';
 import { ReactNode, useEffect } from 'react';
 import Layer from '../common/layer';
 import Modal from './modal';
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { value: layer } = useStore('layer');
-  const { value: modal } = useStore('modal');
+  const { layer, modal } = useSante(['layer', 'modal']);
 
   useEffect(() => {
     const body = document.querySelector('body');

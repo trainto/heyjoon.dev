@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 import { fetcher } from './api/fetchers';
-import useStore, { dispatch } from './store';
+import { dispatch, useSante } from './store';
 import { storage } from './utils-client';
 
 export const useScrollHitTheBottom = (callback: () => void) => {
@@ -145,7 +145,7 @@ export const useAuthState = () => {
 
   const pathname = usePathname();
 
-  const { value: userInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
+  const { userInfo } = useSante(['userInfo']);
 
   const { data: userInfoFetched, error } = useSWR<UserInfo>(
     pathname.startsWith('/places') ? '/places/users/me' : null,
@@ -155,9 +155,9 @@ export const useAuthState = () => {
 
   useEffect(() => {
     if (userInfoFetched && userInfo == null) {
-      dispatchUserInfo(userInfoFetched);
+      dispatch('userInfo', userInfoFetched);
     }
-  }, [dispatchUserInfo, userInfo, userInfoFetched]);
+  }, [userInfo, userInfoFetched]);
 
   useEffect(() => {
     if (error && axios.isAxiosError(error) && error.response && error.response.status === 401) {

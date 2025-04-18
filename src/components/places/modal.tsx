@@ -1,19 +1,19 @@
-import useStore from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { useCallback } from 'react';
 import Button from '../common/button';
 
 export default function Modal() {
-  const { value: info, dispatch } = useStore('modal');
+  const { modal: info } = useSante(['modal']);
 
-  const onCancel = useCallback(() => dispatch(null), [dispatch]);
+  const onCancel = useCallback(() => dispatch('modal', null), []);
 
   const onConfirm = useCallback(() => {
     if (info?.onConfirm) {
       info.onConfirm();
     }
 
-    dispatch(null);
-  }, [dispatch, info]);
+    dispatch('modal', null);
+  }, [info]);
 
   return (
     <div className="w-full sm:w-96 bg-bg-main px-3 py-3 rounded-md mx-3 mt-10 text-sm">

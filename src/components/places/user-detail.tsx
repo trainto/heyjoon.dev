@@ -1,6 +1,6 @@
 import { signout } from '@/lib/api';
 import { sendRequest } from '@/lib/api/fetchers';
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { imgToDataURL } from '@/lib/utils-client';
 import { format } from 'date-fns';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ export default function UserDetail({
   const [nickname, setNickname] = useState('');
   const [intro, setIntro] = useState('');
 
-  const { value: myInfo, dispatch: dispatchUserInfo } = useStore('userInfo');
+  const { userInfo: myInfo } = useSante(['userInfo']);
 
   const { data: userInfoFetched } = useSWR<UserInfo>(fetcherKey);
 
@@ -87,10 +87,12 @@ export default function UserDetail({
     });
 
     if (res.status === 200) {
-      dispatchUserInfo((p) => (p ? { ...p, nickname, intro } : p));
+      dispatch('userInfo', (p) => {
+        return p ? { ...p, nickname, intro } : p;
+      });
       setEdit(false);
     }
-  }, [dispatchUserInfo, intro, nickname]);
+  }, [intro, nickname]);
 
   const onSignUp = useCallback(async () => {
     const res = await sendRequest({

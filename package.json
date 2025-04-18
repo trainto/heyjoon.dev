@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@trainto/sante": "^0.2.2",
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",

@@ -1,6 +1,6 @@
 import { sendRequest } from '@/lib/api/fetchers';
 import { CDN_URL } from '@/lib/constants';
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { memo, MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
@@ -22,7 +22,7 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   const [likes, setLikes] = useState(() => place.likes);
   const [mouseOn, setMouseOn] = useState(false);
 
-  const { value: userInfo } = useStore('userInfo');
+  const { userInfo } = useSante(['userInfo']);
 
   const built = useMemo(() => {
     return place.desc

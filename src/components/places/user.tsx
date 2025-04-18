@@ -1,11 +1,11 @@
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { format } from 'date-fns';
 import { useCallback } from 'react';
 import Avatar from './avatar';
 import UserDetail from './user-detail';
 
 const User = () => {
-  const { value: userInfo } = useStore('userInfo');
+  const { userInfo } = useSante(['userInfo']);
 
   const onAvatarClick = useCallback(() => {
     dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });

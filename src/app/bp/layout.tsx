@@ -1,7 +1,7 @@
 'use client';
 
 import Layer from '@/components/common/layer';
-import useStore from '@/lib/store';
+import { useSante } from '@/lib/store';
 import { Noto_Sans_KR } from 'next/font/google';
 
 const noto = Noto_Sans_KR({
@@ -12,7 +12,7 @@ const noto = Noto_Sans_KR({
 });
 
 export default function PlaceLayout({ children }: { children: React.ReactNode }) {
-  const { value: layer } = useStore('layer');
+  const { layer } = useSante(['layer']);
 
   return (
     <div className={noto.className}>

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@trainto/sante':
+        specifier: ^0.2.2
+        version: 0.2.2(@types/react@19.0.10)(react@19.1.0)
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -384,6 +387,12 @@ packages:
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
+
+  '@trainto/sante@0.2.2':
+    resolution: {integrity: sha512-68CcC21+TyPXS6HmRcZTGYQN7l/ocDK+ysbOrqYXqJvjD9VqYE7cFn4YayxFLNSeUdhmxmem/6+pWFIxxEE4uA==}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      react: '>=18.0.0'
 
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
@@ -2331,6 +2340,11 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
+
+  '@trainto/sante@0.2.2(@types/react@19.0.10)(react@19.1.0)':
+    dependencies:
+      '@types/react': 19.0.10
+      react: 19.1.0
 
   '@tybys/wasm-util@0.9.0':
     dependencies:

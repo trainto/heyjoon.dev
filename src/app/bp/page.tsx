@@ -2,7 +2,7 @@
 
 import Button from '@/components/common/button';
 import { sendRequest } from '@/lib/api/fetchers';
-import useStore from '@/lib/store';
+import { useSante } from '@/lib/store';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -11,7 +11,7 @@ export default function BP() {
   const [systolic, setSystolic] = useState<number | string>('');
   const [diastolic, setDiastolic] = useState<number | string>('');
 
-  const { value: userInfo } = useStore('userInfo');
+  const { userInfo } = useSante(['userInfo']);
 
   const systolicRef = useRef<HTMLInputElement>(null);
   const diastolicRef = useRef<HTMLInputElement>(null);

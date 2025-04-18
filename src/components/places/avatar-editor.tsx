@@ -1,12 +1,12 @@
 import { sendRequest } from '@/lib/api/fetchers';
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { cropAndResize } from '@/lib/utils-client';
 import { useCallback, useEffect } from 'react';
 import Button from '../common/button';
 import Crop from './crop';
 
 export default function AvatarEditor({ src, onComplete }: { src: string; onComplete: () => void }) {
-  const { value: crops } = useStore('crops');
+  const { crops } = useSante(['crops']);
 
   useEffect(() => {
     dispatch('aspect', 1);

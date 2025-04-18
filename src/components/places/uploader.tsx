@@ -1,6 +1,6 @@
 import { sendRequest } from '@/lib/api/fetchers';
 import { dispatchEvent } from '@/lib/event-bus';
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import Image from 'next/image';
 import { ChangeEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,8 +16,7 @@ const Uploader = () => {
   const [taRows, setTaRows] = useState(2);
   const [isUploading, setIsUploading] = useState(false);
 
-  const { value: userInfo } = useStore('userInfo');
-  const { value: layer, dispatch: dispatchLayer } = useStore('layer');
+  const { userInfo, layer } = useSante(['userInfo', 'layer']);
 
   const taRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -57,7 +56,7 @@ const Uploader = () => {
         }
       }
 
-      dispatchLayer({
+      dispatch('layer', {
         node: <PhotoEditor files={files} onComplete={setBlobs} />,
         containerClassName: 'w-full sm:w-1/3',
       });

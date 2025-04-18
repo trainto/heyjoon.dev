@@ -1,5 +1,5 @@
 import { IMAGE_SIZE } from '@/lib/constants';
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import { cropAndResize, imgToDataURL, resize } from '@/lib/utils-client';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
@@ -20,8 +20,7 @@ export default function PhotoEditor({
   const [smallImages, setSmallImages] = useState<number[]>([]);
   const [processingImgs, setProcessingImgs] = useState(false);
 
-  const { value: crops, dispatch: dispatchCrops } = useStore('crops');
-  const { value: aspect, dispatch: dispatchAspect } = useStore('aspect');
+  const { crops, aspect } = useSante(['crops', 'aspect']);
 
   useEffect(() => {
     files.map(async (f, i) => {
@@ -68,7 +67,7 @@ export default function PhotoEditor({
       return [...p];
     });
 
-    dispatchCrops((p) => {
+    dispatch('crops', (p) => {
       if (p == null) {
         return p;
       }
@@ -135,7 +134,7 @@ export default function PhotoEditor({
             className={`font-bold text-sm border border-dashed rounded-md px-2 ${
               aspect === 1 ? 'border-brand2' : 'border-gray-400 text-gray-500'
             }`}
-            onClick={() => dispatchAspect(1)}
+            onClick={() => dispatch('aspect', 1)}
           >
             1 : 1
           </div>
@@ -144,7 +143,7 @@ export default function PhotoEditor({
             className={`font-bold text-sm border border-dashed rounded-md px-2 ${
               aspect === 4 / 3 ? 'border-brand2' : 'border-gray-400 text-gray-500'
             }`}
-            onClick={() => dispatchAspect(4 / 3)}
+            onClick={() => dispatch('aspect', 4 / 3)}
           >
             4 : 3
           </div>

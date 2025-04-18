@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuthState, useStandalone } from '@/lib/hooks';
-import useStore, { dispatch } from '@/lib/store';
+import { dispatch, useSante } from '@/lib/store';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
@@ -10,7 +10,7 @@ import Signin from '../places/signin';
 import UserDetail from '../places/user-detail';
 
 const Header = () => {
-  const { value: userInfo } = useStore('userInfo');
+  const { userInfo } = useSante(['userInfo']);
 
   const router = useRouter();
   const pathname = usePathname();
