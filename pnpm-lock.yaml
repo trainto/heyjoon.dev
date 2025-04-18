@@ -27,7 +27,7 @@ importers:
         specifier: 15.3.0
         version: 15.3.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       prismjs:
-        specifier: ^1.29.0
+        specifier: ^1.30.0
         version: 1.30.0
       query-string:
         specifier: ^8.2.0
