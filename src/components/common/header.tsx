@@ -63,7 +63,7 @@ const Header = () => {
         </div>
 
         <div className={`flex items-end space-x-3 sm:space-x-5`}>
-          <div className={`hidden ${isStandalone ? '' : 'sm:block'}`}>
+          <div className={isStandalone ? 'hiden' : 'sm:block'}>
             <Nav />
           </div>
           <Link
