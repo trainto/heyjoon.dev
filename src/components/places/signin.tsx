@@ -40,7 +40,7 @@ const Signin = ({ width, from }: { width: number; from: string }) => {
       'https://accounts.google.com/o/oauth2/v2/auth?' +
       'client_id=812386537061-qc8e0lcpg5gopjtoh7q2ap39kqdr3c2g.apps.googleusercontent.com' +
       `&redirect_uri=${
-        process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://heyjoon.dev'
+        process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://heyjoon.dev'
       }/places/auth/google-auth` +
       '&response_type=token' +
       '&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
