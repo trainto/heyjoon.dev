@@ -3,7 +3,7 @@ import { CDN_URL } from '@/lib/constants';
 import { dispatch, useSante } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
-import { memo, MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './avatar';
@@ -37,13 +37,19 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
 
   const images = useMemo(() => place.images.split(','), [place.images]);
 
+  const tapCount = useRef(0);
+
   useEffect(() => {
     setLiked(!!userInfo && !!place.likedByMe);
   }, [place, userInfo]);
 
   const handleLike = async (e: MouseEvent) => {
+    if (userInfo == null) {
+      dispatch('modal', { msg: 'Please sign in to cotinue!' });
+      return;
+    }
+
     if (
-      userInfo == null ||
       (e.target as HTMLElement).classList.contains('swiper-button-prev') ||
       (e.target as HTMLElement).classList.contains('swiper-button-next')
     ) {
@@ -59,6 +65,20 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
       setLiked((p) => !p);
       setLikes((p) => (current ? p - 1 : p + 1));
     }
+  };
+
+  const handleTap = (e: MouseEvent) => {
+    if (tapCount.current === 1) {
+      tapCount.current = 0;
+      handleLike(e);
+      return;
+    }
+
+    tapCount.current += 1;
+
+    setTimeout(() => {
+      tapCount.current = 0;
+    }, 300);
   };
 
   const handleCommentsClick = () => {
@@ -106,6 +126,7 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
       <div
         className="relative bg-black w-full pt-100 mt-2 rounded-md cursor-pointer"
         onDoubleClick={handleLike}
+        onClick={handleTap}
       >
         <div
           className="place-images absolute top-0 right-0 bottom-0 left-0 grid content-center"
