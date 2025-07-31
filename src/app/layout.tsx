@@ -39,6 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         `}
       </Script>
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6978978720477594"
+        crossOrigin="anonymous"
+      />
 
       <body className={`${roboto.className} container mx-auto`}>
         <Header />
