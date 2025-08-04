@@ -5,6 +5,7 @@ import Prism from 'prismjs';
 
 import './article.css';
 
+import Ad from '@/components/common/ad';
 import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-jsx';
@@ -54,7 +55,11 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         {format(new Date(post.date), 'MMM dd, yyyy')}
       </div>
 
+      <Ad slot="4266106464" />
+
       <div className="article_body mt-10" dangerouslySetInnerHTML={{ __html: processedContent }} />
+
+      <Ad slot="2054892003" />
     </article>
   );
 }
