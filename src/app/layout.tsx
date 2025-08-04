@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/next-script-for-ga */
+
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import Script from 'next/script';
@@ -43,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6978978720477594"
         crossOrigin="anonymous"
-      />
+      ></Script>
 
       <body className={`${roboto.className} container mx-auto`}>
         <Header />

@@ -57,7 +57,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
       <div className="article_body mt-10" dangerouslySetInnerHTML={{ __html: processedContent }} />
 
-      <div className="my-4">
+      <div className="my-4 overflow-hidden">
         <Ad slot="2054892003" />
       </div>
     </article>
