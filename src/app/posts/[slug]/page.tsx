@@ -55,11 +55,11 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         {format(new Date(post.date), 'MMM dd, yyyy')}
       </div>
 
-      <Ad slot="4266106464" />
-
       <div className="article_body mt-10" dangerouslySetInnerHTML={{ __html: processedContent }} />
 
-      <Ad slot="2054892003" />
+      <div className="my-4">
+        <Ad slot="2054892003" />
+      </div>
     </article>
   );
 }
