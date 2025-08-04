@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 
 const Ad = ({ slot }: { slot: string }) => {
   useEffect(() => {
-    const adsbygoogle = (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle || [];
-    adsbygoogle.push({});
+    const adWindow = window as unknown as { adsbygoogle: unknown[] };
+    if (adWindow.adsbygoogle) {
+      adWindow.adsbygoogle.push({});
+    }
   }, []);
 
   return (
