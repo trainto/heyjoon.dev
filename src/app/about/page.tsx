@@ -1,7 +1,53 @@
 import Image from 'next/image';
 
+import Card from '@/components/common/portfolio-card';
 import Contributions from '@/components/contributions';
 import './terminal.css';
+
+const Portfolios = [
+  {
+    title: 'Insight Lens',
+    desc: 'Text to Hadoop query using LLM for in-house data engineers',
+    period: '2025 ~ ',
+    img: '/querka.png',
+    tags: ['Typescript', 'Node', 'Express', 'MySQL', 'React', 'Tailwind', 'Turborepo'],
+  },
+  {
+    title: 'RB Dialog',
+    desc: 'Total AI chatbot solution',
+    period: '2020 ~ ',
+    img: '/rb.png',
+    tags: ['Typescript', 'Next.js', 'React', 'AWS'],
+  },
+  {
+    title: 'IOT sensor solution',
+    desc: 'IoT based remote facility monitoring solution',
+    period: '2019',
+    img: '/capstec.png',
+    tags: ['Next.js', 'React', 'Typescript'],
+  },
+  {
+    title: 'T World',
+    desc: "SKT's official mobile/web app",
+    period: '2018 ~ 2019',
+    img: '/tworld.jpg',
+    tags: ['Node', 'Express', 'Typescript', 'JQuery', 'Handlebar', 'Redis'],
+  },
+  {
+    title: 'FLO (a.k.a. MusicMate)',
+    desc: 'Music streaming app',
+    period: '2017 ~ 2018',
+    img: '/flo.jpg',
+    tags: ['Java', 'Kotlin', 'Android', 'Retrofit', 'ExoPlayer', 'MVVM'],
+  },
+  {
+    title: 'DataSoda',
+    desc: 'LTE data sharing app',
+    period: '2017',
+    img: '/datasoda.jpg',
+    tags: ['Java', 'Android', 'Retrofit', 'MVP'],
+  },
+];
 
 export default function About() {
   return (
@@ -36,6 +82,15 @@ export default function About() {
         <div className="mx-2 mb-3">
           <span className="text-brand2">{`~ >>`}</span>
           <span className="ml-3 cursor-animation"></span>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <h3 className="font-bold text-3xl">Portfolio</h3>
+        <div className="flex flex-wrap justify-center gap-4 pt-4">
+          {Portfolios.map((p) => (
+            <Card key={p.title} {...p} />
+          ))}
         </div>
       </div>
 
