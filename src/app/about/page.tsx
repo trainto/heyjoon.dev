@@ -1,7 +1,47 @@
 import Image from 'next/image';
 
+import Card from '@/components/common/portfolio-card';
 import Contributions from '@/components/contributions';
 import './terminal.css';
+
+const Portfolios = [
+  {
+    title: 'Insight Lens',
+    desc: 'Text to Hadoop query using LLM for in-house data engineers',
+    img: '/querka.png',
+    tags: ['Node', 'Express', 'Typescript', 'React', 'Tailwind', 'MySQL', 'Redis', 'Turborepo'],
+  },
+  {
+    title: 'RB Dialog',
+    desc: 'Total AI chatbot solution',
+    img: '/rb.png',
+    tags: ['Typescript', 'Next.js', 'React', 'AWS'],
+  },
+  {
+    title: 'IOT sensor solution',
+    desc: 'IoT based remote facility monitoring solution',
+    img: '/capstec.png',
+    tags: ['Next.js', 'React', 'Typescript'],
+  },
+  {
+    title: 'T World',
+    desc: "SKT's official mobile/web app",
+    img: '/tworld.jpg',
+    tags: ['Node', 'Express', 'Typescript', 'JQuery', 'Handlebar', 'Redis'],
+  },
+  {
+    title: 'FLO (a.k.a. MusicMate)',
+    desc: 'Music streaming app',
+    img: '/flo.jpg',
+    tags: ['Java', 'Kotlin', 'Android', 'Retrofit', 'ExoPlayer', 'MVVM'],
+  },
+  {
+    title: 'DataSoda',
+    desc: 'LTE data sharing app',
+    img: '/datasoda.jpg',
+    tags: ['Java', 'Android', 'Retrofit', 'MVP'],
+  },
+];
 
 export default function About() {
   return (
@@ -36,6 +76,15 @@ export default function About() {
         <div className="mx-2 mb-3">
           <span className="text-brand2">{`~ >>`}</span>
           <span className="ml-3 cursor-animation"></span>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <h3 className="font-bold text-3xl">Portfolio</h3>
+        <div className="flex flex-wrap justify-center gap-4 pt-4">
+          {Portfolios.map((p) => (
+            <Card key={p.title} title={p.title} desc={p.desc} img={p.img} tags={p.tags} />
+          ))}
         </div>
       </div>
 
