@@ -86,15 +86,6 @@ export default function About() {
       </div>
 
       <div className="mt-10">
-        <h3 className="font-bold text-3xl">Portfolio</h3>
-        <div className="flex flex-wrap justify-center gap-4 pt-4">
-          {Portfolios.map((p) => (
-            <Card key={p.title} {...p} />
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-10">
         <h3 className="font-bold text-3xl">Work Experience</h3>
         <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-5">
           <div>
@@ -173,6 +164,15 @@ export default function About() {
           <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Java</div>
           <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Android</div>
           <div className="border border-brand2 border-dashed py-1 px-2 rounded-md">Linux</div>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <h3 className="font-bold text-3xl">Portfolio</h3>
+        <div className="flex flex-wrap justify-center gap-4 pt-4">
+          {Portfolios.map((p) => (
+            <Card key={p.title} {...p} />
+          ))}
         </div>
       </div>
 
