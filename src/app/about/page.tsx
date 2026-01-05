@@ -89,13 +89,34 @@ export default function About() {
         <h3 className="font-bold text-3xl">Work Experience</h3>
         <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-5">
           <div>
+            <Image src="./hmc.svg" width={96} height={48} alt="SK planet" />
+          </div>
+          <ul className="marker:text-brand2">
+            <li>
+              Mobility Platform Team, Hyundai Motor Company
+              <br />
+              <span className="text-sm text-gray-400">
+                - Senior Research Engineer (Jan. 2026 ~ Current)
+              </span>
+              <br />
+              <span className="text-sm text-gray-400">
+                -{' '}
+                <a href="https://www.shucle.com" target="_blank" rel="noopener noreferrer">
+                  https://www.shucle.com
+                </a>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-10">
+          <div>
             <Image src="./skp.png" width={96} height={44.86} alt="SK planet" />
           </div>
           <ul className="marker:text-brand2">
             <li>
               Platform Centre, SK planet
               <br />
-              <span className="text-sm text-gray-400">- FE developer (Sep. 2018 ~ Current)</span>
+              <span className="text-sm text-gray-400">- FE developer (Sep. 2018 ~ Dec. 2025)</span>
             </li>
             <li className="mt-5">
               Platform Centre, SK techx
