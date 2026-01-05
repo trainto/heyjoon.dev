@@ -72,8 +72,8 @@ export default function About() {
               </h2>
             </div>
             I&apos;m a software engineer who works for{' '}
-            <a href="https://skplanet.com" target="_blank">
-              SK planet.
+            <a href="https://hyundai.com/worldwide" target="_blank" rel="noopener noreferrer">
+              Hyundai Motor Company.
             </a>
             <br />
             I&apos;m living in Seoul, passionate about development and learning new technologies.
