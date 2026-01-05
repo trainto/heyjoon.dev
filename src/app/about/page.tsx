@@ -87,7 +87,7 @@ export default function About() {
 
       <div className="mt-10">
         <h3 className="font-bold text-3xl">Work Experience</h3>
-        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-5">
+        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 sm:space-y-0 mt-5">
           <div>
             <Image src="./hmc.svg" width={96} height={48} alt="SK planet" />
           </div>
@@ -108,7 +108,7 @@ export default function About() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-10">
+        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 sm:space-y-0 mt-10">
           <div>
             <Image src="./skp.png" width={96} height={44.86} alt="SK planet" />
           </div>
@@ -127,7 +127,7 @@ export default function About() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 mt-10">
+        <div className="flex flex-col sm:flex-row space-x-5 space-y-2 sm:space-y-0 mt-10">
           <div>
             <Image src="./lge.png" width={96} height={20} alt="LGE" />
           </div>
