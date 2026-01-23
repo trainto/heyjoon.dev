@@ -77,6 +77,10 @@ export default function About() {
             </a>
             <br />
             I&apos;m living in Seoul, passionate about development and learning new technologies.
+            <br />
+            <br />
+            &quot;There is a difference between code that functions today and code that can be
+            changed by someone else in the future&quot;
           </div>
         </div>
         <div className="mx-2 mb-3">
