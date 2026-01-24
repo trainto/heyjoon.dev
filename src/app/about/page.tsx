@@ -61,9 +61,9 @@ export default function About() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-center items-center sm:space-x-10 space-y-5 mx-2 my-5">
+        <div className="flex flex-col sm:flex-row justify-center items-center sm:space-x-10 space-y-5 mx-6 my-5">
           <div>
-            <Image src="./me.jpg" className="rounded-full" width={80} height={80} alt="Hakjoon" />
+            <Image src="./me.jpg" className="rounded-full" width={100} height={100} alt="Hakjoon" />
           </div>
           <div>
             <div>
