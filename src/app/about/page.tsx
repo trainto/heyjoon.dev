@@ -97,7 +97,7 @@ export default function About() {
           </div>
           <ul className="marker:text-brand2">
             <li>
-              Mobility Platform Team, Hyundai Motor Company
+              Mobility Platform Development dept., Hyundai Motor Company
               <br />
               <span className="text-sm text-gray-400">
                 - Senior Research Engineer (Jan. 2026 ~ Current)
@@ -137,14 +137,14 @@ export default function About() {
           </div>
           <ul className="marker:text-brand2">
             <li>
-              IMS Team, Mobile Communications Lab. LG Electronics
+              IMS Team, Mobile Communications Lab., LG Electronics
               <br />
               <span className="text-sm text-gray-400">
                 - Android developer (Dec. 2015 ~ Dec. 2016)
               </span>
             </li>
             <li className="mt-5">
-              Web Team, Mobile Communications Lab. LG Electronics
+              Web Team, Mobile Communications Lab., LG Electronics
               <br />
               <span className="text-sm text-gray-400">
                 - Android developer (Apr. 2011 ~ Nov. 2015)
