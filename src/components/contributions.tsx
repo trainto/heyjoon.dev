@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
 const Contributions = () => {
-  const { data, setSize, isLoading } = useSWRInfinite<{
+  const { data, setSize, isLoading, error } = useSWRInfinite<{
     items: GithubPR[];
     total_count: number;
   }>((page, prevData) => {
@@ -28,7 +28,7 @@ const Contributions = () => {
 
   useScrollHitTheBottom(loadMore);
 
-  if (isLoading || data == null) {
+  if (isLoading || data == null || error) {
     return null;
   }
 
