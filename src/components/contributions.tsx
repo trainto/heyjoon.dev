@@ -11,7 +11,7 @@ const Contributions = () => {
     items: GithubPR[];
     total_count: number;
   }>((page, prevData) => {
-    if (prevData && prevData.items.length < 30) {
+    if (prevData && (!prevData.items || prevData.items.length < 30)) {
       return null;
     }
 
@@ -19,7 +19,8 @@ const Contributions = () => {
   }, fetcher);
 
   const loadMore = useCallback(() => {
-    if (data && data[data.length - 1].items.length < 30) {
+    const last = data?.[data.length - 1];
+    if (!last?.items || last.items.length < 30) {
       return;
     }
 
@@ -28,7 +29,7 @@ const Contributions = () => {
 
   useScrollHitTheBottom(loadMore);
 
-  if (isLoading || data == null || error) {
+  if (isLoading || data == null || data[0].items == null || error) {
     return null;
   }
 
@@ -39,7 +40,7 @@ const Contributions = () => {
       </h3>
       <ul className="marker:text-brand2 mt-5">
         {data?.map((page) =>
-          page.items.map((pr) => (
+          page.items?.map((pr) => (
             <li key={pr.id} className="mb-3">
               <a href={pr.html_url} target="_blank">
                 {pr.title}
