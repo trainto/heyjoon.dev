@@ -2,7 +2,5 @@ packages:
   - "apps/*"
   - "packages/*"
 allowBuilds:
-  esbuild: false
-  sharp: set this to true or false
-minimumReleaseAgeExclude:
-  - mysql2@3.23.2
+  sharp: true
+  esbuild: true
