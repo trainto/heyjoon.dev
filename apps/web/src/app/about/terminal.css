@@ -1,0 +1,40 @@
+.terminal {
+  margin: 0 auto;
+  border: 1px solid #535353;
+  border-radius: 7px;
+  background-color: black;
+}
+
+.terminal-header {
+  height: 2rem;
+  text-align: left;
+  background-color: #212121;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.terminal-button-group {
+  display: flex;
+  height: 100%;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.terminal-button {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-button.red {
+  background-color: #ff5c5c;
+}
+
+.terminal-button.yellow {
+  background-color: #ffbd4c;
+}
+
+.terminal-button.green {
+  background-color: #00ca56;
+}

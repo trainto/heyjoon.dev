@@ -1,0 +1,102 @@
+textarea {
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
+.place + .place {
+  margin-top: 1rem;
+}
+
+.pt-100 {
+  padding-top: 100%;
+}
+
+.place-images .swiper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-brand2 !important;
+}
+
+.swiper-lazy-preloader {
+  @apply border-brand2 !important;
+  border-top-color: transparent !important;
+}
+
+.swiper-pagination {
+  position: static !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  visibility: hidden;
+}
+
+@media screen(sm) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply text-brand2 !important;
+  }
+
+  .hover {
+    .swiper-button-prev,
+    .swiper-button-next {
+      visibility: visible;
+    }
+  }
+}
+
+.dark-scroller {
+  &::-webkit-scrollbar {
+   @apply bg-bg-main;
+   width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-brand1;
+  }
+
+  &.x-thin {
+    &::-webkit-scrollbar {
+      height: 2px;
+    }
+  }
+}
+
+.modal-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-window {
+  animation: 0.2s linear fadein;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

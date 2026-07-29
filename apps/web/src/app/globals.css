@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-bg-main;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+header {
+  @apply bg-bg-main;
+  opacity: 0.85;
+}
+
+main a {
+  @apply text-brand2;
+}
+
+ul li {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: rgba(29, 32, 38, 0.5);
+}
+
+img {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.layer-container {
+  @apply bg-bg-main;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.text-gray-300-animation {
+  @apply text-gray-300;
+
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+.text-brand1-animation {
+  @apply text-brand1;
+
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+.text-brand2-animation {
+  @apply text-brand2;
+
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+.cursor-animation::after {
+  content: '|';
+  animation: cursor 0.8s infinite;
+}
+
+.mobile-nav-hidden {
+  display: none;
+}
+
+.mobile-nav-show {
+  display: flex;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.h-cvh {
+  height: calc(100vh - 210px);
+}
