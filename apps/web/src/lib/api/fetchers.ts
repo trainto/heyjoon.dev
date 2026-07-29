@@ -11,16 +11,12 @@ export const fetcher = async <T>(url: string, query?: StringifiableRecord) => {
     url: query ? queryString.stringifyUrl({ url, query }) : url,
   };
 
-  try {
-    const res = await axios<T>(axiosConfig);
+  const res = await axios<T>(axiosConfig);
 
-    if (Math.floor(res.status / 100) === 2) {
-      return res.data;
-    } else {
-      throw res;
-    }
-  } catch (err: unknown) {
-    throw err;
+  if (Math.floor(res.status / 100) === 2) {
+    return res.data;
+  } else {
+    throw res;
   }
 };
 

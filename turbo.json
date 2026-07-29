@@ -7,6 +7,7 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"],
       "env": [
+        "NODE_ENV",
         "IS_PRODUCTION",
         "PORT",
         "DB_HOST",

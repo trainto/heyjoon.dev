@@ -17,7 +17,6 @@ const Ad = ({ slot }: { slot: string }) => {
     try {
       (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle.push({});
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.error('Error loading Google AdSense:', e);
     }
   }, [slot]);

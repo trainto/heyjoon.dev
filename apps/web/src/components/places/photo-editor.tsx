@@ -53,8 +53,6 @@ export default function PhotoEditor({
 
   const handleOrdering = (e: React.MouseEvent<HTMLDivElement>, from: number, to: number) => {
     e.stopPropagation();
-    {
-    }
     if (to < 0 || to > urls.length - 1) {
       return;
     }

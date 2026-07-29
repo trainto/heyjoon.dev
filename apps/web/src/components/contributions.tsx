@@ -42,7 +42,7 @@ const Contributions = () => {
         {data?.map((page) =>
           page.items?.map((pr) => (
             <li key={pr.id} className="mb-3">
-              <a href={pr.html_url} target="_blank">
+              <a href={pr.html_url} target="_blank" rel="noreferrer">
                 {pr.title}
               </a>
               <br />

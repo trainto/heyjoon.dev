@@ -11,10 +11,10 @@ export default function Me() {
       <div>Developer who lives in Seoul,</div>
       <div>like programming and doing nothing.</div>
       <div className="mt-5 flex space-x-2">
-        <a href="https://linkedin.com" target="_blank">
+        <a href="https://linkedin.com" target="_blank" rel="noreferrer">
           <Image src="/linkedin.png" width={28} height={28} alt="Linkedin" />
         </a>
-        <a href="https://github.com/trainto" target="_blank">
+        <a href="https://github.com/trainto" target="_blank" rel="noreferrer">
           <Image src="/github.png" width={28} height={28} alt="Github" />
         </a>
       </div>
