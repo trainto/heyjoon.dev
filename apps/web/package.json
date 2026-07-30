@@ -10,6 +10,7 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@repo/shared": "workspace:*",
     "@trainto/sante": "^0.2.3",
     "axios": "^1.18.1",
     "date-fns": "^4.4.0",
