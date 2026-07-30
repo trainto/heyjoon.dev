@@ -21,7 +21,8 @@
         "GMAIL_SMTP_ID",
         "GMAIL_SMTP_PASSWORD",
         "SECRET",
-        "API_KEY_GITHUB"
+        "API_KEY_GITHUB",
+        "OWNER_EMAIL"
       ]
     },
     "lint": {

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Deno, OCI } from './svg';
+import { OCI } from './svg';
 
 const Stack = () => {
   return (
@@ -36,10 +36,6 @@ const Stack = () => {
             <div className="flex items-center space-x-1 mr-4 mb-2">
               <Image src="/typescript.webp" width={24} height={24} alt="Typescript" />
               <div>Typescript</div>
-            </div>
-            <div className="flex items-center space-x-1 mr-4 mb-2">
-              <Deno size={24} />
-              <div>Deno</div>
             </div>
             <div className="flex items-center space-x-1 mr-4 mb-2">
               <Image src="/mariadb.svg" width={24} height={24} alt="MariaDB" />
