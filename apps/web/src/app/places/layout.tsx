@@ -7,7 +7,7 @@ import './places.css';
 
 export const metadata: Metadata = {
   title: 'Places - Joon.log()',
-  description: 'Hot places shared by ordinary people',
+  description: 'Places to checkout shared by real people',
   applicationName: 'Places',
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Places' },
 };
