@@ -38,6 +38,7 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   const images = useMemo(() => place.images.split(','), [place.images]);
 
   const tapCount = useRef(0);
+  const likeInFlight = useRef(false);
 
   useEffect(() => {
     setLiked(!!userInfo && !!place.likedByMe);
@@ -56,14 +57,23 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
       return;
     }
 
-    const current = liked;
-    const res = current
-      ? await sendRequest({ method: 'DELETE', url: '/places/likes/' + place.id })
-      : await sendRequest({ method: 'POST', url: '/places/likes/' + place.id });
+    if (likeInFlight.current) {
+      return;
+    }
+    likeInFlight.current = true;
 
-    if (res.status === 200) {
-      setLiked((p) => !p);
-      setLikes((p) => (current ? p - 1 : p + 1));
+    try {
+      const current = liked;
+      const res = current
+        ? await sendRequest({ method: 'DELETE', url: '/places/likes/' + place.id })
+        : await sendRequest({ method: 'POST', url: '/places/likes/' + place.id });
+
+      if (res.status === 200) {
+        setLiked(!current);
+        setLikes((p) => (current ? p - 1 : p + 1));
+      }
+    } finally {
+      likeInFlight.current = false;
     }
   };
 
@@ -125,7 +135,6 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
 
       <div
         className="relative bg-black w-full pt-100 mt-2 rounded-md cursor-pointer"
-        onDoubleClick={handleLike}
         onClick={handleTap}
       >
         <div
