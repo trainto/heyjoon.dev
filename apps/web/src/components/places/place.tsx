@@ -160,7 +160,9 @@ const Place = ({
       {place.location && (
         <div className="flex justify-end px-1 mt-1">
           <a
-            href={`https://www.google.com/maps/search/?api=1&query=${place.location.lat},${place.location.lng}`}
+            href={`https://www.google.com/maps/search/${encodeURIComponent(
+              `${place.location.name} ${place.location.address}`,
+            )}/@${place.location.lat},${place.location.lng},17z`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-1 text-xs text-brand1"
