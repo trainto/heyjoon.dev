@@ -6,7 +6,13 @@ import Button from '../common/button';
 import Fetcher from '../common/fetcher';
 import Avatar from './avatar';
 
-export default function Comments({ place }: { place: Place }) {
+export default function Comments({
+  place,
+  variant = 'layer',
+}: {
+  place: Place;
+  variant?: 'layer' | 'inline';
+}) {
   const fetcherKey = '/places/comments/' + place.id;
 
   const [newComment, setNewComment] = useState('');
@@ -18,7 +24,7 @@ export default function Comments({ place }: { place: Place }) {
   const contentDiv = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (comments == null) {
+    if (variant !== 'layer' || comments == null) {
       return;
     }
 
@@ -29,7 +35,7 @@ export default function Comments({ place }: { place: Place }) {
 
     const height = container?.clientHeight - 30 - 30;
     contentDiv.current.style.height = height < 320 ? '320px' : height + 'px';
-  }, [comments]);
+  }, [comments, variant]);
 
   const onPost = useCallback(async () => {
     const res = await sendRequest({
@@ -43,6 +49,45 @@ export default function Comments({ place }: { place: Place }) {
       mutate();
     }
   }, [mutate, newComment, place.id]);
+
+  if (variant === 'inline') {
+    return (
+      <Fetcher swrKey={fetcherKey} loading={<div className="h-20" />}>
+        <div className="text-sm">
+          <div className="px-2">
+            {comments && comments.map((c) => <CommentMemo key={c.id} commentInfo={c} />)}
+            {comments && comments.length === 0 && (
+              <div className="text-center text-gray-400 py-3">
+                Be the first to comment on this post. &#128516;
+              </div>
+            )}
+          </div>
+
+          <div className="mt-3">
+            <input
+              className="w-full bg-bg-main border-b p-1"
+              placeholder="Your comment"
+              maxLength={100}
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value.slice(0, 100))}
+            />
+
+            <div className="flex justify-end mt-2">
+              <Button color="indigo" size="sm" onClick={onPost} disabled={!canPost}>
+                Post
+              </Button>
+            </div>
+          </div>
+
+          <style jsx>{`
+            input {
+              outline: none !important;
+            }
+          `}</style>
+        </div>
+      </Fetcher>
+    );
+  }
 
   return (
     <Fetcher

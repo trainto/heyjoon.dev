@@ -17,7 +17,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
+const Place = ({
+  place,
+  priority,
+  detail = false,
+}: {
+  place: Place;
+  priority: boolean;
+  detail?: boolean;
+}) => {
   const [liked, setLiked] = useState(() => !!place.likedByMe);
   const [likes, setLikes] = useState(() => place.likes);
   const [mouseOn, setMouseOn] = useState(false);
@@ -102,6 +110,10 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   };
 
   const handleCommentsClick = () => {
+    if (detail) {
+      return;
+    }
+
     if (userInfo == null) {
       dispatch('modal', { msg: 'Please sign in to cotinue!' });
       return;
@@ -205,7 +217,7 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
 
         <div>|</div>
 
-        <div role="button" onClick={handleCommentsClick}>
+        <div role={detail ? undefined : 'button'} onClick={handleCommentsClick}>
           Comments: {place.comments}
         </div>
       </div>
