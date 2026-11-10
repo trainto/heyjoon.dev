@@ -9,10 +9,18 @@ export type UserInfo = {
   deletedAt?: string | null;
 };
 
+export type PlaceLocation = {
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+};
+
 export type Place = {
   id: number;
   desc: string;
   images: string;
+  location?: PlaceLocation | null;
   email: string;
   avatar: string;
   nickname: string;

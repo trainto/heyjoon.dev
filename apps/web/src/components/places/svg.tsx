@@ -199,3 +199,17 @@ export const Search = ({ size = 24 }: { size?: number }) => {
     </svg>
   );
 };
+
+export const LocationPin = ({ size = 16 }: { size?: number }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 -960 960 960"
+      fill="currentColor"
+    >
+      <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 376q122-110 181-199.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 160.5T480-104Zm0 96Q339-132 269.5-239.5T200-552q0-150 96.5-249T480-900q87 0 183.5 99T760-552q0 100-69.5 207.5T480-8Z" />
+    </svg>
+  );
+};

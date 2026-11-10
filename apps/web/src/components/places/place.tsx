@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './avatar';
 import Comments from './comments';
 import Likes from './likes';
-import { Heart } from './svg';
+import { Heart, LocationPin } from './svg';
 import Tag from './tag';
 import UserDetail from './user-detail';
 
@@ -40,7 +40,7 @@ const Place = ({
 
   const createdAt = useMemo(
     () => format(new Date(place.createdAt), 'MMM dd, yyyy'),
-    [place.createdAt],
+    [place.createdAt]
   );
 
   const images = useMemo(() => place.images.split(','), [place.images]);
@@ -156,6 +156,20 @@ const Place = ({
           ) : null} */}
         </div>
       </div>
+
+      {place.location && (
+        <div className="flex justify-end px-1 mt-1">
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${place.location.lat},${place.location.lng}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-1 text-xs text-brand1"
+          >
+            <LocationPin size={14} />
+            <span>{place.location.name}</span>
+          </a>
+        </div>
+      )}
 
       <div
         className="relative bg-black w-full pt-100 mt-2 rounded-md cursor-pointer"
