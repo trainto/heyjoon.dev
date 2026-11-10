@@ -38,6 +38,7 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   const images = useMemo(() => place.images.split(','), [place.images]);
 
   const tapCount = useRef(0);
+  const tapTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const likeInFlight = useRef(false);
 
   useEffect(() => {
@@ -78,16 +79,25 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
   };
 
   const handleTap = (e: MouseEvent) => {
+    if (
+      (e.target as HTMLElement).classList.contains('swiper-button-prev') ||
+      (e.target as HTMLElement).classList.contains('swiper-button-next')
+    ) {
+      return;
+    }
+
     if (tapCount.current === 1) {
       tapCount.current = 0;
+      clearTimeout(tapTimer.current);
       handleLike(e);
       return;
     }
 
     tapCount.current += 1;
 
-    setTimeout(() => {
+    tapTimer.current = setTimeout(() => {
       tapCount.current = 0;
+      window.location.hash = String(place.id);
     }, 300);
   };
 
@@ -123,7 +133,9 @@ const Place = ({ place, priority }: { place: Place; priority: boolean }) => {
           <div className="text-sm text-gray-300">{place.nickname}</div>
         </div>
         <div className="flex items-center space-x-1">
-          <div className="text-xs text-gray-500">{createdAt}</div>
+          <a href={`/places#${place.id}`} className="text-xs text-gray-500">
+            {createdAt}
+          </a>
 
           {/* {userInfo?.email === place.email ? (
             <div role="button">
