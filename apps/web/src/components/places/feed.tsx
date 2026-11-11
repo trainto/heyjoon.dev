@@ -69,8 +69,11 @@ export default function Feed() {
     <>
       <Uploader />
 
-      <div className="flex justify-between items-center mb-3">
+      <div className="mb-3">
         <TagSearch />
+      </div>
+
+      <div className="flex justify-end mb-3">
         <SortToggle value={sortMode} onChange={handleSortChange} />
       </div>
 

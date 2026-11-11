@@ -24,7 +24,7 @@ export default function TagSearch() {
 
   if (activeTag) {
     return (
-      <div className="flex items-center space-x-2 border border-gray-700 rounded-md px-2 py-1">
+      <div className="flex items-center space-x-2 w-full border border-gray-700 rounded-md px-2 py-1">
         <span className="text-sm text-brand2">#{activeTag}</span>
         <button type="button" className="text-gray-400" onClick={handleClear}>
           ✕
@@ -34,7 +34,7 @@ export default function TagSearch() {
   }
 
   return (
-    <div className="flex rounded-md border border-gray-700 items-center">
+    <div className="flex w-full rounded-md border border-gray-700 items-center">
       <div className="p-1 pl-2 text-brand2">#</div>
       <input
         className="bg-bg-main p-1 text-gray-400 text-sm min-w-0 w-full"

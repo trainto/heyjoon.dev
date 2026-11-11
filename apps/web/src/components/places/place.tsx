@@ -169,17 +169,17 @@ const Place = ({
       </div>
 
       {place.location && (
-        <div className="flex justify-end px-1 mt-1">
+        <div className="flex justify-end items-center space-x-2 px-1 mt-1">
+          {distance && <span className="text-xs text-gray-400">{distance}</span>}
           <a
             href={`https://www.google.com/maps/search/${encodeURIComponent(
-              `${place.location.name} ${place.location.address}`,
+              `${place.location.name} ${place.location.address}`
             )}/@${place.location.lat},${place.location.lng},17z`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-1 text-xs text-brand1"
           >
             <LocationPin size={14} color="#db2777" />
-            {distance && <span>{distance}</span>}
             <span>{place.location.name}</span>
           </a>
         </div>
