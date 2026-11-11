@@ -84,8 +84,10 @@ export default function Feed() {
         <div className="text-center text-gray-400 text-sm py-10">
           {tag ? (
             <>
-              No places tagged <span className="text-brand2">#{tag}</span> yet. Be the first, or
-              try another tag!
+              <div>
+                No places tagged <span className="text-brand2">#{tag}</span> yet.
+              </div>
+              <div>Be the first, or try another tag!</div>
             </>
           ) : (
             'No places found.'
