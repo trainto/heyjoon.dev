@@ -45,6 +45,17 @@ const Place = ({
 
   const images = useMemo(() => place.images.split(','), [place.images]);
 
+  const distance = useMemo(() => {
+    if (place.distance == null) {
+      return null;
+    }
+
+    return `${new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(place.distance)}km`;
+  }, [place.distance]);
+
   const tapCount = useRef(0);
   const tapTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const likeInFlight = useRef(false);
@@ -168,6 +179,7 @@ const Place = ({
             className="flex items-center space-x-1 text-xs text-brand1"
           >
             <LocationPin size={14} color="#db2777" />
+            {distance && <span>{distance}</span>}
             <span>{place.location.name}</span>
           </a>
         </div>

@@ -29,6 +29,7 @@ export type Place = {
   comments: number;
   likes: number;
   likedByMe?: number;
+  distance?: number;
 };
 
 export type CommentInfo = {
@@ -66,4 +67,8 @@ export type GetPlacesQuery = {
   limit?: string;
   tags?: string;
   by?: string;
+  sort?: 'distance';
+  lat?: string;
+  lng?: string;
+  lastDistance?: string;
 };
