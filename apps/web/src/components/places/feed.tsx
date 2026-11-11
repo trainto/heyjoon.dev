@@ -65,6 +65,9 @@ export default function Feed() {
     return <PlaceLoading />;
   }
 
+  const tag = params.get('tags');
+  const isEmpty = data != null && data.every((arr) => arr.length === 0);
+
   return (
     <>
       <Uploader />
@@ -77,15 +80,28 @@ export default function Feed() {
         <SortToggle value={sortMode} onChange={handleSortChange} />
       </div>
 
-      <div>
-        {data?.map((arr, i) =>
-          arr.map((p, j) => (
-            <Place key={p.id} place={p} priority={i === 0 && (j === 0 || j === 1)} />
-          )),
-        )}
-      </div>
+      {isEmpty ? (
+        <div className="text-center text-gray-400 text-sm py-10">
+          {tag ? (
+            <>
+              No places tagged <span className="text-brand2">#{tag}</span> yet. Be the first, or
+              try another tag!
+            </>
+          ) : (
+            'No places found.'
+          )}
+        </div>
+      ) : (
+        <div>
+          {data?.map((arr, i) =>
+            arr.map((p, j) => (
+              <Place key={p.id} place={p} priority={i === 0 && (j === 0 || j === 1)} />
+            )),
+          )}
+        </div>
+      )}
 
-      {data && !noMoreFeed.current && (
+      {data && !noMoreFeed.current && !isEmpty && (
         <div className="flex justify-center mt-3">
           <Loading />
         </div>
