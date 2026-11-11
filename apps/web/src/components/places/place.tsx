@@ -51,8 +51,8 @@ const Place = ({
     }
 
     return `${new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
     }).format(place.distance)}km`;
   }, [place.distance]);
 
