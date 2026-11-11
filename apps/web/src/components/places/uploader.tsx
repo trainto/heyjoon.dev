@@ -99,6 +99,8 @@ const Uploader = () => {
       setBlobs([]);
       setLocation(null);
       dispatchEvent('fetchPlaces');
+    } else {
+      dispatch('modal', { msg: 'Failed to post. Please try again.' });
     }
 
     setIsUploading(false);
