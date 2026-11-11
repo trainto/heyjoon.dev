@@ -7,14 +7,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from '../common/button';
 import Avatar from './avatar';
 import Loading from './loading';
+import LocationSearch from './location-search';
 import PhotoEditor from './photo-editor';
-import { Camera } from './svg';
+import { AddLocation, Camera } from './svg';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
   const [blobs, setBlobs] = useState<Blob[]>([]);
   const [taRows, setTaRows] = useState(2);
   const [isUploading, setIsUploading] = useState(false);
+  const [location, setLocation] = useState<PlaceLocation | null>(null);
 
   const { userInfo, layer } = useSante(['userInfo', 'layer']);
 
@@ -46,6 +48,13 @@ const Uploader = () => {
     }
   }, [layer]);
 
+  const handleLocationClick = () => {
+    dispatch('layer', {
+      node: <LocationSearch onComplete={setLocation} />,
+      containerClassName: 'w-full sm:w-1/3',
+    });
+  };
+
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const files: File[] = [];
@@ -72,8 +81,11 @@ const Uploader = () => {
 
     const form = new FormData();
     form.append('desc', desc.trim());
+    if (location) {
+      form.append('location', JSON.stringify(location));
+    }
     blobs.forEach((b, i) =>
-      form.append('files', new File([b], i + '.jpg', { type: 'image/jpeg' })),
+      form.append('files', new File([b], i + '.jpg', { type: 'image/jpeg' }))
     );
 
     const res = await sendRequest({
@@ -85,11 +97,12 @@ const Uploader = () => {
     if (res.status === 200) {
       setDesc('');
       setBlobs([]);
+      setLocation(null);
       dispatchEvent('fetchPlaces');
     }
 
     setIsUploading(false);
-  }, [blobs, desc]);
+  }, [blobs, desc, location]);
 
   useEffect(() => {
     if (isUploading) {
@@ -124,11 +137,22 @@ const Uploader = () => {
       </div>
 
       <div className="flex justify-between mt-3 h-9 border-t border-gray-600 ml-12 pt-2">
-        <div className="flex space-x-1 items-end">
+        <div className="flex space-x-2 items-end">
           <div className="cursor-pointer" role="button" onClick={() => inputRef.current?.click()}>
             <Camera />
           </div>
           {blobs && <div className="text-xs text-gray-300">{blobs.length}/10</div>}
+          <div className="cursor-pointer" role="button" onClick={handleLocationClick}>
+            <AddLocation size={24} />
+          </div>
+          {location && (
+            <div className="flex items-center space-x-1 text-xs text-brand1">
+              <span>{location.name}</span>
+              <button type="button" className="text-gray-400" onClick={() => setLocation(null)}>
+                ✕
+              </button>
+            </div>
+          )}
         </div>
 
         {isUploading ? (
@@ -140,6 +164,15 @@ const Uploader = () => {
             size="sm"
             color="indigo"
             onClick={() => {
+              if (!location) {
+                dispatch('modal', {
+                  msg: 'No location was added. Continue without it?',
+                  hasCancel: true,
+                  onConfirm: () => setIsUploading(true),
+                });
+                return;
+              }
+
               setIsUploading(true);
             }}
             disabled={desc.trim() === '' || blobs.length === 0}

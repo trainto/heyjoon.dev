@@ -14,6 +14,7 @@ declare global {
 
   type UserInfo = import('@repo/shared').UserInfo;
   type Place = import('@repo/shared').Place;
+  type PlaceLocation = import('@repo/shared').PlaceLocation;
   type CommentInfo = import('@repo/shared').CommentInfo;
   type BP = import('@repo/shared').BP;
   type GithubPR = import('@repo/shared').GithubPR;

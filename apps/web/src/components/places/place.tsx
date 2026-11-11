@@ -167,7 +167,7 @@ const Place = ({
             rel="noopener noreferrer"
             className="flex items-center space-x-1 text-xs text-brand1"
           >
-            <LocationPin size={14} />
+            <LocationPin size={14} color="#db2777" />
             <span>{place.location.name}</span>
           </a>
         </div>

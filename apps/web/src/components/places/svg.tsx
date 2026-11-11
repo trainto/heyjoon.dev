@@ -200,16 +200,30 @@ export const Search = ({ size = 24 }: { size?: number }) => {
   );
 };
 
-export const LocationPin = ({ size = 16 }: { size?: number }) => {
+export const LocationPin = ({ size = 16, color }: { size?: number; color?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
       viewBox="0 -960 960 960"
-      fill="currentColor"
+      fill={color ?? '#9ca3af'}
     >
-      <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 376q122-110 181-199.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 160.5T480-104Zm0 96Q339-132 269.5-239.5T200-552q0-150 96.5-249T480-900q87 0 183.5 99T760-552q0 100-69.5 207.5T480-8Z" />
+      <path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
+    </svg>
+  );
+};
+
+export const AddLocation = ({ size = 22, color }: { size?: number; color?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 -960 960 960"
+      fill={color ?? '#9ca3af'}
+    >
+      <path d="M440-400h80v-120h120v-80H520v-120h-80v120H320v80h120v120Zm40 214q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
     </svg>
   );
 };
