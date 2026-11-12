@@ -15,13 +15,12 @@ setWorkerUrl('/maplibre-gl-worker.mjs');
 // Used when geolocation isn't available or permission is denied.
 const GANGNAM_STATION = { lat: 37.497952, lng: 127.027619 };
 
-const INITIAL_RADIUS_KM = 10;
+const INITIAL_RADIUS_KM = 5;
 const SOURCE_ID = 'place-pins';
 const MOVE_DEBOUNCE_MS = 400;
 
 const kmToLatDelta = (km: number) => km / 111;
-const kmToLngDelta = (km: number, atLat: number) =>
-  km / (111 * Math.cos((atLat * Math.PI) / 180));
+const kmToLngDelta = (km: number, atLat: number) => km / (111 * Math.cos((atLat * Math.PI) / 180));
 
 const boundsAround = (
   center: { lat: number; lng: number },
@@ -244,6 +243,10 @@ export default function FullMap() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full rounded-md overflow-hidden" style={{ height: '70vh' }} />
+    <div
+      ref={containerRef}
+      className="w-full rounded-md overflow-hidden"
+      style={{ height: '70vh' }}
+    />
   );
 }
