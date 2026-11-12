@@ -49,7 +49,7 @@ export default function Feed() {
   useScrollHitTheBottom(
     useCallback(() => {
       setSize((p) => p + 1);
-    }, [setSize]),
+    }, [setSize])
   );
 
   useEventBus('fetchPlaces', mutate);
@@ -61,7 +61,7 @@ export default function Feed() {
       setSortMode(mode);
       setSize(1);
     },
-    [setSize],
+    [setSize]
   );
 
   const handleMapClick = useCallback(() => {
@@ -87,7 +87,7 @@ export default function Feed() {
       </div>
 
       <div className="flex justify-between items-center mb-3">
-        <div className="cursor-pointer" role="button" onClick={handleMapClick}>
+        <div className="cursor-pointer pl-2" role="button" onClick={handleMapClick}>
           <MapIcon size={20} />
         </div>
         <SortToggle value={sortMode} onChange={handleSortChange} />
@@ -111,7 +111,7 @@ export default function Feed() {
           {data?.map((arr, i) =>
             arr.map((p, j) => (
               <Place key={p.id} place={p} priority={i === 0 && (j === 0 || j === 1)} />
-            )),
+            ))
           )}
         </div>
       )}
