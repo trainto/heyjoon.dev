@@ -209,12 +209,27 @@ export default function FullMap() {
         nameEl.textContent = name || 'Untitled place';
         container.appendChild(nameEl);
 
+        const linkRow = document.createElement('div');
+        linkRow.className = 'flex flex-col space-y-1';
+
         const link = document.createElement('a');
         link.href = `/places#${id}`;
         link.className = 'text-brand1';
         link.textContent = 'View place →';
         link.onclick = () => dispatch('layer', null);
-        container.appendChild(link);
+        linkRow.appendChild(link);
+
+        const googleMapsLink = document.createElement('a');
+        googleMapsLink.href = `https://www.google.com/maps/search/${encodeURIComponent(
+          name || ''
+        )}/@${lat},${lng},17z`;
+        googleMapsLink.target = '_blank';
+        googleMapsLink.rel = 'noopener noreferrer';
+        googleMapsLink.className = 'text-gray-500';
+        googleMapsLink.textContent = 'Google Maps ↗';
+        linkRow.appendChild(googleMapsLink);
+
+        container.appendChild(linkRow);
 
         new Popup({ closeButton: false }).setLngLat([lng, lat]).setDOMContent(container).addTo(map);
       });
