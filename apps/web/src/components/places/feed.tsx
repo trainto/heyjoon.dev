@@ -1,13 +1,16 @@
 import { fetcher } from '@/lib/api/fetchers';
 import { useEventBus } from '@/lib/event-bus';
 import { useScrollHitTheBottom } from '@/lib/hooks';
+import { dispatch } from '@/lib/store';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useRef, useState } from 'react';
 import useSWRInfinite from 'swr/infinite';
+import FullMap from './full-map';
 import Loading from './loading';
 import Place from './place';
 import PlaceLoading from './place-loading';
 import SortToggle, { SortMode } from './sort-toggle';
+import { MapIcon } from './svg';
 import TagSearch from './tag-search';
 import Uploader from './uploader';
 
@@ -61,6 +64,13 @@ export default function Feed() {
     [setSize],
   );
 
+  const handleMapClick = useCallback(() => {
+    dispatch('layer', {
+      node: <FullMap />,
+      containerClassName: 'layer-container-full-width w-full sm:w-4/5',
+    });
+  }, []);
+
   if (isLoading && data == null) {
     return <PlaceLoading />;
   }
@@ -76,7 +86,10 @@ export default function Feed() {
         <TagSearch />
       </div>
 
-      <div className="flex justify-end mb-3">
+      <div className="flex justify-between items-center mb-3">
+        <div className="cursor-pointer" role="button" onClick={handleMapClick}>
+          <MapIcon size={20} />
+        </div>
         <SortToggle value={sortMode} onChange={handleSortChange} />
       </div>
 

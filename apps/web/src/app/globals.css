@@ -40,6 +40,13 @@ img {
   max-height: 90%;
 }
 
+@media (max-width: 639px) {
+  .layer-container.layer-container-full-width {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 .text-gray-300-animation {
   @apply text-gray-300;
 

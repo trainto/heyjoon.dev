@@ -72,3 +72,17 @@ export type GetPlacesQuery = {
   lng?: string;
   lastDistance?: string;
 };
+
+export type GetPlaceLocationsQuery = {
+  minLat?: string;
+  maxLat?: string;
+  minLng?: string;
+  maxLng?: string;
+};
+
+export type PlacePin = {
+  id: number;
+  lat: number;
+  lng: number;
+  name: string;
+};
