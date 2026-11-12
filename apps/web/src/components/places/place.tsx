@@ -1,5 +1,6 @@
 import { sendRequest } from '@/lib/api/fetchers';
 import { CDN_URL } from '@/lib/constants';
+import { dispatchEvent } from '@/lib/event-bus';
 import { dispatch, useSante } from '@/lib/store';
 import { format } from 'date-fns';
 import Image from 'next/image';
@@ -8,7 +9,9 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Avatar from './avatar';
 import Comments from './comments';
+import EditPlace from './edit-place';
 import Likes from './likes';
+import MoreDrop from './more-dropdown';
 import { Heart, LocationPin } from './svg';
 import Tag from './tag';
 import UserDetail from './user-detail';
@@ -143,6 +146,33 @@ const Place = ({
     });
   }, [place.email]);
 
+  const handleEditClick = useCallback(() => {
+    dispatch('layer', {
+      node: <EditPlace place={place} />,
+      containerClassName: 'w-full sm:w-1/3',
+    });
+  }, [place]);
+
+  const handleDeleteClick = useCallback(() => {
+    dispatch('modal', {
+      msg: 'Are you sure you want to delete this place? This cannot be undone.',
+      hasCancel: true,
+      onConfirm: async () => {
+        const res = await sendRequest({ method: 'DELETE', url: '/places/' + place.id });
+
+        if (res.status === 200) {
+          if (detail) {
+            window.location.href = '/places';
+          } else {
+            dispatchEvent('fetchPlaces');
+          }
+        } else {
+          dispatch('modal', { msg: 'Failed to delete. Please try again.' });
+        }
+      },
+    });
+  }, [detail, place.id]);
+
   return (
     <div className="place border border-gray-700 py-2 px-1 rounded">
       <div className="flex justify-between items-center px-1">
@@ -160,14 +190,19 @@ const Place = ({
             {createdAt}
           </a>
 
-          {/* {userInfo?.email === place.email ? (
-            <div role="button">
-              <MoreDrop iconSize={20} menu={[]} />
+          {userInfo && (userInfo.email === place.email || userInfo.admin) ? (
+            <div className="text-gray-500">
+              <MoreDrop
+                iconSize={14}
+                menu={[
+                  { label: 'Edit', onClick: handleEditClick },
+                  { label: 'Delete', onClick: handleDeleteClick },
+                ]}
+              />
             </div>
-          ) : null} */}
+          ) : null}
         </div>
       </div>
-
       {place.location && (
         <div className="flex justify-end items-center space-x-2 px-1 mt-1">
           {distance && <span className="text-xs text-gray-400">{distance}</span>}
@@ -184,7 +219,6 @@ const Place = ({
           </a>
         </div>
       )}
-
       <div
         className="relative bg-black w-full pt-100 mt-2 rounded-md cursor-pointer"
         onClick={handleTap}
@@ -217,13 +251,10 @@ const Place = ({
           </Swiper>
         </div>
       </div>
-
       <div
         className={`swiper-pagination-container-${place.id} swiper-pagination swiper-pagination-clickable swiper-pagination-horizontal`}
       ></div>
-
       <div className="px-1 text-sm my-2">{built}</div>
-
       <div className="flex justify-end items-center space-x-3 px-3 text-xs text-gray-400">
         <div className="flex space-x-1">
           <div role="button" onClick={handleLike}>

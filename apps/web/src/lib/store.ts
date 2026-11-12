@@ -4,7 +4,7 @@ import { Crop } from 'react-image-crop';
 
 type Store = {
   userInfo: UserInfo | null;
-  layer: { node: ReactNode; containerClassName?: string } | null;
+  layer: { node: ReactNode; containerClassName?: string; key?: string } | null;
   modal: { msg: string; onConfirm?: () => void; hasCancel?: boolean } | null;
   aspect: number | null;
   crops: ((Crop & CropInfo) | undefined)[] | null;
@@ -18,6 +18,6 @@ const initialStore: Store = {
   crops: null,
 };
 
-const { useSante, dispatch } = createSante(initialStore);
+const { useSante, dispatch, getCached } = createSante(initialStore);
 
-export { dispatch, useSante };
+export { dispatch, getCached, useSante };

@@ -1,13 +1,14 @@
 import { fetcher } from '@/lib/api/fetchers';
-import { dispatch } from '@/lib/store';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Loading from './loading';
 import { LocationPin } from './svg';
 
 export default function LocationSearch({
   onComplete,
+  scrollResults = false,
 }: {
   onComplete: (location: PlaceLocation) => void;
+  scrollResults?: boolean;
 }) {
   const [q, setQ] = useState('');
   const [results, setResults] = useState<PlaceLocation[]>([]);
@@ -64,7 +65,6 @@ export default function LocationSearch({
 
   const handleSelect = (location: PlaceLocation) => {
     onComplete(location);
-    dispatch('layer', null);
   };
 
   return (
@@ -84,7 +84,7 @@ export default function LocationSearch({
         )}
       </div>
 
-      <div className="mt-3">
+      <div className={`mt-3 ${scrollResults ? 'max-h-60 overflow-y-auto dark-scroller' : ''}`}>
         {hasError ? (
           <div className="text-center text-sm text-gray-400 py-6">
             Something went wrong. Please try again.

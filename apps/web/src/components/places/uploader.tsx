@@ -7,53 +7,25 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from '../common/button';
 import Avatar from './avatar';
 import Loading from './loading';
-import LocationSearch from './location-search';
 import PhotoEditor from './photo-editor';
-import { AddLocation, Camera } from './svg';
+import { DescField, LocationField } from './place-fields';
+import { Camera } from './svg';
 
 const Uploader = () => {
   const [desc, setDesc] = useState('');
   const [blobs, setBlobs] = useState<Blob[]>([]);
-  const [taRows, setTaRows] = useState(2);
   const [isUploading, setIsUploading] = useState(false);
   const [location, setLocation] = useState<PlaceLocation | null>(null);
 
   const { userInfo, layer } = useSante(['userInfo', 'layer']);
 
-  const taRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleDescChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDesc(e.target.value.slice(0, 180));
-
-    const ta = taRef.current;
-    if (ta == null) {
-      return;
-    }
-
-    if (ta.clientHeight < ta.scrollHeight) {
-      setTaRows((prev) => prev + 1);
-    }
-  };
-
-  useEffect(() => {
-    if (desc === '') {
-      setTaRows(2);
-    }
-  }, [desc]);
 
   useEffect(() => {
     if (layer == null) {
       dispatch('crops', []);
     }
   }, [layer]);
-
-  const handleLocationClick = () => {
-    dispatch('layer', {
-      node: <LocationSearch onComplete={setLocation} />,
-      containerClassName: 'w-full sm:w-1/3',
-    });
-  };
 
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -124,18 +96,8 @@ const Uploader = () => {
         </div>
 
         <div className="flex-grow">
-          <textarea
-            ref={taRef}
-            className="bg-transparent w-full px-2 text-sm"
-            placeholder="Where do you want to share?"
-            maxLength={180}
-            value={desc}
-            rows={taRows}
-            onChange={handleDescChange}
-          />
+          <DescField desc={desc} onDescChange={setDesc} />
         </div>
-
-        <div className="self-end text-xs text-gray-400">{desc.length}/180</div>
       </div>
 
       <div className="flex justify-between mt-3 h-9 border-t border-gray-600 ml-12 pt-2">
@@ -144,17 +106,7 @@ const Uploader = () => {
             <Camera />
           </div>
           {blobs && <div className="text-xs text-gray-300">{blobs.length}/10</div>}
-          <div className="cursor-pointer" role="button" onClick={handleLocationClick}>
-            <AddLocation size={24} />
-          </div>
-          {location && (
-            <div className="flex items-center space-x-1 text-xs text-brand1">
-              <span>{location.name}</span>
-              <button type="button" className="text-gray-400" onClick={() => setLocation(null)}>
-                ✕
-              </button>
-            </div>
-          )}
+          <LocationField location={location} onLocationChange={setLocation} />
         </div>
 
         {isUploading ? (
