@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import Comments from './comments';
 import Place from './place';
 import PlaceLoading from './place-loading';
+import PlaceMap from './place-map';
 
 export default function PlaceDetail({ id }: { id: string }) {
   const { data, error, mutate } = useSWR<Place>('/places/' + id, fetcher);
@@ -28,6 +29,12 @@ export default function PlaceDetail({ id }: { id: string }) {
       ) : data ? (
         <>
           <Place key={data.id} place={data} priority detail />
+
+          {data.location && (
+            <div className="mt-3 px-2">
+              <PlaceMap key={data.id} location={data.location} />
+            </div>
+          )}
 
           <div className="mt-3 pt-3 border-t border-gray-700 px-2">
             {userInfo == null ? (

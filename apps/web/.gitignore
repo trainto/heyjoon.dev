@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# copied by predev/prebuild from node_modules, kept in sync with the installed maplibre-gl version
+/public/maplibre-gl-worker.mjs
