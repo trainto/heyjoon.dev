@@ -1,7 +1,7 @@
 import { fetcher } from '@/lib/api/fetchers';
 import { dispatch } from '@/lib/store';
 import type { FeatureCollection, Point } from 'geojson';
-import { GeoJSONSource, Map as MapLibreMap, Popup, setWorkerUrl } from 'maplibre-gl';
+import { GeoJSONSource, Map as MapLibreMap, Marker, Popup, setWorkerUrl } from 'maplibre-gl';
 import { useEffect, useRef } from 'react';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -247,6 +247,7 @@ export default function FullMap() {
         return;
       }
 
+      new Marker({ color: '#0891b2' }).setLngLat([location.lng, location.lat]).addTo(map);
       map.fitBounds(boundsAround(location, INITIAL_RADIUS_KM), { animate: false });
     });
 
