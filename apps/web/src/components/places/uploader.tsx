@@ -84,6 +84,20 @@ const Uploader = () => {
     }
   }, [handlePost, isUploading]);
 
+  const [blobUrls, setBlobUrls] = useState<string[]>([]);
+
+  // Object URLs are created inside the effect (not memoized) so Strict
+  // Mode's extra setup+cleanup+setup in dev gets fresh URLs instead of
+  // reusing ones its own cleanup already revoked.
+  useEffect(() => {
+    const urls = blobs.map((b) => URL.createObjectURL(b));
+    setBlobUrls(urls);
+
+    return () => {
+      urls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [blobs]);
+
   if (userInfo == null) {
     return null;
   }
@@ -139,15 +153,9 @@ const Uploader = () => {
       {blobs && blobs.length > 0 && (
         <div className="mt-3 ml-12 h-10">
           <Swiper slidesPerView="auto" className="h-10" spaceBetween={5}>
-            {blobs.map((blob, i) => (
+            {blobUrls.map((url, i) => (
               <SwiperSlide key={i} style={{ width: 'auto' }}>
-                <Image
-                  src={URL.createObjectURL(blob)}
-                  alt="food"
-                  width={40}
-                  height={40}
-                  className="rounded-md"
-                />
+                <Image src={url} alt="food" width={40} height={40} className="rounded-md" />
               </SwiperSlide>
             ))}
           </Swiper>
