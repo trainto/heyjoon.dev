@@ -22,6 +22,7 @@ export default function Comments({
   const canPost = useMemo(() => newComment.length >= 3, [newComment.length]);
 
   const contentDiv = useRef<HTMLDivElement>(null);
+  const postInFlight = useRef(false);
 
   useEffect(() => {
     if (variant !== 'layer' || comments == null) {
@@ -38,15 +39,24 @@ export default function Comments({
   }, [comments, variant]);
 
   const onPost = useCallback(async () => {
-    const res = await sendRequest({
-      method: 'POST',
-      url: '/places/comments/' + place.id,
-      data: { comment: newComment.trim() },
-    });
+    if (postInFlight.current) {
+      return;
+    }
+    postInFlight.current = true;
 
-    if (res.status === 200) {
-      setNewComment('');
-      mutate();
+    try {
+      const res = await sendRequest({
+        method: 'POST',
+        url: '/places/comments/' + place.id,
+        data: { comment: newComment.trim() },
+      });
+
+      if (res.status === 201) {
+        setNewComment('');
+        mutate();
+      }
+    } finally {
+      postInFlight.current = false;
     }
   }, [mutate, newComment, place.id]);
 
