@@ -247,7 +247,15 @@ export default function FullMap() {
         return;
       }
 
-      new Marker({ color: '#0891b2' }).setLngLat([location.lng, location.lat]).addTo(map);
+      const myLocationEl = document.createElement('div');
+      myLocationEl.className = 'rounded-full p-1.5 shadow-lg';
+      myLocationEl.style.backgroundColor = '#0891b2';
+      myLocationEl.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 -960 960 960" fill="#ffffff">' +
+        '<path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm63.5-663.5Q400-767 400-800t23.5-56.5Q447-880 480-880t56.5 23.5Q560-833 560-800t-23.5 56.5Q513-720 480-720t-56.5-23.5Z"/>' +
+        '</svg>';
+
+      new Marker({ element: myLocationEl }).setLngLat([location.lng, location.lat]).addTo(map);
       map.fitBounds(boundsAround(location, INITIAL_RADIUS_KM), { animate: false });
     });
 
