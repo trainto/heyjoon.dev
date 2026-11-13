@@ -1,7 +1,7 @@
 import { fetcher } from '@/lib/api/fetchers';
 import { dispatch } from '@/lib/store';
 import type { FeatureCollection, Point } from 'geojson';
-import { GeoJSONSource, Map as MapLibreMap, Marker, Popup, setWorkerUrl } from 'maplibre-gl';
+import { GeolocateControl, GeoJSONSource, Map as MapLibreMap, Popup, setWorkerUrl } from 'maplibre-gl';
 import { useEffect, useRef } from 'react';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -46,40 +46,6 @@ const pinsToGeoJSON = (pins: PlacePin[]): FeatureCollection<Point> => ({
 
 const GEOLOCATION_TIMEOUT_MS = 8000;
 
-// Resolves to null if geolocation isn't available/granted, times out, or
-// fails -- callers fall back to GANGNAM_STATION, which is already on screen
-// by the time this settles.
-const getCurrentLocation = (): Promise<{ lat: number; lng: number } | null> =>
-  new Promise((resolve) => {
-    if (!navigator.geolocation || !navigator.permissions?.query) {
-      resolve(null);
-      return;
-    }
-
-    const timer = setTimeout(() => resolve(null), GEOLOCATION_TIMEOUT_MS);
-    const resolveOnce = (value: { lat: number; lng: number } | null) => {
-      clearTimeout(timer);
-      resolve(value);
-    };
-
-    navigator.permissions
-      .query({ name: 'geolocation' })
-      .then((status) => {
-        if (status.state === 'denied') {
-          resolveOnce(null);
-          return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-          (position) =>
-            resolveOnce({ lat: position.coords.latitude, lng: position.coords.longitude }),
-          () => resolveOnce(null),
-          { timeout: GEOLOCATION_TIMEOUT_MS }
-        );
-      })
-      .catch(() => resolveOnce(null));
-  });
-
 export default function FullMap() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -91,6 +57,7 @@ export default function FullMap() {
     let cancelled = false;
     const pinsById = new Map<number, PlacePin>();
     let moveTimer: ReturnType<typeof setTimeout> | undefined;
+    let triggerInterval: ReturnType<typeof setInterval> | undefined;
 
     const map = new MapLibreMap({
       container: containerRef.current,
@@ -234,33 +201,51 @@ export default function FullMap() {
         new Popup({ closeButton: false }).setLngLat([lng, lat]).setDOMContent(container).addTo(map);
       });
 
+      // GeolocateControl supplies its own "recenter on my location" button,
+      // the blue dot marker, and the accuracy circle, so none of that needs
+      // to be built by hand here. zoomToUserAccuracy is turned off so a
+      // precise fix doesn't zoom in past our INITIAL_RADIUS_KM overview --
+      // it only recenters, keeping the current zoom level.
+      const geolocate = new GeolocateControl({
+        positionOptions: { timeout: GEOLOCATION_TIMEOUT_MS },
+        zoomToUserAccuracy: false,
+      });
+      map.addControl(geolocate, 'bottom-right');
+
       // Register before the first fetch, and show/load the default view
       // right away, so a pan/zoom during (or a stall/timeout of) the
-      // geolocation lookup below is never missed and the map is never left
+      // geolocation trigger below is never missed and the map is never left
       // empty waiting on it.
       map.on('moveend', onMoveEnd);
       map.fitBounds(boundsAround(GANGNAM_STATION, INITIAL_RADIUS_KM), { animate: false });
       await loadPins();
 
-      const location = await getCurrentLocation();
-      if (cancelled || location == null) {
+      if (cancelled) {
         return;
       }
 
-      const myLocationEl = document.createElement('div');
-      myLocationEl.className = 'rounded-full p-1.5 shadow-lg';
-      myLocationEl.style.backgroundColor = '#0891b2';
-      myLocationEl.innerHTML =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 -960 960 960" fill="#ffffff">' +
-        '<path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm63.5-663.5Q400-767 400-800t23.5-56.5Q447-880 480-880t56.5 23.5Q560-833 560-800t-23.5 56.5Q513-720 480-720t-56.5-23.5Z"/>' +
-        '</svg>';
+      // trigger() calls navigator.geolocation unconditionally even when
+      // it's unavailable (unsupported browser, insecure context), so check
+      // first. If permission is denied, GeolocateControl surfaces an error
+      // state on its own button and the map stays on the default view.
+      if (!navigator.geolocation) {
+        return;
+      }
 
-      new Marker({ element: myLocationEl }).setLngLat([location.lng, location.lat]).addTo(map);
-      map.fitBounds(boundsAround(location, INITIAL_RADIUS_KM), { animate: false });
+      // GeolocateControl finishes its own (async) setup shortly after
+      // addControl() returns -- trigger() is a no-op until then, with no
+      // event to await, so retry briefly until it reports success.
+      triggerInterval = setInterval(() => {
+        if (cancelled || geolocate.trigger()) {
+          clearInterval(triggerInterval);
+        }
+      }, 100);
+      setTimeout(() => clearInterval(triggerInterval), 2000);
     });
 
     return () => {
       cancelled = true;
+      clearInterval(triggerInterval);
       clearTimeout(moveTimer);
       map.remove();
     };
