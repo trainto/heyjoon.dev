@@ -1,5 +1,5 @@
 import { sendRequest } from '@/lib/api/fetchers';
-import { dispatch, useSante } from '@/lib/store';
+import { dispatch, dispatchMany, useSante } from '@/lib/store';
 import { cropAndResize } from '@/lib/utils-client';
 import { useCallback, useEffect } from 'react';
 import Button from '../common/button';
@@ -12,8 +12,7 @@ export default function AvatarEditor({ src, onComplete }: { src: string; onCompl
     dispatch('aspect', 1);
 
     return () => {
-      dispatch('aspect', null);
-      dispatch('crops', null);
+      dispatchMany({ aspect: null, crops: null });
     };
   }, []);
 

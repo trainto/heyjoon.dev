@@ -1,7 +1,7 @@
 import UserDetail from '@/components/places/user-detail';
 import { mutate } from 'swr';
 import { dispatchEvent } from '../event-bus';
-import { dispatch } from '../store';
+import { dispatch, dispatchMany } from '../store';
 import { storage } from '../utils-client';
 import { sendRequest } from './fetchers';
 
@@ -38,7 +38,6 @@ export const signout = async () => {
   if (res.status === 200) {
     storage.remove('isLogin');
     mutate('/places/users/me', null);
-    dispatch('userInfo', null);
-    dispatch('layer', null);
+    dispatchMany({ userInfo: null, layer: null });
   }
 };

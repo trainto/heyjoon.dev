@@ -18,6 +18,6 @@ const initialStore: Store = {
   crops: null,
 };
 
-const { useSante, dispatch, getCached } = createSante(initialStore);
+const { useSante, dispatch, dispatchMany, getCached } = createSante(initialStore);
 
-export { dispatch, getCached, useSante };
+export { dispatch, dispatchMany, getCached, useSante };

@@ -95,8 +95,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/shared
       '@trainto/sante':
-        specifier: ^0.3.0
-        version: 0.3.0(@types/react@19.2.2)(react@19.2.0)
+        specifier: ^0.4.0
+        version: 0.4.0(@types/react@19.2.2)(react@19.2.0)
       axios:
         specifier: ^1.21.1
         version: 1.21.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
@@ -1273,8 +1273,8 @@ packages:
   '@swc/helpers@0.5.23':
     resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
 
-  '@trainto/sante@0.3.0':
-    resolution: {integrity: sha512-+6+nIn0zNp5uW0bFPUn8p8WzDpnL3Mt/LTHLJNPHQ8r9P7ywn6uOezi6m//9+DXXnNOMMW943eVJtKhGNYa9Sg==}
+  '@trainto/sante@0.4.0':
+    resolution: {integrity: sha512-V9udgn12CA+qR4i+OOiMigdsouFuluGhWoSgfbHJ6mGCQsenMQtnF9KGe2AmJOeFr2hBhhnSbLgnVRe70blofA==}
     peerDependencies:
       '@types/react': '>=18.0.0'
       react: '>=18.0.0'
@@ -4378,7 +4378,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@trainto/sante@0.3.0(@types/react@19.2.2)(react@19.2.0)':
+  '@trainto/sante@0.4.0(@types/react@19.2.2)(react@19.2.0)':
     dependencies:
       '@types/react': 19.2.2
       react: 19.2.0

@@ -1,6 +1,6 @@
 import { signout } from '@/lib/api';
 import { sendRequest } from '@/lib/api/fetchers';
-import { dispatch, useSante } from '@/lib/store';
+import { dispatch, dispatchMany, useSante } from '@/lib/store';
 import { imgToDataURL } from '@/lib/utils-client';
 import { format } from 'date-fns';
 import Link from 'next/link';
@@ -102,12 +102,14 @@ export default function UserDetail({
     });
 
     if (res.status === 201) {
-      dispatch('layer', null);
-      dispatch('modal', {
-        msg:
-          'Thank you for signing up! Admin will review your sign up and approve.' +
-          ' If it is not approved within 7 days, your personal information will be discarded completely.' +
-          '<br><br>Inquiry: you@heyjoon.dev',
+      dispatchMany({
+        layer: null,
+        modal: {
+          msg:
+            'Thank you for signing up! Admin will review your sign up and approve.' +
+            ' If it is not approved within 7 days, your personal information will be discarded completely.' +
+            '<br><br>Inquiry: you@heyjoon.dev',
+        },
       });
     }
   }, [intro, nickname, userInfo]);

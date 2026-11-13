@@ -1,5 +1,5 @@
 import { IMAGE_SIZE } from '@/lib/constants';
-import { dispatch, useSante } from '@/lib/store';
+import { dispatch, dispatchMany, useSante } from '@/lib/store';
 import { cropAndResize, resize } from '@/lib/utils-client';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
@@ -78,8 +78,7 @@ export default function PhotoEditor({
       );
 
       onComplete(resized);
-      dispatch('layer', null);
-      dispatch('crops', null);
+      dispatchMany({ layer: null, crops: null });
     }, 0);
   }, [crops, onComplete, urls]);
 
