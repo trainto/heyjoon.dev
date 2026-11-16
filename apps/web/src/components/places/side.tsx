@@ -1,6 +1,6 @@
 import { useAuthState } from '@/lib/hooks';
 import { dispatch } from '@/lib/store';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import Signin from './signin';
 import Stack from './stack';
@@ -14,6 +14,8 @@ const Side = () => {
   const authIconKind = useAuthState();
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const activeTag = searchParams.get('tags');
 
   const handleSearch = () => {
     if (search.trim() === '') {
@@ -21,6 +23,11 @@ const Side = () => {
     }
 
     router.push(`/places?tags=${search}`);
+  };
+
+  const handleClear = () => {
+    setSearch('');
+    router.push('/places');
   };
 
   return (
@@ -72,6 +79,17 @@ const Side = () => {
           ⓘ Stack
         </a>
       </div>
+
+      {activeTag && (
+        <div className="flex justify-end mt-2">
+          <div className="inline-flex items-center space-x-2 border border-gray-700 rounded-md px-2 py-1">
+            <span className="text-sm text-brand2">#{activeTag}</span>
+            <button type="button" className="text-gray-400" onClick={handleClear}>
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

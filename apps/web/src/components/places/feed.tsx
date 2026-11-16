@@ -82,7 +82,7 @@ export default function Feed() {
     <>
       <Uploader />
 
-      <div className="mb-3">
+      <div className="mb-3 sm:hidden">
         <TagSearch />
       </div>
 
