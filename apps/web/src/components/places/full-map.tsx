@@ -1,7 +1,15 @@
 import { fetcher } from '@/lib/api/fetchers';
 import { dispatch } from '@/lib/store';
 import type { FeatureCollection, Point } from 'geojson';
-import { GeolocateControl, GeoJSONSource, Map as MapLibreMap, Popup, setWorkerUrl } from 'maplibre-gl';
+import {
+  GeolocateControl,
+  GeolocatePositionEvent,
+  GeoJSONSource,
+  Map as MapLibreMap,
+  Marker,
+  Popup,
+  setWorkerUrl,
+} from 'maplibre-gl';
 import { useEffect, useRef } from 'react';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -202,15 +210,46 @@ export default function FullMap() {
       });
 
       // GeolocateControl supplies its own "recenter on my location" button,
-      // the blue dot marker, and the accuracy circle, so none of that needs
-      // to be built by hand here. zoomToUserAccuracy is turned off so a
-      // precise fix doesn't zoom in past our INITIAL_RADIUS_KM overview --
-      // it only recenters, keeping the current zoom level.
+      // so that doesn't need to be built by hand here. Its built-in blue
+      // dot marker is turned off (showUserLocation: false) in favor of a
+      // person-icon marker, kept in sync on each 'geolocate' event below.
+      // zoomToUserAccuracy is also off so a precise fix doesn't zoom in
+      // past our INITIAL_RADIUS_KM overview -- it only recenters, keeping
+      // the current zoom level.
       const geolocate = new GeolocateControl({
         positionOptions: { timeout: GEOLOCATION_TIMEOUT_MS },
         zoomToUserAccuracy: false,
+        showUserLocation: false,
       });
       map.addControl(geolocate, 'bottom-right');
+
+      let myLocationMarker: Marker | undefined;
+      geolocate.on('geolocate', (e: GeolocatePositionEvent) => {
+        const lngLat: [number, number] = [e.coords.longitude, e.coords.latitude];
+
+        if (myLocationMarker == null) {
+          const el = document.createElement('div');
+          el.className = 'rounded-full p-1.5 shadow-lg';
+          el.style.backgroundColor = '#0891b2';
+          el.innerHTML =
+            '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 -960 960 960" fill="#ffffff">' +
+            '<path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm63.5-663.5Q400-767 400-800t23.5-56.5Q447-880 480-880t56.5 23.5Q560-833 560-800t-23.5 56.5Q513-720 480-720t-56.5-23.5Z"/>' +
+            '</svg>';
+
+          myLocationMarker = new Marker({ element: el }).setLngLat(lngLat).addTo(map);
+        } else {
+          myLocationMarker.setLngLat(lngLat).setOpacity(1);
+        }
+      });
+
+      // If the button is used again later and that lookup fails/times out,
+      // dim the marker to signal the shown position may be outdated rather
+      // than silently leaving it at the last-known location. Marker.setOpacity
+      // (not the element's style directly) persists across map movement,
+      // since MapLibre recomputes the element's opacity from it on every move.
+      geolocate.on('error', () => {
+        myLocationMarker?.setOpacity(0.5);
+      });
 
       // Register before the first fetch, and show/load the default view
       // right away, so a pan/zoom during (or a stall/timeout of) the
