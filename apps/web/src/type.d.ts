@@ -19,6 +19,8 @@ declare global {
   type CommentInfo = import('@repo/shared').CommentInfo;
   type BP = import('@repo/shared').BP;
   type GithubPR = import('@repo/shared').GithubPR;
+  type MusicVideo = import('@repo/shared').MusicVideo;
+  type MusicSearchResult = import('@repo/shared').MusicSearchResult;
 }
 
 export {};

@@ -86,3 +86,21 @@ export type PlacePin = {
   lng: number;
   name: string;
 };
+
+export type MusicVideo = {
+  videoId: string;
+  title: string;
+  channelTitle: string;
+  thumbnail: string;
+};
+
+export type MusicSearchResult = {
+  items: MusicVideo[];
+  nextPageToken?: string;
+};
+
+export type SearchMusicQuery = {
+  q?: string;
+  category?: 'music' | 'all';
+  pageToken?: string;
+};

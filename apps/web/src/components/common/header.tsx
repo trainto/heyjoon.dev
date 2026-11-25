@@ -24,23 +24,38 @@ const Header = () => {
     dispatch('layer', { node: <UserDetail />, containerClassName: 'w-full sm:w-96' });
   }, []);
 
-  const bpTimer = useRef<NodeJS.Timeout>(undefined);
-  const bpEventCount = useRef(0);
-  const handleMouseDown = () => {
-    if (bpTimer.current) {
-      clearTimeout(bpTimer.current);
-    }
-
-    if (bpEventCount.current >= 4) {
-      bpEventCount.current = 0;
-      router.push('/bp');
+  const sideTimer = useRef<NodeJS.Timeout>(undefined);
+  const sideEventCount = useRef(0);
+  const sideRef = useRef<'left' | 'right' | null>(null);
+  const handleMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+    if (userInfo?.email !== 'trainto@gmail.com') {
       return;
     }
 
-    bpEventCount.current = bpEventCount.current + 1;
-    bpTimer.current = setTimeout(() => {
-      bpEventCount.current = 0;
-      bpTimer.current = undefined;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const side: 'left' | 'right' = e.clientX - rect.left < rect.width / 2 ? 'left' : 'right';
+
+    if (sideTimer.current) {
+      clearTimeout(sideTimer.current);
+    }
+
+    if (sideRef.current !== side) {
+      sideRef.current = side;
+      sideEventCount.current = 0;
+    }
+
+    if (sideEventCount.current >= 4) {
+      sideEventCount.current = 0;
+      sideRef.current = null;
+      router.push(side === 'left' ? '/bp' : '/music');
+      return;
+    }
+
+    sideEventCount.current = sideEventCount.current + 1;
+    sideTimer.current = setTimeout(() => {
+      sideEventCount.current = 0;
+      sideRef.current = null;
+      sideTimer.current = undefined;
     }, 500);
   };
 
