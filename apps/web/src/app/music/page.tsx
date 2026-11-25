@@ -22,6 +22,12 @@ const CopyUrlButton = ({ videoId }: { videoId: string }) => {
   );
 };
 
+const handleFetchError = (err: unknown) => {
+  if ((err as { status?: number })?.status === 429) {
+    dispatch('modal', { msg: 'Too many requests. Please try again in a moment.' });
+  }
+};
+
 type Category = 'music' | 'all';
 
 export default function Music() {
@@ -49,6 +55,8 @@ export default function Music() {
       const data = await fetcher<MusicSearchResult>('/music', { q, category });
       setResults(data.items);
       nextPageTokenRef.current = data.nextPageToken;
+    } catch (err) {
+      handleFetchError(err);
     } finally {
       setIsLoading(false);
     }
@@ -71,6 +79,8 @@ export default function Music() {
         return [...prev, ...data.items.filter((v) => !existingIds.has(v.videoId))];
       });
       nextPageTokenRef.current = data.nextPageToken;
+    } catch (err) {
+      handleFetchError(err);
     } finally {
       setIsLoading(false);
     }
