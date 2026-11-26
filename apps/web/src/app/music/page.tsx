@@ -60,16 +60,99 @@ const DownloadButton = ({ videoId }: { videoId: string }) => {
   );
 };
 
-type Category = 'music' | 'all';
+const EditTrackForm = ({
+  track,
+  onSaved,
+}: {
+  track: LibraryTrack;
+  onSaved: (track: LibraryTrack) => void;
+}) => {
+  const [title, setTitle] = useState(track.title);
+  const [artist, setArtist] = useState(track.artist);
+  const [album, setAlbum] = useState(track.album);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    const edits: { title?: string; artist?: string; album?: string } = {};
+    if (title.trim() !== track.title) edits.title = title.trim();
+    if (artist.trim() !== track.artist) edits.artist = artist.trim();
+    if (album.trim() !== track.album) edits.album = album.trim();
+
+    if (Object.keys(edits).length === 0) {
+      dispatch('layer', null);
+      return;
+    }
+
+    setIsSaving(true);
+
+    try {
+      const res = await sendRequest({
+        method: 'PATCH',
+        url: `/music/library/${track.id}`,
+        data: edits,
+      });
+
+      if (res.status !== 200) {
+        dispatch('modal', { msg: 'Failed to save. Please try again.' });
+        return;
+      }
+
+      onSaved({ ...track, ...edits });
+      dispatch('layer', null);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      <div>
+        <div className="text-xs text-gray-500 mb-1">Title</div>
+        <input
+          className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <div className="text-xs text-gray-500 mb-1">Artist</div>
+        <input
+          className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+          value={artist}
+          onChange={(e) => setArtist(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <div className="text-xs text-gray-500 mb-1">Album</div>
+        <input
+          className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+          value={album}
+          onChange={(e) => setAlbum(e.target.value)}
+        />
+      </div>
+
+      <div className="flex justify-end">
+        <Button onClick={handleSave} disabled={isSaving}>
+          {isSaving ? 'Saving...' : 'Save'}
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+type Tab = 'youtube' | 'library';
 
 export default function Music() {
-  const [category, setCategory] = useState<Category>('music');
+  const [tab, setTab] = useState<Tab>('youtube');
   const [search, setSearch] = useState('');
   const [results, setResults] = useState<MusicVideo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const queryRef = useRef<{ q: string; category: Category } | undefined>(undefined);
+  const queryRef = useRef<string | undefined>(undefined);
   const nextPageTokenRef = useRef<string | undefined>(undefined);
+  const requestGenRef = useRef(0);
 
   const handleSearch = async () => {
     const q = search.trim();
@@ -78,45 +161,53 @@ export default function Music() {
       return;
     }
 
-    queryRef.current = { q, category };
+    queryRef.current = q;
     nextPageTokenRef.current = undefined;
 
+    requestGenRef.current += 1;
+    const gen = requestGenRef.current;
     setIsLoading(true);
 
     try {
-      const data = await fetcher<MusicSearchResult>('/music', { q, category });
+      const data = await fetcher<MusicSearchResult>('/music', { q, category: 'music' });
+      if (gen !== requestGenRef.current) return;
       setResults(data.items);
       nextPageTokenRef.current = data.nextPageToken;
     } catch (err) {
+      if (gen !== requestGenRef.current) return;
       handleFetchError(err);
     } finally {
-      setIsLoading(false);
+      if (gen === requestGenRef.current) setIsLoading(false);
     }
   };
 
   const handleLoadMore = useCallback(async () => {
-    if (!queryRef.current || !nextPageTokenRef.current || isLoading) {
+    if (tab !== 'youtube' || !queryRef.current || !nextPageTokenRef.current || isLoading) {
       return;
     }
 
+    const gen = requestGenRef.current;
     setIsLoading(true);
 
     try {
       const data = await fetcher<MusicSearchResult>('/music', {
-        ...queryRef.current,
+        q: queryRef.current,
+        category: 'music',
         pageToken: nextPageTokenRef.current,
       });
+      if (gen !== requestGenRef.current) return;
       setResults((prev) => {
         const existingIds = new Set(prev.map((v) => v.videoId));
         return [...prev, ...data.items.filter((v) => !existingIds.has(v.videoId))];
       });
       nextPageTokenRef.current = data.nextPageToken;
     } catch (err) {
+      if (gen !== requestGenRef.current) return;
       handleFetchError(err);
     } finally {
-      setIsLoading(false);
+      if (gen === requestGenRef.current) setIsLoading(false);
     }
-  }, [isLoading]);
+  }, [isLoading, tab]);
 
   useScrollHitTheBottom(handleLoadMore);
 
@@ -141,27 +232,73 @@ export default function Music() {
     });
   };
 
+  const [libraryResults, setLibraryResults] = useState<LibraryTrack[]>([]);
+  const [isLibraryLoading, setIsLibraryLoading] = useState(false);
+
+  const handleLibrarySearch = async () => {
+    requestGenRef.current += 1;
+    const gen = requestGenRef.current;
+    setIsLibraryLoading(true);
+
+    try {
+      const data = await fetcher<LibraryTrack[]>('/music/library', { q: search.trim() });
+      if (gen !== requestGenRef.current) return;
+      setLibraryResults(data);
+    } catch (err) {
+      if (gen !== requestGenRef.current) return;
+      handleFetchError(err);
+    } finally {
+      if (gen === requestGenRef.current) setIsLibraryLoading(false);
+    }
+  };
+
+  const handleLibraryRowClick = (track: LibraryTrack) => {
+    dispatch('layer', {
+      node: (
+        <EditTrackForm
+          track={track}
+          onSaved={(updated) => {
+            setLibraryResults((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
+          }}
+        />
+      ),
+      containerClassName: 'w-full sm:w-96',
+    });
+  };
+
+  const handleTabChange = (next: Tab) => {
+    requestGenRef.current += 1;
+    setTab(next);
+    setSearch('');
+    setResults([]);
+    setLibraryResults([]);
+    setIsLoading(false);
+    setIsLibraryLoading(false);
+    queryRef.current = undefined;
+    nextPageTokenRef.current = undefined;
+  };
+
   return (
     <div>
       <div className="flex items-center justify-center space-x-5">
         <button
           className={`text-lg font-bold ${
-            category === 'music' ? 'text-brand2-animation' : 'text-gray-300-animation'
+            tab === 'youtube' ? 'text-brand2-animation' : 'text-gray-300-animation'
           }`}
-          onClick={() => setCategory('music')}
+          onClick={() => handleTabChange('youtube')}
         >
-          Music
+          YouTube
         </button>
 
         <span className="text-gray-500">|</span>
 
         <button
           className={`text-lg font-bold ${
-            category === 'all' ? 'text-brand2-animation' : 'text-gray-300-animation'
+            tab === 'library' ? 'text-brand2-animation' : 'text-gray-300-animation'
           }`}
-          onClick={() => setCategory('all')}
+          onClick={() => handleTabChange('library')}
         >
-          전체
+          Library
         </button>
       </div>
 
@@ -169,43 +306,64 @@ export default function Music() {
         <div className="flex w-full rounded-md border border-gray-700 items-center">
           <input
             className="bg-bg-main p-2 text-gray-400 text-sm min-w-0 w-full"
-            placeholder="Search videos"
+            placeholder={tab === 'youtube' ? 'Search videos' : 'Search library'}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                handleSearch();
+                tab === 'youtube' ? handleSearch() : handleLibrarySearch();
               }
             }}
           />
           <div
             role="button"
             className="p-2 px-4 border-l border-gray-700 text-gray-400"
-            onClick={handleSearch}
+            onClick={tab === 'youtube' ? handleSearch : handleLibrarySearch}
           >
             Search
           </div>
         </div>
       </div>
 
-      <div className="px-5 mt-3 space-y-2">
-        {results.map((v) => (
-          <div
-            key={v.videoId}
-            role="button"
-            className="flex items-center space-x-3"
-            onClick={() => handleRowClick(v)}
-          >
-            <img src={v.thumbnail} alt={v.title} className="w-24 h-auto rounded-md" />
-            <div className="min-w-0">
-              <div className="text-sm truncate">{v.title}</div>
-              <div className="text-xs text-gray-500 truncate">{v.channelTitle}</div>
+      {tab === 'youtube' ? (
+        <div className="px-5 mt-3 space-y-2">
+          {results.map((v) => (
+            <div
+              key={v.videoId}
+              role="button"
+              className="flex items-center space-x-3"
+              onClick={() => handleRowClick(v)}
+            >
+              <img src={v.thumbnail} alt={v.title} className="w-24 h-auto rounded-md" />
+              <div className="min-w-0">
+                <div className="text-sm truncate">{v.title}</div>
+                <div className="text-xs text-gray-500 truncate">{v.channelTitle}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {isLoading && <div className="text-gray-500 text-sm">Loading...</div>}
-      </div>
+          {isLoading && <div className="text-gray-500 text-sm">Loading...</div>}
+        </div>
+      ) : (
+        <div className="px-5 mt-3 space-y-2">
+          {libraryResults.map((track) => (
+            <div
+              key={track.id}
+              role="button"
+              className="py-1"
+              onClick={() => handleLibraryRowClick(track)}
+            >
+              <div className="text-sm truncate">{track.title}</div>
+              <div className="text-xs text-gray-500 truncate">
+                {track.artist}
+                {track.album ? ` — ${track.album}` : ''}
+              </div>
+            </div>
+          ))}
+
+          {isLibraryLoading && <div className="text-gray-500 text-sm">Loading...</div>}
+        </div>
+      )}
     </div>
   );
 }

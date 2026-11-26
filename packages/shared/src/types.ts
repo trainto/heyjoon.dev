@@ -104,3 +104,10 @@ export type SearchMusicQuery = {
   category?: 'music' | 'all';
   pageToken?: string;
 };
+
+export type LibraryTrack = {
+  id: string;
+  title: string;
+  artist: string;
+  album: string;
+};

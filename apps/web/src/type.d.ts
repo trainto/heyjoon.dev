@@ -21,6 +21,7 @@ declare global {
   type GithubPR = import('@repo/shared').GithubPR;
   type MusicVideo = import('@repo/shared').MusicVideo;
   type MusicSearchResult = import('@repo/shared').MusicSearchResult;
+  type LibraryTrack = import('@repo/shared').LibraryTrack;
 }
 
 export {};
