@@ -113,6 +113,8 @@ export type LibraryTrack = {
   albumartist: string;
   year: string;
   mbAlbumId: string;
+  disc: string;
+  disctotal: string;
 };
 
 export type LibraryTrackEdits = {
@@ -122,4 +124,6 @@ export type LibraryTrackEdits = {
   albumartist?: string;
   year?: string;
   mbAlbumId?: string;
+  disc?: string;
+  disctotal?: string;
 };

@@ -73,6 +73,8 @@ const EditTrackForm = ({
   const [albumartist, setAlbumartist] = useState(track.albumartist);
   const [year, setYear] = useState(track.year);
   const [mbAlbumId, setMbAlbumId] = useState(track.mbAlbumId);
+  const [disc, setDisc] = useState(track.disc);
+  const [disctotal, setDisctotal] = useState(track.disctotal);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
@@ -83,6 +85,8 @@ const EditTrackForm = ({
     if (albumartist.trim() !== track.albumartist) edits.albumartist = albumartist.trim();
     if (year.trim() !== track.year) edits.year = year.trim();
     if (mbAlbumId.trim() !== track.mbAlbumId) edits.mbAlbumId = mbAlbumId.trim();
+    if (disc.trim() !== track.disc) edits.disc = disc.trim();
+    if (disctotal.trim() !== track.disctotal) edits.disctotal = disctotal.trim();
 
     if (Object.keys(edits).length === 0) {
       dispatch('layer', null);
@@ -167,6 +171,28 @@ const EditTrackForm = ({
             value={mbAlbumId}
             onChange={(e) => setMbAlbumId(e.target.value)}
           />
+        </div>
+
+        <div className="flex space-x-3">
+          <div className="flex-1">
+            <div className="text-xs text-gray-500 mb-1">Disc</div>
+            <input
+              className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+              placeholder="e.g. 1"
+              value={disc}
+              onChange={(e) => setDisc(e.target.value)}
+            />
+          </div>
+
+          <div className="flex-1">
+            <div className="text-xs text-gray-500 mb-1">Disc Total</div>
+            <input
+              className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+              placeholder="e.g. 1"
+              value={disctotal}
+              onChange={(e) => setDisctotal(e.target.value)}
+            />
+          </div>
         </div>
       </div>
 
