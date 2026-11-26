@@ -110,4 +110,16 @@ export type LibraryTrack = {
   title: string;
   artist: string;
   album: string;
+  albumartist: string;
+  year: string;
+  mbAlbumId: string;
+};
+
+export type LibraryTrackEdits = {
+  title?: string;
+  artist?: string;
+  album?: string;
+  albumartist?: string;
+  year?: string;
+  mbAlbumId?: string;
 };

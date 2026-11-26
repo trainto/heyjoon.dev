@@ -22,6 +22,7 @@ declare global {
   type MusicVideo = import('@repo/shared').MusicVideo;
   type MusicSearchResult = import('@repo/shared').MusicSearchResult;
   type LibraryTrack = import('@repo/shared').LibraryTrack;
+  type LibraryTrackEdits = import('@repo/shared').LibraryTrackEdits;
 }
 
 export {};

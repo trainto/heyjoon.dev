@@ -70,13 +70,19 @@ const EditTrackForm = ({
   const [title, setTitle] = useState(track.title);
   const [artist, setArtist] = useState(track.artist);
   const [album, setAlbum] = useState(track.album);
+  const [albumartist, setAlbumartist] = useState(track.albumartist);
+  const [year, setYear] = useState(track.year);
+  const [mbAlbumId, setMbAlbumId] = useState(track.mbAlbumId);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
-    const edits: { title?: string; artist?: string; album?: string } = {};
+    const edits: LibraryTrackEdits = {};
     if (title.trim() !== track.title) edits.title = title.trim();
     if (artist.trim() !== track.artist) edits.artist = artist.trim();
     if (album.trim() !== track.album) edits.album = album.trim();
+    if (albumartist.trim() !== track.albumartist) edits.albumartist = albumartist.trim();
+    if (year.trim() !== track.year) edits.year = year.trim();
+    if (mbAlbumId.trim() !== track.mbAlbumId) edits.mbAlbumId = mbAlbumId.trim();
 
     if (Object.keys(edits).length === 0) {
       dispatch('layer', null);
@@ -105,35 +111,66 @@ const EditTrackForm = ({
   };
 
   return (
-    <div className="space-y-3">
-      <div>
-        <div className="text-xs text-gray-500 mb-1">Title</div>
-        <input
-          className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+    <div className="flex flex-col max-h-[70vh]">
+      <div className="space-y-3 overflow-y-auto">
+        <div>
+          <div className="text-xs text-gray-500 mb-1">Title</div>
+          <input
+            className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <div className="text-xs text-gray-500 mb-1">Artist</div>
+          <input
+            className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <div className="text-xs text-gray-500 mb-1">Album</div>
+          <input
+            className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+            value={album}
+            onChange={(e) => setAlbum(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <div className="text-xs text-gray-500 mb-1">Album Artist</div>
+          <input
+            className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+            value={albumartist}
+            onChange={(e) => setAlbumartist(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <div className="text-xs text-gray-500 mb-1">Year</div>
+          <input
+            className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+            placeholder="e.g. 2024 (leave empty to clear)"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <div className="text-xs text-gray-500 mb-1">MusicBrainz Album Id</div>
+          <input
+            className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+            placeholder="leave empty to clear"
+            value={mbAlbumId}
+            onChange={(e) => setMbAlbumId(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div>
-        <div className="text-xs text-gray-500 mb-1">Artist</div>
-        <input
-          className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
-          value={artist}
-          onChange={(e) => setArtist(e.target.value)}
-        />
-      </div>
-
-      <div>
-        <div className="text-xs text-gray-500 mb-1">Album</div>
-        <input
-          className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
-          value={album}
-          onChange={(e) => setAlbum(e.target.value)}
-        />
-      </div>
-
-      <div className="flex justify-end">
+      <div className="flex justify-end pt-3">
         <Button onClick={handleSave} disabled={isSaving}>
           {isSaving ? 'Saving...' : 'Save'}
         </Button>
