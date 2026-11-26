@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/button';
-import { fetcher } from '@/lib/api/fetchers';
+import { fetcher, sendRequest } from '@/lib/api/fetchers';
 import { useScrollHitTheBottom } from '@/lib/hooks';
 import { dispatch } from '@/lib/store';
 import { useCallback, useRef, useState } from 'react';
@@ -26,6 +26,38 @@ const handleFetchError = (err: unknown) => {
   if ((err as { status?: number })?.status === 429) {
     dispatch('modal', { msg: 'Too many requests. Please try again in a moment.' });
   }
+};
+
+const DownloadButton = ({ videoId }: { videoId: string }) => {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+
+    try {
+      const res = await sendRequest({
+        method: 'POST',
+        url: '/music/download',
+        data: { url: `https://www.youtube.com/watch?v=${videoId}` },
+      });
+
+      if (res.status === 429) {
+        dispatch('modal', { msg: 'Too many requests. Please try again in a moment.' });
+      } else if (res.status !== 200) {
+        dispatch('modal', { msg: 'Failed to download. Please try again.' });
+      } else {
+        dispatch('modal', { msg: 'Download complete!' });
+      }
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  return (
+    <Button onClick={handleDownload} disabled={isDownloading}>
+      {isDownloading ? 'Downloading...' : 'Download'}
+    </Button>
+  );
 };
 
 type Category = 'music' | 'all';
@@ -88,10 +120,6 @@ export default function Music() {
 
   useScrollHitTheBottom(handleLoadMore);
 
-  const handleDownload = (v: MusicVideo) => {
-    // TODO: send video url to server for download
-  };
-
   const handleRowClick = (v: MusicVideo) => {
     dispatch('layer', {
       node: (
@@ -105,7 +133,7 @@ export default function Music() {
 
           <div className="flex justify-end items-center space-x-2 mt-3">
             <CopyUrlButton videoId={v.videoId} />
-            <Button onClick={() => handleDownload(v)}>Download</Button>
+            <DownloadButton videoId={v.videoId} />
           </div>
         </div>
       ),
