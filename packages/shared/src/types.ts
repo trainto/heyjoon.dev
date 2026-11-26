@@ -115,6 +115,8 @@ export type LibraryTrack = {
   mbAlbumId: string;
   disc: string;
   disctotal: string;
+  track: string;
+  tracktotal: string;
 };
 
 export type LibraryTrackEdits = {
@@ -126,4 +128,6 @@ export type LibraryTrackEdits = {
   mbAlbumId?: string;
   disc?: string;
   disctotal?: string;
+  track?: string;
+  tracktotal?: string;
 };

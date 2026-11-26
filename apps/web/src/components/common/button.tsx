@@ -9,7 +9,7 @@ const Button = ({
   onClick,
 }: {
   children: ReactNode;
-  color?: 'zinc' | 'indigo';
+  color?: 'zinc' | 'indigo' | 'red';
   size?: 'xs' | 'sm' | 'base' | 'lg';
   disabled?: boolean;
   throttle?: number;

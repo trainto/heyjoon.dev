@@ -63,9 +63,11 @@ const DownloadButton = ({ videoId }: { videoId: string }) => {
 const EditTrackForm = ({
   track,
   onSaved,
+  onDeleted,
 }: {
   track: LibraryTrack;
   onSaved: (track: LibraryTrack) => void;
+  onDeleted: (id: string) => void;
 }) => {
   const [title, setTitle] = useState(track.title);
   const [artist, setArtist] = useState(track.artist);
@@ -75,6 +77,8 @@ const EditTrackForm = ({
   const [mbAlbumId, setMbAlbumId] = useState(track.mbAlbumId);
   const [disc, setDisc] = useState(track.disc);
   const [disctotal, setDisctotal] = useState(track.disctotal);
+  const [trackNo, setTrackNo] = useState(track.track);
+  const [tracktotal, setTracktotal] = useState(track.tracktotal);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
@@ -87,6 +91,8 @@ const EditTrackForm = ({
     if (mbAlbumId.trim() !== track.mbAlbumId) edits.mbAlbumId = mbAlbumId.trim();
     if (disc.trim() !== track.disc) edits.disc = disc.trim();
     if (disctotal.trim() !== track.disctotal) edits.disctotal = disctotal.trim();
+    if (trackNo.trim() !== track.track) edits.track = trackNo.trim();
+    if (tracktotal.trim() !== track.tracktotal) edits.tracktotal = tracktotal.trim();
 
     if (Object.keys(edits).length === 0) {
       dispatch('layer', null);
@@ -112,6 +118,35 @@ const EditTrackForm = ({
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = () => {
+    dispatch('modal', {
+      msg: 'Are you sure you want to delete this track? This cannot be undone.',
+      hasCancel: true,
+      onConfirm: async () => {
+        setIsDeleting(true);
+
+        try {
+          const res = await sendRequest({
+            method: 'DELETE',
+            url: `/music/library/${track.id}`,
+          });
+
+          if (res.status !== 200) {
+            dispatch('modal', { msg: 'Failed to delete. Please try again.' });
+            return;
+          }
+
+          onDeleted(track.id);
+          dispatch('layer', null);
+        } finally {
+          setIsDeleting(false);
+        }
+      },
+    });
   };
 
   return (
@@ -194,10 +229,35 @@ const EditTrackForm = ({
             />
           </div>
         </div>
+
+        <div className="flex space-x-3">
+          <div className="flex-1">
+            <div className="text-xs text-gray-500 mb-1">Track No.</div>
+            <input
+              className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+              placeholder="e.g. 1"
+              value={trackNo}
+              onChange={(e) => setTrackNo(e.target.value)}
+            />
+          </div>
+
+          <div className="flex-1">
+            <div className="text-xs text-gray-500 mb-1">Track Total</div>
+            <input
+              className="bg-bg-main border border-gray-700 rounded-md p-2 text-sm w-full"
+              placeholder="e.g. 10"
+              value={tracktotal}
+              onChange={(e) => setTracktotal(e.target.value)}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex justify-end pt-3">
-        <Button onClick={handleSave} disabled={isSaving}>
+      <div className="flex justify-end items-center space-x-2 pt-3">
+        <Button color="red" onClick={handleDelete} disabled={isDeleting || isSaving}>
+          Delete
+        </Button>
+        <Button onClick={handleSave} disabled={isSaving || isDeleting}>
           {isSaving ? 'Saving...' : 'Save'}
         </Button>
       </div>
@@ -322,6 +382,9 @@ export default function Music() {
           track={track}
           onSaved={(updated) => {
             setLibraryResults((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
+          }}
+          onDeleted={(id) => {
+            setLibraryResults((prev) => prev.filter((t) => t.id !== id));
           }}
         />
       ),
