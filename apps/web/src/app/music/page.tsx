@@ -121,32 +121,28 @@ const EditTrackForm = ({
   };
 
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
 
-  const handleDelete = () => {
-    dispatch('modal', {
-      msg: 'Are you sure you want to delete this track? This cannot be undone.',
-      hasCancel: true,
-      onConfirm: async () => {
-        setIsDeleting(true);
+  const handleDeleteConfirmed = async () => {
+    setIsDeleting(true);
 
-        try {
-          const res = await sendRequest({
-            method: 'DELETE',
-            url: `/music/library/${track.id}`,
-          });
+    try {
+      const res = await sendRequest({
+        method: 'DELETE',
+        url: `/music/library/${track.id}`,
+      });
 
-          if (res.status !== 200) {
-            dispatch('modal', { msg: 'Failed to delete. Please try again.' });
-            return;
-          }
+      if (res.status !== 200) {
+        setIsConfirmingDelete(false);
+        dispatch('modal', { msg: 'Failed to delete. Please try again.' });
+        return;
+      }
 
-          onDeleted(track.id);
-          dispatch('layer', null);
-        } finally {
-          setIsDeleting(false);
-        }
-      },
-    });
+      onDeleted(track.id);
+      dispatch('layer', null);
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   return (
@@ -253,13 +249,37 @@ const EditTrackForm = ({
         </div>
       </div>
 
-      <div className="flex justify-end items-center space-x-2 pt-3">
-        <Button color="red" onClick={handleDelete} disabled={isDeleting || isSaving}>
-          Delete
-        </Button>
-        <Button onClick={handleSave} disabled={isSaving || isDeleting}>
-          {isSaving ? 'Saving...' : 'Save'}
-        </Button>
+      {isConfirmingDelete && (
+        <div className="text-xs text-red-500 pt-3">
+          This cannot be undone. Delete this track from the library and disk?
+        </div>
+      )}
+
+      <div className="flex justify-between items-center space-x-2 pt-2">
+        {isConfirmingDelete ? (
+          <div className="flex space-x-2">
+            <Button
+              color="zinc"
+              onClick={() => setIsConfirmingDelete(false)}
+              disabled={isDeleting}
+            >
+              Cancel
+            </Button>
+            <Button color="red" onClick={handleDeleteConfirmed} disabled={isDeleting}>
+              {isDeleting ? 'Deleting...' : 'Confirm Delete'}
+            </Button>
+          </div>
+        ) : (
+          <Button color="red" onClick={() => setIsConfirmingDelete(true)} disabled={isSaving}>
+            Delete
+          </Button>
+        )}
+
+        {!isConfirmingDelete && (
+          <Button onClick={handleSave} disabled={isSaving}>
+            {isSaving ? 'Saving...' : 'Save'}
+          </Button>
+        )}
       </div>
     </div>
   );

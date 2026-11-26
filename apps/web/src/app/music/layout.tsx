@@ -4,6 +4,8 @@ import Layer from '@/components/common/layer';
 import Modal from '@/components/places/modal';
 import { useSante } from '@/lib/store';
 
+import './music.css';
+
 export default function MusicLayout({ children }: { children: React.ReactNode }) {
   const { layer, modal } = useSante(['layer', 'modal']);
 
