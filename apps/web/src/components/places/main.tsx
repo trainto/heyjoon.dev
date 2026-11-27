@@ -11,6 +11,12 @@ const getPlaceIdFromHash = () => {
   return match ? match[1] : null;
 };
 
+// Module-level (not per-mount) so a declined update isn't re-prompted every time
+// this component remounts (navigating back into /places, reloading, etc). Each
+// genuinely new update is a distinct ServiceWorker object, so this naturally
+// resets without needing to persist or identify updates by version.
+let dismissedWorker: ServiceWorker | undefined;
+
 export default function Main() {
   const [placeId, setPlaceId] = useState<string | null>(null);
 
@@ -23,29 +29,29 @@ export default function Main() {
     }
 
     let disposed = false;
-
-    // clients.claim() in sw.js fires 'controllerchange' on first install too (no prior
-    // controller), and in every tab when any tab accepts an update. Only reload this
-    // tab if its own user accepted the update prompt.
-    let updateAccepted = false;
-    let reloaded = false;
-    const onControllerChange = () => {
-      if (!updateAccepted || reloaded) {
-        return;
-      }
-      reloaded = true;
-      window.location.reload();
-    };
-    navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
+    let unwatchActivation: (() => void) | undefined;
 
     const promptForUpdate = (worker: ServiceWorker) => {
-      if (disposed) {
+      if (disposed || dismissedWorker === worker) {
         return;
       }
-      if (window.confirm('A new version is available. Reload now?')) {
-        updateAccepted = true;
-        worker.postMessage('SKIP_WAITING');
+
+      if (!window.confirm('A new version is available. Reload now?')) {
+        dismissedWorker = worker;
+        return;
       }
+
+      // Reload once this worker actually takes over, regardless of whether this
+      // document is currently controlled by the service worker (e.g. it was opened
+      // via client-side navigation into /places rather than a full page load).
+      const onStateChange = () => {
+        if (worker.state === 'activated' && !disposed) {
+          window.location.reload();
+        }
+      };
+      worker.addEventListener('statechange', onStateChange);
+      unwatchActivation = () => worker.removeEventListener('statechange', onStateChange);
+      worker.postMessage('SKIP_WAITING');
     };
 
     // An installing worker only represents an update if this registration already
@@ -102,8 +108,8 @@ export default function Main() {
 
     return () => {
       disposed = true;
-      navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
       unwatchInstalling?.();
+      unwatchActivation?.();
       if (registrationRef && onUpdateFound) {
         registrationRef.removeEventListener('updatefound', onUpdateFound);
       }
