@@ -7,6 +7,7 @@
     "dev": "next dev --port 3000",
     "prebuild": "cp node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs public/maplibre-gl-worker.mjs",
     "build": "next build",
+    "postbuild": "node scripts/inject-build-id.mjs",
     "start": "next start",
     "lint": "eslint src --max-warnings 0",
     "check-types": "next typegen && tsc --noEmit"
