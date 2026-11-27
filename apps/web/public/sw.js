@@ -39,16 +39,19 @@ const cacheFirst = async ({ request }) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((names) =>
-      Promise.all(
-        names
-          .filter(
-            (name) =>
-              name === LEGACY_CACHE_NAME || (name.startsWith(CACHE_PREFIX) && name !== CACHE_NAME),
-          )
-          .map((name) => caches.delete(name)),
-      ),
-    ),
+    caches
+      .keys()
+      .then((names) =>
+        Promise.all(
+          names
+            .filter(
+              (name) =>
+                name === LEGACY_CACHE_NAME || (name.startsWith(CACHE_PREFIX) && name !== CACHE_NAME),
+            )
+            .map((name) => caches.delete(name)),
+        ),
+      )
+      .then(() => self.clients.claim()),
   );
 });
 
@@ -60,3 +63,9 @@ if (location.hostname === 'heyjoon.dev') {
     }
   });
 }
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});

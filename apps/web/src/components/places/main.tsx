@@ -18,9 +18,96 @@ export default function Main() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js', { scope: '/places' });
+    if (process.env.NODE_ENV !== 'production' || !('serviceWorker' in navigator)) {
+      return;
     }
+
+    let disposed = false;
+
+    // clients.claim() in sw.js fires 'controllerchange' on first install too (no prior
+    // controller), and in every tab when any tab accepts an update. Only reload this
+    // tab if its own user accepted the update prompt.
+    let updateAccepted = false;
+    let reloaded = false;
+    const onControllerChange = () => {
+      if (!updateAccepted || reloaded) {
+        return;
+      }
+      reloaded = true;
+      window.location.reload();
+    };
+    navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
+
+    const promptForUpdate = (worker: ServiceWorker) => {
+      if (disposed) {
+        return;
+      }
+      if (window.confirm('A new version is available. Reload now?')) {
+        updateAccepted = true;
+        worker.postMessage('SKIP_WAITING');
+      }
+    };
+
+    // An installing worker only represents an update if this registration already
+    // controlled an active worker; otherwise it's just the first install.
+    const watchInstalling = (
+      installing: ServiceWorker,
+      registration: ServiceWorkerRegistration,
+    ) => {
+      const hadActiveWorker = Boolean(registration.active);
+      const onStateChange = () => {
+        if (disposed) {
+          return;
+        }
+        if (hadActiveWorker && installing.state === 'installed' && registration.waiting) {
+          promptForUpdate(registration.waiting);
+        }
+      };
+      installing.addEventListener('statechange', onStateChange);
+      return () => installing.removeEventListener('statechange', onStateChange);
+    };
+
+    let registrationRef: ServiceWorkerRegistration | undefined;
+    let onUpdateFound: (() => void) | undefined;
+    let unwatchInstalling: (() => void) | undefined;
+
+    navigator.serviceWorker
+      .register('/sw.js', { scope: '/places' })
+      .then((registration) => {
+        if (disposed) {
+          return;
+        }
+
+        registrationRef = registration;
+
+        if (registration.active && registration.waiting) {
+          promptForUpdate(registration.waiting);
+        }
+
+        if (registration.installing) {
+          unwatchInstalling = watchInstalling(registration.installing, registration);
+        }
+
+        onUpdateFound = () => {
+          unwatchInstalling?.();
+          if (registration.installing) {
+            unwatchInstalling = watchInstalling(registration.installing, registration);
+          }
+        };
+        registration.addEventListener('updatefound', onUpdateFound);
+      })
+      .catch((error) => {
+        console.error('Service worker registration failed', error);
+      });
+
+    return () => {
+      disposed = true;
+      navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
+      unwatchInstalling?.();
+      if (registrationRef && onUpdateFound) {
+        registrationRef.removeEventListener('updatefound', onUpdateFound);
+      }
+    };
   }, []);
 
   // Next.js client-side navigation (pushState) doesn't fire 'hashchange', so
