@@ -31,8 +31,13 @@ export default function Main() {
     let disposed = false;
     let unwatchActivation: (() => void) | undefined;
 
+    // In a regular browser tab the user will naturally reload/reopen the page, so
+    // don't interrupt reading with a prompt. In the installed PWA there's no address
+    // bar/refresh button and tabs tend to stay open, so prompting is worth it.
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+
     const promptForUpdate = (worker: ServiceWorker) => {
-      if (disposed || dismissedWorker === worker) {
+      if (disposed || !isStandalone || dismissedWorker === worker) {
         return;
       }
 
